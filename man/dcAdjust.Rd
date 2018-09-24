@@ -42,7 +42,7 @@ Ensure that the p-value matrix passed to this function is the one
 x <- matrix(rnorm(60), 2, 30)
 cond <- rep(1:2, 15)
 zscores <- dcScore(x, cond)
-pvals <-dcTest(zscores, emat = x, condition = cond)
+pvals <- dcTest(zscores, emat = x, condition = cond)
 dcAdjust(pvals, p.adjust, method = 'fdr')
 
 }

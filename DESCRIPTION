@@ -31,3 +31,4 @@ Collate:
     'inference_methods_generic.R'
     'statistical_tests.R'
     'multtest_adjust.R'
+    'network_analysis.R'

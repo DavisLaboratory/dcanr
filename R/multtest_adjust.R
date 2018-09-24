@@ -34,13 +34,13 @@ NULL
 #' x <- matrix(rnorm(60), 2, 30)
 #' cond <- rep(1:2, 15)
 #' zscores <- dcScore(x, cond)
-#' pvals <-dcTest(zscores, emat = x, condition = cond)
+#' pvals <- dcTest(zscores, emat = x, condition = cond)
 #' dcAdjust(pvals, p.adjust, method = 'fdr')
 #'
 #' @export
 dcAdjust <- function(dcpvals, f = p.adjust, ...) {
   if (!all(c('dc.test', 'dc.method') %in% names(attributes(dcpvals)))) {
-    stop('Please ensure dcscore has not been modified')
+    stop('Please ensure dcpvals has not been modified')
   }
 
   if (!methodmap[attr(dcpvals, 'dc.method'), 'adjust']) {

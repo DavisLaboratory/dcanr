@@ -3,6 +3,7 @@
 export(cor.pairs)
 export(dcAdjust)
 export(dcMethods)
+export(dcNetwork)
 export(dcTest)
 export(mi.ap)
 exportMethods(dcScore)
