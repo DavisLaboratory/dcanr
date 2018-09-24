@@ -2,24 +2,24 @@
 
 #' @title Statistical test for differential association analysis
 #' @description Perform statistical tests for scores generated using
-#'   \code{diffScore}. Selects appropriate tests for the different methods used
+#'   \code{dcScore}. Selects appropriate tests for the different methods used
 #'   in computing scores. The exact test is selected based on the scoring method
 #'   used and cannot be manually specified. Available tests include the z-test
 #'   and permutation tests. Parallel computation supported for the permutation
 #'   test.
 #'
-#' @param dcscore a matrix, the result of the \code{diffScore} function. The
+#' @param dcscore a matrix, the result of the \code{dcScore} function. The
 #'   results should be passed as produced by the function and not modified in
 #'   intermmediate steps
 #' @param emat a matrix, data.frame, ExpressionSet, SummarizedExperiment or
-#'   DGEList. This should be the one passed to \code{diffScore}
+#'   DGEList. This should be the one passed to \code{dcScore}
 #' @param condition a numeric, (with 1's and 2's representing a binary
 #'   condition), a factor with 2 levels or a character representing 2
-#'   conditions. This should be the one passed to \code{diffScore}
+#'   conditions. This should be the one passed to \code{dcScore}
 #' @param ... see details
 #'
 #' @details Ensure that the score matrix passed to this function is the one
-#'   produced by \code{diffScore}. Any modification to the result matrix will
+#'   produced by \code{dcScore}. Any modification to the result matrix will
 #'   cause this function to fail. This is intended as the test need to be
 #'   performed on the entire score matrix, not subsets.
 #'
@@ -38,30 +38,30 @@
 #'   If a cluster exists, computation in a permutation test will be performed in
 #'   parallel (see examples).
 #'
-#' @name diffTest
+#' @name dcTest
 #' @return a matrix, of p-values (or scores in the case of DiffCoEx and
 #'   EBcoexpress) representing significance of differential associations.
 #'   DiffCoEx will return scores as the publication specifies direct
 #'   thresholding of scores and EBcoexpress returns posterior probabilities.
-#' @seealso \code{\link{dcMethods}}, \code{\link{diffScore}}
+#' @seealso \code{\link{dcMethods}}, \code{\link{dcScore}}
 #'
 #' @examples
 #' x <- matrix(rnorm(60), 2, 30)
 #' cond <- rep(1:2, 15)
-#' ecfscores <- diffScore(x, cond, dc.method = 'ecf')
-#' diffTest(ecfscores, emat = x, condition = cond)
+#' ecfscores <- dcScore(x, cond, dc.method = 'ecf')
+#' dcTest(ecfscores, emat = x, condition = cond)
 #'
 #' \dontrun{
 #' #running in parallel
 #' num_cores = 2
 #' cl <- parallel::makeCluster(num_cores)
 #' doSNOW::registerDoSNOW(cl) #or doParallel
-#' diffTest(ecfscores, emat = x, condition = cond, B = 100)
+#' dcTest(ecfscores, emat = x, condition = cond, B = 100)
 #' parallel::stopCluster(cl)
 #' }
 #'
 #' @export
-diffTest <- function(dcscore, emat, condition, ...) {
+dcTest <- function(dcscore, emat, condition, ...) {
   if (!all(c('dc.method', 'call') %in% names(attributes(dcscore)))) {
     stop('Please ensure dcscore has not been modified')
   }

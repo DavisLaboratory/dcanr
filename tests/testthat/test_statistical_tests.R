@@ -14,17 +14,17 @@ rownames(x) = 1:nrow(x)
 cond <- rep(1:2, each = 30)
 
 #run all methods and store results
-scorelist <- lapply(dcMethods(), function (m) diffScore(x, cond, m))
+scorelist <- lapply(dcMethods(), function (m) dcScore(x, cond, m))
 names(scorelist) <- dcMethods()
 
 test_that('Testing calls work', {
   for (m in dcMethods()) {
-    expect_is(diffTest(scorelist[[!!m]], x, cond), 'matrix')
+    expect_is(dcTest(scorelist[[!!m]], x, cond), 'matrix')
   }
 })
 
 #generate test matrices
-testmats <- lapply(scorelist, function(s) diffTest(s, x, cond))
+testmats <- lapply(scorelist, function(s) dcTest(s, x, cond))
 
 test_that('Correct dimensions of results', {
   for (m in dcMethods()) {

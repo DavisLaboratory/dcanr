@@ -41,7 +41,7 @@ NULL
 #'   \code{ebcoexpress.plot} which plots the diagnostic plots if set to
 #'   \code{TRUE} (defaults to \code{FALSE}).
 #'
-#' @name diffScore
+#' @name dcScore
 #' @return a matrix, of scores/statistics representing differential
 #'   associations; p-values will be returned if FTGI is used and posterior
 #'   probabilities if EBcoexpress is used.
@@ -50,23 +50,23 @@ NULL
 #' @examples
 #' x <- matrix(rnorm(60), 2, 30)
 #' cond <- rep(1:2, 15)
-#' diffScore(x, cond) #defaults to zscore
-#' diffScore(x, cond, dc.method = 'diffcoex')
+#' dcScore(x, cond) #defaults to zscore
+#' dcScore(x, cond, dc.method = 'diffcoex')
 #'
-#' @exportMethod diffScore
+#' @exportMethod dcScore
 setGeneric(
-  name = 'diffScore',
+  name = 'dcScore',
   def = function(emat,
                  condition,
                  dc.method,
                  ...) {
-    standardGeneric('diffScore')
+    standardGeneric('dcScore')
   }
 )
 
-#' @rdname diffScore
+#' @rdname dcScore
 setMethod(
-  f = 'diffScore',
+  f = 'dcScore',
   signature = c('matrix', 'ANY', 'ANY'),
   definition = function(emat,
                         condition,
@@ -109,9 +109,9 @@ setMethod(
   }
 )
 
-#' @rdname diffScore
+#' @rdname dcScore
 setMethod(
-  f = 'diffScore',
+  f = 'dcScore',
   signature = c('data.frame', 'ANY', 'ANY'),
   definition = function(emat,
                         condition,
@@ -131,9 +131,9 @@ setMethod(
   }
 )
 
-#' @rdname diffScore
+#' @rdname dcScore
 setMethod(
-  f = 'diffScore',
+  f = 'dcScore',
   signature = c('ExpressionSet', 'ANY', 'ANY'),
   definition = function(emat,
                         condition,
@@ -155,9 +155,9 @@ setMethod(
   }
 )
 
-#' @rdname diffScore
+#' @rdname dcScore
 setMethod(
-  f = 'diffScore',
+  f = 'dcScore',
   signature = c('SummarizedExperiment', 'ANY', 'ANY'),
   definition = function(emat,
                         condition,
@@ -179,9 +179,9 @@ setMethod(
   }
 )
 
-#' @rdname diffScore
+#' @rdname dcScore
 setMethod(
-  f = 'diffScore',
+  f = 'dcScore',
   signature = c('DGEList', 'ANY', 'ANY'),
   definition = function(emat,
                         condition,

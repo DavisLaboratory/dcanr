@@ -2,9 +2,9 @@
 
 export(cor.pairs)
 export(dcMethods)
-export(diffTest)
+export(dcTest)
 export(mi.ap)
-exportMethods(diffScore)
+exportMethods(dcScore)
 import(methods)
 importFrom(foreach,"%:%")
 importFrom(foreach,"%dopar%")
