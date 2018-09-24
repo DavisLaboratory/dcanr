@@ -4,13 +4,13 @@
 \alias{dcNetwork}
 \title{Generate a differential network from a DC analysis}
 \usage{
-dcNetwork(dcscores, dcpvals, thresh = NA)
+dcNetwork(dcscores, dcpvals, thresh = NULL)
 }
 \arguments{
 \item{dcpvals}{a matrix, raw or adjusted p-values resulting from
 \code{dcTest} or \code{dcAdjust} respectively}
 
-\item{thresh}{a numeric, threshold to apply. If \code{NA}, defaults to 0.05
+\item{thresh}{a numeric, threshold to apply. If \code{NULL}, defaults to 0.05
 for methods that generate a p-value, 0.9 for posterior probabilities from
 EBcoexpress and 0.05 on the absolute score from DiffCoEx}
 }

@@ -8,7 +8,7 @@ NULL
 #' @inheritParams dcTest
 #' @param dcpvals a matrix, raw or adjusted p-values resulting from
 #'   \code{dcTest} or \code{dcAdjust} respectively
-#' @param thresh a numeric, threshold to apply. If \code{NA}, defaults to 0.05
+#' @param thresh a numeric, threshold to apply. If \code{NULL}, defaults to 0.05
 #'   for methods that generate a p-value, 0.9 for posterior probabilities from
 #'   EBcoexpress and 0.05 on the absolute score from DiffCoEx
 #'
@@ -33,7 +33,7 @@ NULL
 #' }
 #'
 #' @export
-dcNetwork <- function(dcscores, dcpvals, thresh = NA) {
+dcNetwork <- function(dcscores, dcpvals, thresh = NULL) {
   if (!all(c('dc.test', 'dc.method') %in% names(attributes(dcpvals)))) {
     stop('Please ensure dcpvals has not been modified')
   }
@@ -43,7 +43,7 @@ dcNetwork <- function(dcscores, dcpvals, thresh = NA) {
 
   #default thresh if not provided
   dc.method = attr(dcpvals, 'dc.method')
-  if (is.na(thresh)) {
+  if (is.null(thresh)) {
     warning('default thresholds being selected')
     thresh = methodmap[dc.method, 'default_thresh']
   }
