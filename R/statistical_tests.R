@@ -1,5 +1,3 @@
-#' @include statistical_tests.R
-
 #' @title Statistical test for differential association analysis
 #' @description Perform statistical tests for scores generated using
 #'   \code{dcScore}. Selects appropriate tests for the different methods used
@@ -84,7 +82,7 @@ z.test <- function(dcscore, ...) {
 }
 
 no.test <- function(dcscore, ...) {
-  message('No statistical test requried')
+  warning('No statistical test required')
   attr(dcscore, 'dc.test') = 'none'
 
   return(dcscore)

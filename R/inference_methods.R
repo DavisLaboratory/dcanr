@@ -12,6 +12,7 @@ methodmap = data.frame(
     'mindy.score'
   ),
   'testf' = c('z.test', c('perm.test', 'no.test')[c(1, 1, 2, 2, 2, 1, 1, 1, 1)]),
+  'adjust' = c(rep(TRUE, 4), rep(FALSE, 2), rep(TRUE, 4)),
   'default_thresh' = c(rep(0.05, 5), 0.95, rep(0.05, 4)),
   row.names = c(
     'zscore',

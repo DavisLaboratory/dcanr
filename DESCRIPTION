@@ -30,3 +30,4 @@ Collate:
     'inference_methods.R'
     'inference_methods_generic.R'
     'statistical_tests.R'
+    'multtest_adjust.R'
