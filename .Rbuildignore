@@ -1,0 +1,7 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.Rhistory*
+^\devtools_setup\*
+^\.git\*
+^\.gitignore*
+^\README.md*
