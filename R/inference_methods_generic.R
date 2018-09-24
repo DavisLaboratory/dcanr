@@ -139,6 +139,10 @@ setMethod(
                         condition,
                         dc.method = 'zscore',
                         ...) {
+    if (!requireNamespace("Biobase", quietly = TRUE)){
+      stop('\'Biobase\' needed for this function to work. Please install it.', call. = FALSE)
+    }
+
     #default method
     if (missing(dc.method)) {
       dc.method = 'zscore'
@@ -159,6 +163,10 @@ setMethod(
                         condition,
                         dc.method = 'zscore',
                         ...) {
+    if (!requireNamespace("SummarizedExperiment", quietly = TRUE)){
+      stop('\'SummarizedExperiment\' needed for this function to work. Please install it.', call. = FALSE)
+    }
+
     #default method
     if (missing(dc.method)) {
       dc.method = 'zscore'

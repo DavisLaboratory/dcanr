@@ -14,8 +14,6 @@ LazyData: true
 Imports: igraph,
     foreach,
     plyr,
-    SummarizedExperiment,
-    Biobase,
     stringr,
     reshape2
 Suggests: EBcoexpress,
@@ -24,7 +22,9 @@ Suggests: EBcoexpress,
     GeneNet,
     COSINE,
     mclust,
-    minqa
+    minqa,
+    SummarizedExperiment,
+    Biobase
 RoxygenNote: 6.1.0
 Collate:
     'inference_methods.R'
