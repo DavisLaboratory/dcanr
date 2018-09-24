@@ -30,11 +30,11 @@
 #' emat <- simdata$emat
 #' zscores <- dcScore(emat, cond)
 #'
-#' @describeIn getSimulatedData get the expression matrix and sample
+#' @describeIn getSimData get the expression matrix and sample
 #'   classification
 #'
 #' @export
-getSimulatedData <- function(simulation, cond.name = NULL, full = FALSE) {
+getSimData <- function(simulation, cond.name = NULL, full = FALSE) {
   #subset the condition matrix with the condition of interest
   emat = simulation$data
   condmat = attr(emat, 'classf')
@@ -59,10 +59,8 @@ getSimulatedData <- function(simulation, cond.name = NULL, full = FALSE) {
   return(list('emat' = emat, 'condition' = cond))
 }
 
-#' @describeIn getSimulatedData get names of the conditions (KOs)
+#' @describeIn getSimData get names of the conditions (KOs)
 #' @export
 getConditionNames <- function(simulation) {
   return(rownames(attr(simulation$data, 'classf')))
 }
-
-

@@ -59,7 +59,6 @@ dcNetwork <- function(dcscores, dcpvals, thresh = NULL) {
   #return results as a igraph
   diag(dcpvals) = FALSE
   dcscores[!dcpvals] = 0
-  dcscores = dcscores[rowSums(dcscores) != 0, colSums(dcscores) != 0]
   ig = igraph::graph_from_adjacency_matrix(dcscores, mode = 'undirected', weighted = 'score')
 
   return(ig)

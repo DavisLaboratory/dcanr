@@ -33,3 +33,4 @@ Collate:
     'multtest_adjust.R'
     'network_analysis.R'
     'simulation_accessors.R'
+    'simulation_plot.R'
