@@ -23,26 +23,20 @@ NULL
 #'
 #' @examples
 #' data(sim102)
-#' plotSimNet(sim102)
-#' plotSimNet(sim102, what = 'direct')
-#' plotSimNet(sim102, what = 'influence')
-#' plotSimNet(sim102, what = 'association')
+#' plotSimNetwork(sim102)
+#' plotSimNetwork(sim102, what = 'direct')
+#' plotSimNetwork(sim102, what = 'influence')
+#' plotSimNetwork(sim102, what = 'association')
 #'
 #' @export
 plotSimNetwork <- function(simulation, what = c('source', 'direct', 'influence', 'association')[1], ...) {
   lyt = simulation$netlayout
   if (what == 'source') {
-    plot(simulation$staticnet, layout = lyt, ...)
-  } else if(what == 'association') {
+    igraph::plot.igraph(simulation$staticnet, layout = lyt, ...)
+  } else {
+    what = stringr::str_to_title(what)
     infnet = simulation$infnet
-    plot(infnet, layout = lyt, ...)
-  } else if(what == 'influence') {
-    infnet = simulation$infnet
-    E(infnet)$color[!E(infnet)$Influence] = NA
-    plot(infnet, layout = lyt, ...)
-  } else if(what == 'direct') {
-    infnet = simulation$infnet
-    E(infnet)$color[!E(infnet)$Direct] = NA
-    plot(infnet, layout = lyt, ...)
+    E(infnet)$color[!igraph::get.edge.attribute(infnet, what)] = NA
+    igraph::plot.igraph(infnet, layout = lyt, ...)
   }
 }

@@ -3,11 +3,15 @@
 \name{getSimData}
 \alias{getSimData}
 \alias{getConditionNames}
+\alias{getTrueNetwork}
 \title{Get data and conditions from a given knock-out (KO)}
 \usage{
 getSimData(simulation, cond.name = NULL, full = FALSE)
 
 getConditionNames(simulation)
+
+getTrueNetwork(simulation, cond.name = NULL, full = FALSE,
+  what = c("association", "influence", "direct")[1])
 }
 \arguments{
 \item{simulation}{a list, storing data and results generated from simulations}
@@ -18,40 +22,56 @@ conditions. Multiple knock-outs (KOs) are performed per simulation. If
 
 \item{full}{a logical, indicating whether genes associated with the condition
 should be excluded. Defaults to \code{FALSE} and is recommended}
+
+\item{what}{a character, specifying which level of the true network to
+retrieve: 'association' (default), 'influence' or 'direct'}
 }
 \value{
 a list, containing \code{emat}, a matrix representing the expression
-  data and \code{condition}, a numeric containing the classification of
-  samples
+ data and \code{condition}, a numeric containing the classification of
+ samples for \code{getSimData}, the names of all genes that are KO for
+ \code{getConditionNames}, and an adjacency matrix for \code{getTrueNetwork}.
 }
 \description{
 Retrieves the simulated expression matrix and sample
-  classification for a specific knock-out experiment.
+ classification for a specific knock-out experiment.
 }
 \details{
 Genes discarded when \code{full} is \code{FALSE} are those that are
-  solely dependent on the condition. These genes are discarded from the
-  analysis to focus on those that are differentially co-expressed, not
-  co-ordinately co-expressed.
+ solely dependent on the condition. These genes are discarded from the
+ analysis to focus on those that are differentially co-expressed, not
+ co-ordinately co-expressed.
 
-  The names of all genes knocked-out can be retrieved using
-  \code{getConditionNames}
+ The names of all genes knocked-out can be retrieved using
+ \code{getConditionNames}.
+
+ The direct, influence and association networks represent different levels of
+ true differential networks. The direct network contains differential
+ regulatory interactions present in the original network. The influence
+ network includes upstream interactions and the association network includes
+ non-causative differential interactions.
 }
 \section{Functions}{
 \itemize{
-\item \code{getSimData}: get the expression matrix and sample
-classification
+\item \code{getSimData}: get the expression matrix and sample classification
 
 \item \code{getConditionNames}: get names of the conditions (KOs)
+
+\item \code{getTrueNetwork}: get the true differential network
 }}
 
 \examples{
 data(sim102)
 KOs <- getConditionNames(sim102)
-simdata <- getSimulatedData(sim102, KOs[2])
+
+#get simulated data
+simdata <- getSimData(sim102, KOs[2])
 cond <- simdata$condition
 emat <- simdata$emat
 zscores <- dcScore(emat, cond)
+
+#get the true network to evaluate against
+truenet <- getTrueNetwork(sim102, KOs[2], 'association')
 
 }
 \seealso{

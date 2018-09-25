@@ -32,10 +32,10 @@ The direct, influence and association networks represent different
 }
 \examples{
 data(sim102)
-plotSimNet(sim102)
-plotSimNet(sim102, what = 'direct')
-plotSimNet(sim102, what = 'influence')
-plotSimNet(sim102, what = 'association')
+plotSimNetwork(sim102)
+plotSimNetwork(sim102, what = 'direct')
+plotSimNetwork(sim102, what = 'influence')
+plotSimNetwork(sim102, what = 'association')
 
 }
 \seealso{
