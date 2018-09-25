@@ -10,8 +10,9 @@ getSimData(simulation, cond.name = NULL, full = FALSE)
 
 getConditionNames(simulation)
 
-getTrueNetwork(simulation, cond.name = NULL, full = FALSE,
-  what = c("association", "influence", "direct")[1])
+getTrueNetwork(simulation, cond.name = NULL,
+  truth.type = c("association", "influence", "direct")[1],
+  full = FALSE)
 }
 \arguments{
 \item{simulation}{a list, storing data and results generated from simulations}
@@ -23,7 +24,7 @@ conditions. Multiple knock-outs (KOs) are performed per simulation. If
 \item{full}{a logical, indicating whether genes associated with the condition
 should be excluded. Defaults to \code{FALSE} and is recommended}
 
-\item{what}{a character, specifying which level of the true network to
+\item{truth.type}{a character, specifying which level of the true network to
 retrieve: 'association' (default), 'influence' or 'direct'}
 }
 \value{
@@ -71,7 +72,7 @@ emat <- simdata$emat
 zscores <- dcScore(emat, cond)
 
 #get the true network to evaluate against
-truenet <- getTrueNetwork(sim102, KOs[2], 'association')
+truenet <- getTrueNetwork(sim102, KOs[2], truth.type = 'association')
 
 }
 \seealso{

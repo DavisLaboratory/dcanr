@@ -27,10 +27,12 @@ Suggests: EBcoexpress,
     Biobase
 RoxygenNote: 6.1.0
 Collate:
-    'inference_methods.R'
-    'inference_methods_generic.R'
+    'performance_metrics.R'
     'statistical_tests.R'
     'multtest_adjust.R'
+    'evaluation_functions.R'
+    'inference_methods.R'
+    'inference_methods_generic.R'
     'network_analysis.R'
     'simulation_accessors.R'
     'simulation_plot.R'

@@ -12,8 +12,10 @@ results should be passed as produced by the function and not modified in
 intermmediate steps}
 
 \item{f}{a function, the function to be used for adjustment. \code{p.adjust}
-from the \code{stats} package is used. The range of available methods can
-be accessed using \code{p.adjust.methods}}
+from the \code{stats} package is the default with the specific adjustment
+method 'fdr' used. The range of available methods can be accessed using
+\code{p.adjust.methods}. Custom functions should accept a numeric vector of
+p-values as the first argument}
 
 \item{...}{additional parameters to the adjustment function such as
 \code{method}}

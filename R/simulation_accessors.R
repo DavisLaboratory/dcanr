@@ -6,10 +6,10 @@
 #'@param cond.name a character, indicating the knock-out to use to derive
 #'  conditions. Multiple knock-outs (KOs) are performed per simulation. If
 #'  \code{NULL}, the first KO is chosen
+#'@param truth.type a character, specifying which level of the true network to
+#'  retrieve: 'association' (default), 'influence' or 'direct'
 #'@param full a logical, indicating whether genes associated with the condition
 #'  should be excluded. Defaults to \code{FALSE} and is recommended
-#'@param what a character, specifying which level of the true network to
-#'  retrieve: 'association' (default), 'influence' or 'direct'
 #'
 #'@details Genes discarded when \code{full} is \code{FALSE} are those that are
 #'  solely dependent on the condition. These genes are discarded from the
@@ -42,7 +42,7 @@
 #' zscores <- dcScore(emat, cond)
 #'
 #' #get the true network to evaluate against
-#' truenet <- getTrueNetwork(sim102, KOs[2], 'association')
+#' truenet <- getTrueNetwork(sim102, KOs[2], truth.type = 'association')
 #'
 #'@describeIn getSimData get the expression matrix and sample classification
 #'
@@ -81,8 +81,8 @@ getConditionNames <- function(simulation) {
 
 #' @describeIn getSimData get the true differential network
 #' @export
-getTrueNetwork <- function(simulation, cond.name = NULL, full = FALSE, what = c('association', 'influence', 'direct')[1]) {
-  what = stringr::str_to_title(what)
+getTrueNetwork <- function(simulation, cond.name = NULL, truth.type = c('association', 'influence', 'direct')[1], full = FALSE) {
+  truth.type = stringr::str_to_title(truth.type)
   if (is.null(cond.name)) {
     cond.name = getConditionNames(simulation)[1]
   }
@@ -95,7 +95,7 @@ getTrueNetwork <- function(simulation, cond.name = NULL, full = FALSE, what = c(
   #populate the matrix
   diffpairs = simulation$triplets
   diffpairs = diffpairs[diffpairs$cond %in% cond.name, ]
-  diffpairs = diffpairs[diffpairs[, what],  c('TF', 'Target')]
+  diffpairs = diffpairs[diffpairs[, truth.type],  c('TF', 'Target')]
   adjmat[as.matrix(diffpairs)] = adjmat[as.matrix(diffpairs)[, 2:1]] = 1
 
   return(adjmat)

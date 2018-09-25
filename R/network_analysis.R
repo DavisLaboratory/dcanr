@@ -12,6 +12,9 @@ NULL
 #'   for methods that generate a p-value, 0.9 for posterior probabilities from
 #'   EBcoexpress and 0.05 on the absolute score from DiffCoEx
 #'
+#' @details No extra arguments required for this function. The ellipsis are used
+#'   to allow flexibility in pipelines.
+#'
 #' @name dcNetwork
 #' @return an igraph object, representing the differential network. Scores are
 #'   added as edge attributes with the name 'score'
@@ -33,7 +36,7 @@ NULL
 #' }
 #'
 #' @export
-dcNetwork <- function(dcscores, dcpvals, thresh = NULL) {
+dcNetwork <- function(dcscores, dcpvals, thresh = NULL, ...) {
   if (!all(c('dc.test', 'dc.method') %in% names(attributes(dcpvals)))) {
     stop('Please ensure dcpvals has not been modified')
   }

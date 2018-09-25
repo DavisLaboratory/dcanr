@@ -4,7 +4,7 @@
 \alias{dcNetwork}
 \title{Generate a differential network from a DC analysis}
 \usage{
-dcNetwork(dcscores, dcpvals, thresh = NULL)
+dcNetwork(dcscores, dcpvals, thresh = NULL, ...)
 }
 \arguments{
 \item{dcpvals}{a matrix, raw or adjusted p-values resulting from
@@ -13,6 +13,8 @@ dcNetwork(dcscores, dcpvals, thresh = NULL)
 \item{thresh}{a numeric, threshold to apply. If \code{NULL}, defaults to 0.05
 for methods that generate a p-value, 0.9 for posterior probabilities from
 EBcoexpress and 0.05 on the absolute score from DiffCoEx}
+
+\item{...}{see details}
 }
 \value{
 an igraph object, representing the differential network. Scores are
@@ -21,6 +23,10 @@ an igraph object, representing the differential network. Scores are
 \description{
 Threshold the results from a differential co-expression analysis
   and create a differential network.
+}
+\details{
+No extra arguments required for this function. The ellipsis are used
+  to allow flexibility in pipelines.
 }
 \examples{
 #create data
