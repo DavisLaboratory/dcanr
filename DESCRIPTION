@@ -1,21 +1,23 @@
 Package: dcevalr
 Title: An evaluation framework for differential co-expression methods
-Version: 0.0.0.9000
+Version: 0.99.0
 Authors@R: person("Dharmesh", "Bhuva", email = "bhuva.d@wehi.edu.au", role = c("aut", "cre"))
 Description: An evaluation framework for testing differential co-expression methods in
   R. Simulated expression data with differential associations is used to assess inference methods.
   The package provides methods to evaluate inference methods and visualise predictions. Inference
   methods without implementations have been added to the package along with interfaces
   to existing implementations to enable ease of evaluations.
+biocViews: NetworkInference, GraphAndNetwork
 Depends: R (>= 3.5.0)
-License: What license is it under?
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: igraph,
     foreach,
     plyr,
     stringr,
-    reshape2
+    reshape2,
+    methods
 Suggests: EBcoexpress,
     testthat,
     EBarrays,
@@ -24,7 +26,9 @@ Suggests: EBcoexpress,
     mclust,
     minqa,
     SummarizedExperiment,
-    Biobase
+    Biobase,
+    knitr,
+    rmarkdown
 RoxygenNote: 6.1.0
 Collate:
     'performance_metrics.R'
@@ -36,3 +40,9 @@ Collate:
     'network_analysis.R'
     'simulation_accessors.R'
     'simulation_plot.R'
+VignetteBuilder: knitr
+Enhances: parallel,
+    doSNOW,
+    doParallel
+URL: https://github.com/bhuvad/dcevalr
+BugReports: https://github.com/bhuvad/dcevalr

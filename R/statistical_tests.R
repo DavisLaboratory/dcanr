@@ -6,7 +6,7 @@
 #'   and permutation tests. Parallel computation supported for the permutation
 #'   test.
 #'
-#' @param dcscore a matrix, the result of the \code{dcScore} function. The
+#' @param dcscores a matrix, the result of the \code{dcScore} function. The
 #'   results should be passed as produced by the function and not modified in
 #'   intermmediate steps
 #' @param emat a matrix, data.frame, ExpressionSet, SummarizedExperiment or
@@ -59,21 +59,21 @@
 #' }
 #'
 #' @export
-dcTest <- function(dcscore, emat, condition, ...) {
-  if (!all(c('dc.method', 'call') %in% names(attributes(dcscore)))) {
-    stop('Please ensure dcscore has not been modified')
+dcTest <- function(dcscores, emat, condition, ...) {
+  if (!all(c('dc.method', 'call') %in% names(attributes(dcscores)))) {
+    stop('Please ensure dcscores has not been modified')
   }
 
-  dc.method = attr(dcscore, 'dc.method')
-  pmat = do.call(methodmap[dc.method, 'testf'], list(quote(dcscore), quote(emat), quote(condition), ...))
+  dc.method = attr(dcscores, 'dc.method')
+  pmat = do.call(methodmap[dc.method, 'testf'], list(quote(dcscores), quote(emat), quote(condition), ...))
 
   return(pmat)
 }
 
-z.test <- function(dcscore, ...) {
+z.test <- function(dcscores, ...) {
   #compute raw p-values
-  pvals = pnorm(abs(dcscore), lower.tail = FALSE) * 2
-  attributes(pvals) = attributes(dcscore)
+  pvals = pnorm(abs(dcscores), lower.tail = FALSE) * 2
+  attributes(pvals) = attributes(dcscores)
 
   #add test type to attributes
   attr(pvals, 'dc.test') = 'two tailed z-test'
@@ -81,11 +81,11 @@ z.test <- function(dcscore, ...) {
   return(pvals)
 }
 
-no.test <- function(dcscore, ...) {
+no.test <- function(dcscores, ...) {
   warning('No statistical test required')
-  attr(dcscore, 'dc.test') = 'none'
+  attr(dcscores, 'dc.test') = 'none'
 
-  return(dcscore)
+  return(dcscores)
 }
 
 #vectorize networks - helper function convert scorematrix to a symmetric matrix then vector
@@ -110,8 +110,8 @@ vec2mat <- function(v) {
   return(m)
 }
 
-perm.test <- function(dcscore, emat, condition, B = 20, perm.seed = sample.int(1e6, 1)) {
-  obs = mat2vec(dcscore)
+perm.test <- function(dcscores, emat, condition, B = 20, perm.seed = sample.int(1e6, 1)) {
+  obs = mat2vec(dcscores)
   set.seed(perm.seed)
   randseeds = sample.int(1e6, B)
 
@@ -129,7 +129,7 @@ perm.test <- function(dcscore, emat, condition, B = 20, perm.seed = sample.int(1
 
     #shuffle condition and recalculate scores
     condition = sample(condition, length(condition), replace = FALSE)
-    permsc = eval(attr(dcscore, 'call'))
+    permsc = eval(attr(dcscores, 'call'))
     permsc = mat2vec(permsc)
 
     #count elements greater than obs

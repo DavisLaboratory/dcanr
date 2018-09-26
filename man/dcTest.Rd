@@ -4,10 +4,10 @@
 \alias{dcTest}
 \title{Statistical test for differential association analysis}
 \usage{
-dcTest(dcscore, emat, condition, ...)
+dcTest(dcscores, emat, condition, ...)
 }
 \arguments{
-\item{dcscore}{a matrix, the result of the \code{dcScore} function. The
+\item{dcscores}{a matrix, the result of the \code{dcScore} function. The
 results should be passed as produced by the function and not modified in
 intermmediate steps}
 
