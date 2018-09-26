@@ -28,7 +28,8 @@ Suggests: EBcoexpress,
     SummarizedExperiment,
     Biobase,
     knitr,
-    rmarkdown
+    rmarkdown,
+    BiocStyle
 RoxygenNote: 6.1.0
 Collate:
     'performance_metrics.R'

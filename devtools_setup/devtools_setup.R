@@ -19,6 +19,7 @@ devtools::use_package('minqa', type = 'Suggests')
 devtools::use_package('testthat', type = 'Suggests')
 devtools::use_package('SummarizedExperiment', type = 'Suggests')
 devtools::use_package('Biobase', type = 'Suggests')
+devtools::use_package('BiocStyle', type = 'Suggests')
 
 #packages to use: enhances
 devtools::use_package('parallel',  type = 'Enhances')
