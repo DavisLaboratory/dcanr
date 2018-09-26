@@ -8,7 +8,7 @@
 #'
 #' @param dcscores a matrix, the result of the \code{dcScore} function. The
 #'   results should be passed as produced by the function and not modified in
-#'   intermmediate steps
+#'   intermediate steps
 #' @param emat a matrix, data.frame, ExpressionSet, SummarizedExperiment or
 #'   DGEList. This should be the one passed to \code{dcScore}
 #' @param condition a numeric, (with 1's and 2's representing a binary

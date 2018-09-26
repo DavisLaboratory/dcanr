@@ -9,7 +9,7 @@ dcNetwork(dcscores, dcpvals, thresh = NULL, ...)
 \arguments{
 \item{dcscores}{a matrix, the result of the \code{dcScore} function. The
 results should be passed as produced by the function and not modified in
-intermmediate steps}
+intermediate steps}
 
 \item{dcpvals}{a matrix, raw or adjusted p-values resulting from
 \code{dcTest} or \code{dcAdjust} respectively}

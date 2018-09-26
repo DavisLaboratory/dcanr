@@ -14,7 +14,7 @@
 #'@details Genes discarded when \code{full} is \code{FALSE} are those that are
 #'  solely dependent on the condition. These genes are discarded from the
 #'  analysis to focus on those that are differentially co-expressed, not
-#'  co-ordinately co-expressed.
+#'  coordinately co-expressed.
 #'
 #'  The names of all genes knocked-out can be retrieved using
 #'  \code{getConditionNames}.
@@ -96,7 +96,7 @@ getTrueNetwork <- function(simulation, cond.name = NULL, truth.type = c('associa
   diffpairs = simulation$triplets
   diffpairs = diffpairs[diffpairs$cond %in% cond.name, ]
   diffpairs = diffpairs[diffpairs[, truth.type],  c('TF', 'Target')]
-  adjmat[as.matrix(diffpairs)] = adjmat[as.matrix(diffpairs)[, 2:1]] = 1
+  adjmat[as.matrix(diffpairs)] = adjmat[as.matrix(diffpairs)[, 2:1], drop = FALSE] = 1
 
   return(adjmat)
 }

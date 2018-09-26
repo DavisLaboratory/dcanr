@@ -39,6 +39,10 @@ devtools::test() # Ctrl + Shift + T
 # #to setup the data folder
 # devtools::use_data(sim102)
 
+# #setup news file
+# devtools::use_news_md()
+
 #formatting
 # formatR::tidy_dir('R')
 # lintr::lint_package()
+# devtools::spell_check(dict = 'en_AU')

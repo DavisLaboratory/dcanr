@@ -59,7 +59,7 @@ When using data from sequencing experiments, make sure appropriate
   Additional method specific parameters can be supplied to the function.
   \code{cor.method} can be set to either 'pearson' (default) or 'spearman' to
   determine the method to use for estimating correlations. These are the two
-  measures currently suppoerted in the package. We recommend using the
+  measures currently supported in the package. We recommend using the
   'spearman' correlation when dealing with sequencing data.
 
   The beta parameter in the DiffCoEx method can be specified using

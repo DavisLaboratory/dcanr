@@ -41,7 +41,7 @@ Retrieves the simulated expression matrix and sample
 Genes discarded when \code{full} is \code{FALSE} are those that are
  solely dependent on the condition. These genes are discarded from the
  analysis to focus on those that are differentially co-expressed, not
- co-ordinately co-expressed.
+ coordinately co-expressed.
 
  The names of all genes knocked-out can be retrieved using
  \code{getConditionNames}.

@@ -8,7 +8,7 @@ NULL
 #'
 #' @param dcpvals a matrix, the result of the \code{dcTest} function. The
 #'   results should be passed as produced by the function and not modified in
-#'   intermmediate steps
+#'   intermediate steps
 #' @param f a function, the function to be used for adjustment. \code{p.adjust}
 #'   from the \code{stats} package is the default with the specific adjustment
 #'   method 'fdr' used. The range of available methods can be accessed using

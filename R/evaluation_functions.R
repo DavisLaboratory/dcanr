@@ -82,7 +82,7 @@ dcPipeline <- function(simulation, dc.func = 'zscore', ...) {
     condition = simdata$condition
 
     #evaluate function
-    dcnet = dc.func(emat = emat, condition = condition, ...)
+    dcnet = suppressWarnings(dc.func(emat = emat, condition = condition, ...))
     #validate result and convert to matrix
     dcnet = validateResult(emat, dcnet)
     dcnet = annotateig(simulation, dcnet)

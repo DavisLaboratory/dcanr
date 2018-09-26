@@ -9,7 +9,7 @@ dcAdjust(dcpvals, f = p.adjust, ...)
 \arguments{
 \item{dcpvals}{a matrix, the result of the \code{dcTest} function. The
 results should be passed as produced by the function and not modified in
-intermmediate steps}
+intermediate steps}
 
 \item{f}{a function, the function to be used for adjustment. \code{p.adjust}
 from the \code{stats} package is the default with the specific adjustment
