@@ -37,9 +37,10 @@ If \code{dc.func} is a character, the existing methods in the
 
   \code{ function(emat, condition, ...) }
 
-  They must return either an igraph object or an adjacency matrix containing
-  all genes in the expression matrix 'emat'. See examples for how the
-  in-built functions are combined into a pipeline.
+  They must return either an igraph object or an adjacency matrix stored in a
+  base R 'matrix' or the S4 'Matrix' class, containing all genes in the
+  expression matrix 'emat'. See examples for how the in-built functions are
+  combined into a pipeline.
 }
 \examples{
 data(sim102)

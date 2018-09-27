@@ -8,6 +8,7 @@ devtools::use_package('plyr')
 devtools::use_package('stringr')
 devtools::use_package('reshape2')
 devtools::use_package('methods')
+devtools::use_package('Matrix')
 
 #packages to use: suggests
 devtools::use_package('EBcoexpress', type = 'Suggests') #requireNamespace("EBcoexpress", quietly = TRUE)

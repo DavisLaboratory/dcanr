@@ -2,6 +2,7 @@ library(dcevalr)
 library(Biobase)
 library(edgeR)
 library(SummarizedExperiment)
+library(Matrix)
 
 context('Inference methods ')
 
@@ -68,6 +69,7 @@ test_that('Different matrix types', {
   dge = DGEList(counts = round(x * 10) + 100)
   eset = ExpressionSet(assayData = x)
   se = SummarizedExperiment(x)
+  Mat = Matrix(x)
 
   expect_is(dcScore(x, cond), 'matrix')
   expect_is(dcScore(as.data.frame(x), cond), 'matrix')

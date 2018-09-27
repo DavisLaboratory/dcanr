@@ -25,9 +25,10 @@ NULL
 #'
 #'   \code{ function(emat, condition, ...) }
 #'
-#'   They must return either an igraph object or an adjacency matrix containing
-#'   all genes in the expression matrix 'emat'. See examples for how the
-#'   in-built functions are combined into a pipeline.
+#'   They must return either an igraph object or an adjacency matrix stored in a
+#'   base R 'matrix' or the S4 'Matrix' class, containing all genes in the
+#'   expression matrix 'emat'. See examples for how the in-built functions are
+#'   combined into a pipeline.
 #'
 #' @return a list of igraphs, representing the differential network for each
 #'   independent condition (knock-out).
@@ -173,13 +174,23 @@ dcEvaluate <-
 
 validateResult <- function(emat, res) {
   #check for correct output format
-  if (!class(res) %in% c('matrix', 'igraph')) {
+  if (!class(res) %in% c('matrix', 'igraph', 'Matrix')) {
     stop('result of the function must be either a matrix or igraph object')
   }
 
   #if matrix, check that it is binary
   if (class(res) %in% 'matrix') {
     if (!all(table(res) %in% 0:1)) {
+      stop('result of the function must be a binary matrix')
+    }
+
+    #helps with reordering vertices and clearing all attributes
+    res = igraph::graph_from_adjacency_matrix(res)
+  }
+
+  #if Matrix, check that it is binary
+  if (class(res) %in% 'Matrix') {
+    if (!all(Matrix::as.array(res) %in% 0:1)) {
       stop('result of the function must be a binary matrix')
     }
 

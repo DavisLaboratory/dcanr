@@ -17,7 +17,8 @@ Imports: igraph,
     plyr,
     stringr,
     reshape2,
-    methods
+    methods,
+    Matrix
 Suggests: EBcoexpress,
     testthat,
     EBarrays,

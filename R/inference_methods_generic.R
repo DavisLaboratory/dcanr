@@ -12,8 +12,8 @@ NULL
 #'   Applications are not limited to analysis of gene expression data and may be
 #'   used for differential associations in general.
 #'
-#' @param emat a matrix, data.frame, ExpressionSet, SummarizedExperiment or
-#'   DGEList
+#' @param emat a matrix, Matrix, data.frame, ExpressionSet, SummarizedExperiment
+#'   or DGEList
 #' @param condition a numeric, (with 1's and 2's representing a binary
 #'   condition), a factor with 2 levels or a character representing 2 conditions
 #' @param dc.method a character, representing the method to use. Use
@@ -105,6 +105,26 @@ setMethod(
 
     #add method name to attributes
     attr(scmat, 'dc.method') = dc.method
+
+    return(scmat)
+  }
+)
+
+#' @rdname dcScore
+setMethod(
+  f = 'dcScore',
+  signature = c('Matrix', 'ANY', 'ANY'),
+  definition = function(emat,
+                        condition,
+                        dc.method = 'zscore',
+                        ...) {
+    #default method
+    if (missing(dc.method)) {
+      dc.method = 'zscore'
+    }
+
+    emat = Matrix::as.matrix(emat)
+    scmat = methods::callGeneric(emat, condition, dc.method, ...)
 
     return(scmat)
   }

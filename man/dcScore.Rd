@@ -4,6 +4,7 @@
 \name{dcScore}
 \alias{dcScore}
 \alias{dcScore,matrix-method}
+\alias{dcScore,Matrix-method}
 \alias{dcScore,data.frame-method}
 \alias{dcScore,ExpressionSet-method}
 \alias{dcScore,SummarizedExperiment-method}
@@ -13,6 +14,8 @@
 dcScore(emat, condition, dc.method, ...)
 
 \S4method{dcScore}{matrix}(emat, condition, dc.method = "zscore", ...)
+
+\S4method{dcScore}{Matrix}(emat, condition, dc.method = "zscore", ...)
 
 \S4method{dcScore}{data.frame}(emat, condition, dc.method = "zscore",
   ...)
@@ -26,8 +29,8 @@ dcScore(emat, condition, dc.method, ...)
 \S4method{dcScore}{DGEList}(emat, condition, dc.method = "zscore", ...)
 }
 \arguments{
-\item{emat}{a matrix, data.frame, ExpressionSet, SummarizedExperiment or
-DGEList}
+\item{emat}{a matrix, Matrix, data.frame, ExpressionSet, SummarizedExperiment
+or DGEList}
 
 \item{condition}{a numeric, (with 1's and 2's representing a binary
 condition), a factor with 2 levels or a character representing 2 conditions}
