@@ -6,8 +6,9 @@ NULL
 #'   and create a differential network.
 #'
 #' @inheritParams dcTest
-#' @param dcpvals a matrix, raw or adjusted p-values resulting from
-#'   \code{dcTest} or \code{dcAdjust} respectively
+#' @param dcpvals a matrix or NULL, raw or adjusted p-values resulting from
+#'   \code{dcTest} or \code{dcAdjust} respectively. Should be left NULL only if
+#'   method is EBcoexpress or DiffCoEx
 #' @param thresh a numeric, threshold to apply. If \code{NULL}, defaults to 0.1
 #'   for methods that generate a p-value, 0.9 for posterior probabilities from
 #'   EBcoexpress and 0.1 on the absolute score from DiffCoEx
@@ -25,25 +26,34 @@ NULL
 #' x <- matrix(rnorm(120), 4, 30)
 #' cond <- rep(1:2, 15)
 #'
-#' #perform analysis
+#' #perform analysis - z-score
 #' zscores <- dcScore(x, cond)
 #' pvals <- dcTest(zscores, emat = x, condition = cond)
 #' pvals <- dcAdjust(pvals, p.adjust, method = 'fdr')
 #' ig <- dcNetwork(zscores, pvals, 0.1)
+#'
+#' #perform analysis - DiffCoEx
+#' dcscores <- dcScore(x, cond, dc.method = 'diffcoex')
+#' ig <- dcNetwork(dcscores, 0.1)
 #'
 #' \dontrun{
 #' igraph::plot.igraph(ig)
 #' }
 #'
 #' @export
-dcNetwork <- function(dcscores, dcpvals, thresh = NULL, ...) {
-  if (!all(c('dc.test', 'dc.method') %in% names(attributes(dcpvals)))) {
-    stop('Please ensure dcpvals has not been modified')
-  }
+dcNetwork <- function(dcscores, dcpvals = NULL, thresh = NULL, ...) {
   if (!all(c('dc.method', 'dc.method') %in% names(attributes(dcscores)))) {
     stop('Please ensure dcscores has not been modified')
   }
-
+  #if statistical tests are performed for method, check pval matrix
+  if (methodmap[attr(dcscores, 'dc.method'), 'adjust']) {
+    stopifnot(!is.null(dcpvals))
+    if (!all(c('dc.test', 'dc.method') %in% names(attributes(dcpvals)))) {
+      stop('Please ensure dcpvals has not been modified')
+    }
+  } else {
+    dcpvals = dcscores
+  }
   #default thresh if not provided
   dc.method = attr(dcpvals, 'dc.method')
   if (is.null(thresh)) {

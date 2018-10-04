@@ -4,15 +4,16 @@
 \alias{dcNetwork}
 \title{Generate a differential network from a DC analysis}
 \usage{
-dcNetwork(dcscores, dcpvals, thresh = NULL, ...)
+dcNetwork(dcscores, dcpvals = NULL, thresh = NULL, ...)
 }
 \arguments{
 \item{dcscores}{a matrix, the result of the \code{dcScore} function. The
 results should be passed as produced by the function and not modified in
 intermediate steps}
 
-\item{dcpvals}{a matrix, raw or adjusted p-values resulting from
-\code{dcTest} or \code{dcAdjust} respectively}
+\item{dcpvals}{a matrix or NULL, raw or adjusted p-values resulting from
+\code{dcTest} or \code{dcAdjust} respectively. Should be left NULL only if
+method is EBcoexpress or DiffCoEx}
 
 \item{thresh}{a numeric, threshold to apply. If \code{NULL}, defaults to 0.1
 for methods that generate a p-value, 0.9 for posterior probabilities from
@@ -37,11 +38,15 @@ No extra arguments required for this function. The ellipsis are used
 x <- matrix(rnorm(120), 4, 30)
 cond <- rep(1:2, 15)
 
-#perform analysis
+#perform analysis - z-score
 zscores <- dcScore(x, cond)
 pvals <- dcTest(zscores, emat = x, condition = cond)
 pvals <- dcAdjust(pvals, p.adjust, method = 'fdr')
 ig <- dcNetwork(zscores, pvals, 0.1)
+
+#perform analysis - DiffCoEx
+dcscores <- dcScore(x, cond, dc.method = 'diffcoex')
+ig <- dcNetwork(dcscores, 0.1)
 
 \dontrun{
 igraph::plot.igraph(ig)
