@@ -14,8 +14,6 @@ vignette: >
   %\VignetteIndexEntry{Differential co-expression analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-abstract: >
-  Differential co-expression analysis
 ---
 
 # Introduction
