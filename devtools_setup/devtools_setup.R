@@ -9,6 +9,9 @@ devtools::use_package('stringr')
 devtools::use_package('reshape2')
 devtools::use_package('methods')
 devtools::use_package('Matrix')
+devtools::use_package('graphics')
+devtools::use_package('stats')
+devtools::use_package('methods')
 
 #packages to use: suggests
 devtools::use_package('EBcoexpress', type = 'Suggests') #requireNamespace("EBcoexpress", quietly = TRUE)
@@ -38,7 +41,7 @@ devtools::test() # Ctrl + Shift + T
 # devtools::use_testthat()
 
 # #to setup the data folder
-# devtools::use_data(sim102)
+# devtools::use_data(sim102, compress = 'bzip2')
 
 # #setup news file
 # devtools::use_news_md()

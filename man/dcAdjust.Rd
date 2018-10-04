@@ -4,7 +4,7 @@
 \alias{dcAdjust}
 \title{Adjust for multiple testing in differential association analysis}
 \usage{
-dcAdjust(dcpvals, f = p.adjust, ...)
+dcAdjust(dcpvals, f = stats::p.adjust, ...)
 }
 \arguments{
 \item{dcpvals}{a matrix, the result of the \code{dcTest} function. The

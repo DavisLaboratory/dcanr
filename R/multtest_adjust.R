@@ -40,7 +40,7 @@ NULL
 #' dcAdjust(pvals, p.adjust, method = 'fdr')
 #'
 #' @export
-dcAdjust <- function(dcpvals, f = p.adjust, ...) {
+dcAdjust <- function(dcpvals, f = stats::p.adjust, ...) {
   if (!all(c('dc.test', 'dc.method') %in% names(attributes(dcpvals)))) {
     stop('Please ensure dcpvals has not been modified')
   }

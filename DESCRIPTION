@@ -18,7 +18,9 @@ Imports: igraph,
     stringr,
     reshape2,
     methods,
-    Matrix
+    Matrix,
+    graphics,
+    stats
 Suggests: EBcoexpress,
     testthat,
     EBarrays,
@@ -33,8 +35,8 @@ Suggests: EBcoexpress,
     BiocStyle
 RoxygenNote: 6.1.0
 Collate:
-    'performance_metrics.R'
     'statistical_tests.R'
+    'performance_metrics.R'
     'multtest_adjust.R'
     'evaluation_functions.R'
     'inference_methods.R'

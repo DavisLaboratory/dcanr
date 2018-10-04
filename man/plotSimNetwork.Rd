@@ -10,10 +10,10 @@ plotSimNetwork(simulation, what = c("source", "direct", "influence",
 \arguments{
 \item{simulation}{a list, storing data and results generated from simulations}
 
-\item{what}{a character, indicating which network to plot, 'source'
+\item{what}{a character, indicating which network to retrieve, 'source'
 (default), 'direct', 'influence' or 'association'}
 
-\item{...}{additional parameters to \code{plot.igraph}}
+\item{...}{additional parameters to plot.igraph}
 }
 \value{
 a plot of the network

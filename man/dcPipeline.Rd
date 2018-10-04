@@ -4,7 +4,7 @@
 \alias{dcPipeline}
 \title{Run a DC pipeline on a simulation}
 \usage{
-dcPipeline(simulation, dc.func = "zscore", ...)
+dcPipeline(simulation, dc.func = "zscore", precomputed = FALSE, ...)
 }
 \arguments{
 \item{simulation}{a list, storing data and results generated from simulations}
@@ -12,6 +12,9 @@ dcPipeline(simulation, dc.func = "zscore", ...)
 \item{dc.func}{a function or character. Character represents one of the
 method names from \code{dcMethods} which is run with the default settings.
 A function can be used to provide custom processing pipelines (see details)}
+
+\item{precomputed}{a locigal, indicating whether the precomputed inference
+should be used or a new one computed (default FALSE)}
 
 \item{...}{additional parameters to \code{dc.func}}
 }
@@ -31,6 +34,10 @@ If \code{dc.func} is a character, the existing methods in the
   Parameters to the independent processing steps can also be provided to this
   function as shown in the examples.
 
+  If \code{precomputed} is TRUE while \code{dc.func} is a character,
+  precomputed results will be used. These can then be evaluated using
+  \code{dcEvaluate}.
+
   Custom pipelines need to be coded into a function which can then be
   provided instead of a character. Functions must have the following
   structure:
@@ -49,7 +56,10 @@ data(sim102)
 resStd <- dcPipeline(sim102, dc.func = 'zscore')
 
 #run a standard pipeline and specify params
-resParam<- dcPipeline(sim102, dc.func = 'zscore', cor.method = 'pearson')
+resParam <- dcPipeline(sim102, dc.func = 'zscore', cor.method = 'pearson')
+
+#retrieve precomputed results
+resPrecomputed <- dcPipeline(sim102, dc.func = 'zscore', precomputed = TRUE)
 
 #run a custom pipeline
 analysisInbuilt <- function(emat, condition, dc.method = 'zscore', ...) {
@@ -66,7 +76,7 @@ analysisInbuilt <- function(emat, condition, dc.method = 'zscore', ...) {
 }
 resCustom <- dcPipeline(sim102, dc.func = analysisInbuilt)
 
-\dontrun{plot(resCustom[[1]])}
+plot(resCustom[[1]])
 
 }
 \seealso{

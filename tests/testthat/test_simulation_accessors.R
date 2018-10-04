@@ -1,6 +1,7 @@
 library(dcevalr)
 library(igraph)
 library(stringr)
+library(Matrix)
 
 context('Simulation accessors ')
 
@@ -55,7 +56,7 @@ test_that('Retrieved network vector is same as stored network ', {
     })
     nets = unlist(nets)
 
-    expect_equal(length(nets), length(sim102$scores[, vecnames[type]]))
-    expect_equal(nets, sim102$scores[, vecnames[type]])
+    expect_equal(length(nets), length(as.matrix(sim102$scores)[, vecnames[type]]))
+    expect_equal(nets, as.matrix(sim102$scores)[, vecnames[type]])
   }
 })

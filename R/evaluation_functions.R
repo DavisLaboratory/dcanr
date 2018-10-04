@@ -1,4 +1,4 @@
-#' @include multtest_adjust.R performance_metrics.R
+#' @include multtest_adjust.R performance_metrics.R statistical_tests.R
 #' @importFrom igraph E V E<- V<-
 NULL
 
@@ -11,6 +11,8 @@ NULL
 #' @param dc.func a function or character. Character represents one of the
 #'   method names from \code{dcMethods} which is run with the default settings.
 #'   A function can be used to provide custom processing pipelines (see details)
+#' @param precomputed a locigal, indicating whether the precomputed inference
+#'   should be used or a new one computed (default FALSE)
 #' @param ... additional parameters to \code{dc.func}
 #'
 #' @details If \code{dc.func} is a character, the existing methods in the
@@ -18,6 +20,10 @@ NULL
 #'   dcScore -> dcTest -> dcAdjust -> dcNetwork, resulting in a igraph object.
 #'   Parameters to the independent processing steps can also be provided to this
 #'   function as shown in the examples.
+#'
+#'   If \code{precomputed} is TRUE while \code{dc.func} is a character,
+#'   precomputed results will be used. These can then be evaluated using
+#'   \code{dcEvaluate}.
 #'
 #'   Custom pipelines need to be coded into a function which can then be
 #'   provided instead of a character. Functions must have the following
@@ -44,7 +50,10 @@ NULL
 #' resStd <- dcPipeline(sim102, dc.func = 'zscore')
 #'
 #' #run a standard pipeline and specify params
-#' resParam<- dcPipeline(sim102, dc.func = 'zscore', cor.method = 'pearson')
+#' resParam <- dcPipeline(sim102, dc.func = 'zscore', cor.method = 'pearson')
+#'
+#' #retrieve precomputed results
+#' resPrecomputed <- dcPipeline(sim102, dc.func = 'zscore', precomputed = TRUE)
 #'
 #' #run a custom pipeline
 #' analysisInbuilt <- function(emat, condition, dc.method = 'zscore', ...) {
@@ -61,13 +70,17 @@ NULL
 #' }
 #' resCustom <- dcPipeline(sim102, dc.func = analysisInbuilt)
 #'
-#' \dontrun{plot(resCustom[[1]])}
+#' plot(resCustom[[1]])
 #'
 #' @export
-dcPipeline <- function(simulation, dc.func = 'zscore', ...) {
+dcPipeline <- function(simulation, dc.func = 'zscore', precomputed = FALSE, ...) {
   if (is.character(dc.func)) {
     stopifnot(dc.func %in% dcMethods())
     dc.method = dc.func
+
+    if (precomputed) {
+      return(retrieveResult(simulation, dc.method))
+    }
 
     dc.func <- function(emat, condition, ...) {
       return(analysisInbuilt(emat, condition, dc.method, ...))
@@ -224,6 +237,10 @@ annotateig <- function(simulation, ig) {
   E(infnet)$width[is.na(E(infnet)$width)] = E(infnet)$width[!is.na(E(infnet)$width)][1]
   E(infnet)$arrow.size = 0
 
+  #add layout as attributes
+  V(infnet)$x = simulation$netlayout[, 1]
+  V(infnet)$y = simulation$netlayout[, 2]
+
   return(infnet)
 }
 
@@ -238,4 +255,33 @@ analysisInbuilt <- function(emat, condition, dc.method = 'zscore', ...) {
   dcnet = dcNetwork(score, adjp, ...)
 
   return(dcnet)
+}
+
+retrieveResult <- function(simulation, dc.method = 'zscore') {
+  scores = Matrix::as.matrix(simulation$scores)
+  scores = split(scores[, dc.method], scores[, 'bimid'])
+  names(scores) = getConditionNames(simulation)
+
+  #convert vectors to matrices and then to igraphs
+  dcnets = lapply(getConditionNames(simulation), function(b) {
+    gnames = rownames(getSimData(simulation, b)$emat)
+
+    #add attributes to transfer
+    attr(scores[[b]], 'feature.names') = sort(gnames)
+    attr(scores[[b]], 'mat.attrs') = list(
+      'dim' = rep(length(gnames), 2),
+      'dimnames' = list(sort(gnames), sort(gnames))
+    )
+    scmat = vec2mat(scores[[b]])
+    scmat = scmat[gnames, gnames]
+    diag(scmat) = 0
+
+    #convert to igraphs
+    ig = igraph::graph_from_adjacency_matrix(scmat, mode = 'undirected', weighted = 'score')
+    ig = annotateig(simulation, ig)
+    return(ig)
+  })
+  names(dcnets) = getConditionNames(simulation)
+
+  return(dcnets)
 }

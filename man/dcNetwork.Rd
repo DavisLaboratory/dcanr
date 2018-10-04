@@ -14,9 +14,9 @@ intermediate steps}
 \item{dcpvals}{a matrix, raw or adjusted p-values resulting from
 \code{dcTest} or \code{dcAdjust} respectively}
 
-\item{thresh}{a numeric, threshold to apply. If \code{NULL}, defaults to 0.05
+\item{thresh}{a numeric, threshold to apply. If \code{NULL}, defaults to 0.1
 for methods that generate a p-value, 0.9 for posterior probabilities from
-EBcoexpress and 0.05 on the absolute score from DiffCoEx}
+EBcoexpress and 0.1 on the absolute score from DiffCoEx}
 
 \item{...}{see details}
 }
@@ -41,7 +41,7 @@ cond <- rep(1:2, 15)
 zscores <- dcScore(x, cond)
 pvals <- dcTest(zscores, emat = x, condition = cond)
 pvals <- dcAdjust(pvals, p.adjust, method = 'fdr')
-ig <- dcNetwork(zscores, pvals, 0.5)
+ig <- dcNetwork(zscores, pvals, 0.1)
 
 \dontrun{
 igraph::plot.igraph(ig)

@@ -7,7 +7,7 @@ NULL
 #'   resulting differential networks coloured accordingly.
 #'
 #' @inheritParams getSimData
-#' @param what a character, indicating which network to plot, 'source'
+#' @param what a character, indicating which network to retrieve, 'source'
 #'   (default), 'direct', 'influence' or 'association'
 #' @param ... additional parameters to \code{plot.igraph}
 #'
@@ -30,13 +30,18 @@ NULL
 #'
 #' @export
 plotSimNetwork <- function(simulation, what = c('source', 'direct', 'influence', 'association')[1], ...) {
-  lyt = simulation$netlayout
   if (what == 'source') {
-    igraph::plot.igraph(simulation$staticnet, layout = lyt, ...)
+    net = simulation$staticnet
   } else {
     what = stringr::str_to_title(what)
     infnet = simulation$infnet
     E(infnet)$color[!igraph::get.edge.attribute(infnet, what)] = NA
-    igraph::plot.igraph(infnet, layout = lyt, ...)
+    net = infnet
   }
+
+  #add layout
+  V(net)$x = simulation$netlayout[, 1]
+  V(net)$y = simulation$netlayout[, 2]
+
+  igraph::plot.igraph(net, ...)
 }

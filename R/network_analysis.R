@@ -8,9 +8,9 @@ NULL
 #' @inheritParams dcTest
 #' @param dcpvals a matrix, raw or adjusted p-values resulting from
 #'   \code{dcTest} or \code{dcAdjust} respectively
-#' @param thresh a numeric, threshold to apply. If \code{NULL}, defaults to 0.05
+#' @param thresh a numeric, threshold to apply. If \code{NULL}, defaults to 0.1
 #'   for methods that generate a p-value, 0.9 for posterior probabilities from
-#'   EBcoexpress and 0.05 on the absolute score from DiffCoEx
+#'   EBcoexpress and 0.1 on the absolute score from DiffCoEx
 #'
 #' @details No extra arguments required for this function. The ellipsis are used
 #'   to allow flexibility in pipelines.
@@ -29,7 +29,7 @@ NULL
 #' zscores <- dcScore(x, cond)
 #' pvals <- dcTest(zscores, emat = x, condition = cond)
 #' pvals <- dcAdjust(pvals, p.adjust, method = 'fdr')
-#' ig <- dcNetwork(zscores, pvals, 0.5)
+#' ig <- dcNetwork(zscores, pvals, 0.1)
 #'
 #' \dontrun{
 #' igraph::plot.igraph(ig)
@@ -63,6 +63,10 @@ dcNetwork <- function(dcscores, dcpvals, thresh = NULL, ...) {
   diag(dcpvals) = FALSE
   dcscores[!dcpvals] = 0
   ig = igraph::graph_from_adjacency_matrix(dcscores, mode = 'undirected', weighted = 'score')
+
+  #visualisation properties
+  #node sizes based on degree
+  V(ig)$size = log(igraph::degree(ig, mode = 'out') + 3) * 2
 
   return(ig)
 }

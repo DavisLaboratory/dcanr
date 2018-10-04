@@ -2,6 +2,7 @@
 #' @importFrom foreach foreach %:% %dopar%
 #' @importFrom graphics par
 #' @importFrom stats anova binomial glm p.adjust pnorm qchisq var
+#' @import methods
 NULL
 
 #' @title Compute scores from differential association analysis
@@ -124,7 +125,7 @@ setMethod(
     }
 
     emat = Matrix::as.matrix(emat)
-    scmat = methods::callGeneric(emat, condition, dc.method, ...)
+    scmat = callGeneric(emat, condition, dc.method, ...)
 
     return(scmat)
   }
@@ -146,7 +147,7 @@ setMethod(
     }
 
     emat = as.matrix(emat)
-    scmat = methods::callGeneric(emat, condition, dc.method, ...)
+    scmat = callGeneric(emat, condition, dc.method, ...)
 
     return(scmat)
   }
@@ -170,7 +171,7 @@ setMethod(
     }
 
     emat = Biobase::exprs(emat)
-    scmat = methods::callGeneric(emat, condition, dc.method, ...)
+    scmat = callGeneric(emat, condition, dc.method, ...)
 
     return(scmat)
   }
@@ -194,7 +195,7 @@ setMethod(
     }
 
     emat = SummarizedExperiment::assay(emat)
-    scmat = methods::callGeneric(emat, condition, dc.method, ...)
+    scmat = callGeneric(emat, condition, dc.method, ...)
 
     return(scmat)
   }
