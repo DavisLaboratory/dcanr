@@ -77,6 +77,17 @@ dcNetwork <- function(dcscores, dcpvals = NULL, thresh = NULL, ...) {
   #visualisation properties
   #node sizes based on degree
   V(ig)$size = log(igraph::degree(ig, mode = 'out') + 3) * 2
+  V(ig)$color = '#F7F7F7B3'
+  if (length(E(ig)) > 0){
+    minmax = stats::quantile(abs(E(ig)$score), 0.75, na.rm = TRUE)
+    E(ig)$color = colfunc(-minmax, minmax, RColorBrewer::brewer.pal(11, 'PRGn'))(E(ig)$score)
+    E(ig)$color = stringr::str_replace(E(ig)$color, 'FF$', 'B3')
+  }
 
   return(ig)
+}
+
+colfunc <- function(start, end, colvec) {
+  col = circlize::colorRamp2(seq(start, end, length.out = length(colvec)), colvec)
+  return(col)
 }

@@ -10,6 +10,8 @@ devtools::use_package('reshape2')
 devtools::use_package('methods')
 devtools::use_package('Matrix')
 devtools::use_package('graphics')
+devtools::use_package('RColorBrewer')
+devtools::use_package('circlize')
 devtools::use_package('stats')
 devtools::use_package('methods')
 

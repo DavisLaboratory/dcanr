@@ -20,7 +20,9 @@ Imports: igraph,
     methods,
     Matrix,
     graphics,
-    stats
+    stats,
+    RColorBrewer,
+    circlize
 Suggests: EBcoexpress,
     testthat,
     EBarrays,
@@ -41,7 +43,7 @@ Collate:
     'evaluation_functions.R'
     'inference_methods.R'
     'inference_methods_generic.R'
-    'network_analysis.R'
+    'network_inference.R'
     'simulation_accessors.R'
     'simulation_plot.R'
 VignetteBuilder: knitr
