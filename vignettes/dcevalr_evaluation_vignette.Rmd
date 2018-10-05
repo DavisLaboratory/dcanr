@@ -30,10 +30,33 @@ evaluation of inference methods. All methods within the package can be evaluated
 with custom evaluations made possible where required.
 
 # Simulation setup used to create the data
+A dynamical systems simulator was used to simulate expression data with differential
+associations. Regulatory networks of 150 genes were sampled from a S. Cerevisiae
+regulatory network. Perturbation experiments were performed when simulating data
+to induce differential associations. Simulation parameters and networks were
+sampled therefore producing 812 distinct simulations. Data included in the package
+`sim102` is an example of one such simulation where two knock-downs were performed
+simultaneously but independently therefore some samples may have both knock-downs
+whereas other may have either one or none. Details on the simulation procedure can
+be found in the **PAPER**. Upto 500 observations are sampled in each simulation.
 
 # Download the full simulated dataset
+As the simulation is computationally intensive, data from the 812 simulations has
+been precomputed and is available at **LINK**. The downloaded file contains a list
+of simulation results such as `sim102` which is packaged with `dcanr`. Each
+simulation can be accessed as shown below:
+
+```{r eval=FALSE}
+simdata <- load('simdata_directory/simdata.rda')
+sim10 <- simdata[[10]]
+```
+
 
 # Running a pipeline on a simulation
+## Standard pipelines
+## Custom pipelines
+## Retrieving precomputed results
+
 # Evaluate a pipeline
 
 # Session info {.unnumbered}
