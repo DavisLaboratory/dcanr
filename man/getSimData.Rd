@@ -4,7 +4,7 @@
 \alias{getSimData}
 \alias{getConditionNames}
 \alias{getTrueNetwork}
-\title{Get data and conditions from a given knock-out (KO)}
+\title{Get data and conditions from a given knock-down (KD)}
 \usage{
 getSimData(simulation, cond.name = NULL, full = FALSE)
 
@@ -17,9 +17,9 @@ getTrueNetwork(simulation, cond.name = NULL,
 \arguments{
 \item{simulation}{a list, storing data and results generated from simulations}
 
-\item{cond.name}{a character, indicating the knock-out to use to derive
-conditions. Multiple knock-outs (KOs) are performed per simulation. If
-\code{NULL}, the first KO is chosen}
+\item{cond.name}{a character, indicating the knock-down to use to derive
+conditions. Multiple knock-downs (KDs) are performed per simulation. If
+\code{NULL}, the first KD is chosen}
 
 \item{full}{a logical, indicating whether genes associated with the condition
 should be excluded. Defaults to \code{FALSE} and is recommended}
@@ -29,13 +29,15 @@ retrieve: 'association' (default), 'influence' or 'direct'}
 }
 \value{
 a list, containing \code{emat}, a matrix representing the expression
- data and \code{condition}, a numeric containing the classification of
- samples for \code{getSimData}, the names of all genes that are KO for
- \code{getConditionNames}, and an adjacency matrix for \code{getTrueNetwork}.
+ data, \code{condition}, a numeric containing the classification of samples,
+ and , \code{condition_c}, a numeric containing the expression levels of the
+ KD gene (continous condition) for \code{getSimData}; the names of all genes
+ that are KD for \code{getConditionNames}; and an adjacency matrix for
+ \code{getTrueNetwork}.
 }
 \description{
 Retrieves the simulated expression matrix and sample
- classification for a specific knock-out experiment.
+ classification for a specific knock-down experiment.
 }
 \details{
 Genes discarded when \code{full} is \code{FALSE} are those that are
@@ -56,23 +58,23 @@ Genes discarded when \code{full} is \code{FALSE} are those that are
 \itemize{
 \item \code{getSimData}: get the expression matrix and sample classification
 
-\item \code{getConditionNames}: get names of the conditions (KOs)
+\item \code{getConditionNames}: get names of the conditions (KDs)
 
 \item \code{getTrueNetwork}: get the true differential network
 }}
 
 \examples{
 data(sim102)
-KOs <- getConditionNames(sim102)
+KDs <- getConditionNames(sim102)
 
 #get simulated data
-simdata <- getSimData(sim102, KOs[2])
+simdata <- getSimData(sim102, KDs[2])
 cond <- simdata$condition
 emat <- simdata$emat
 zscores <- dcScore(emat, cond)
 
 #get the true network to evaluate against
-truenet <- getTrueNetwork(sim102, KOs[2], truth.type = 'association')
+truenet <- getTrueNetwork(sim102, KDs[2], truth.type = 'association')
 
 }
 \seealso{

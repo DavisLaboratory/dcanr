@@ -1,11 +1,11 @@
-#'@title Get data and conditions from a given knock-out (KO)
+#'@title Get data and conditions from a given knock-down (KD)
 #'@description Retrieves the simulated expression matrix and sample
-#'  classification for a specific knock-out experiment.
+#'  classification for a specific knock-down experiment.
 #'
 #'@param simulation a list, storing data and results generated from simulations
-#'@param cond.name a character, indicating the knock-out to use to derive
-#'  conditions. Multiple knock-outs (KOs) are performed per simulation. If
-#'  \code{NULL}, the first KO is chosen
+#'@param cond.name a character, indicating the knock-down to use to derive
+#'  conditions. Multiple knock-downs (KDs) are performed per simulation. If
+#'  \code{NULL}, the first KD is chosen
 #'@param truth.type a character, specifying which level of the true network to
 #'  retrieve: 'association' (default), 'influence' or 'direct'
 #'@param full a logical, indicating whether genes associated with the condition
@@ -26,23 +26,25 @@
 #'  non-causative differential interactions.
 #'
 #'@return a list, containing \code{emat}, a matrix representing the expression
-#'  data and \code{condition}, a numeric containing the classification of
-#'  samples for \code{getSimData}, the names of all genes that are KO for
-#'  \code{getConditionNames}, and an adjacency matrix for \code{getTrueNetwork}.
+#'  data, \code{condition}, a numeric containing the classification of samples,
+#'  and , \code{condition_c}, a numeric containing the expression levels of the
+#'  KD gene (continous condition) for \code{getSimData}; the names of all genes
+#'  that are KD for \code{getConditionNames}; and an adjacency matrix for
+#'  \code{getTrueNetwork}.
 #'@seealso \code{\link{dcScore}}
 #'
 #' @examples
 #' data(sim102)
-#' KOs <- getConditionNames(sim102)
+#' KDs <- getConditionNames(sim102)
 #'
 #' #get simulated data
-#' simdata <- getSimData(sim102, KOs[2])
+#' simdata <- getSimData(sim102, KDs[2])
 #' cond <- simdata$condition
 #' emat <- simdata$emat
 #' zscores <- dcScore(emat, cond)
 #'
 #' #get the true network to evaluate against
-#' truenet <- getTrueNetwork(sim102, KOs[2], truth.type = 'association')
+#' truenet <- getTrueNetwork(sim102, KDs[2], truth.type = 'association')
 #'
 #'@describeIn getSimData get the expression matrix and sample classification
 #'
@@ -60,6 +62,7 @@ getSimData <- function(simulation, cond.name = NULL, full = FALSE) {
   cond = condmat[cond.name, ]
 
   #filter out genes directly dependent on the condition
+  cond_c = emat[cond.name, ]
   if (!full) {
     noncond = attr(simulation$triplets, 'condcoex')[cond.name, ]
     noncond = names(noncond)[noncond == 0]
@@ -70,10 +73,10 @@ getSimData <- function(simulation, cond.name = NULL, full = FALSE) {
     warning('directly regulated genes should be discarded for differential co-expression analysis')
   }
 
-  return(list('emat' = emat, 'condition' = cond))
+  return(list('emat' = emat, 'condition' = cond, 'condition_c' = cond_c))
 }
 
-#' @describeIn getSimData get names of the conditions (KOs)
+#' @describeIn getSimData get names of the conditions (KDs)
 #' @export
 getConditionNames <- function(simulation) {
   return(rownames(attr(simulation$data, 'classf')))
