@@ -13,7 +13,7 @@ dcPipeline(simulation, dc.func = "zscore", precomputed = FALSE, ...)
 method names from \code{dcMethods} which is run with the default settings.
 A function can be used to provide custom processing pipelines (see details)}
 
-\item{precomputed}{a locigal, indicating whether the precomputed inference
+\item{precomputed}{a logical, indicating whether the precomputed inference
 should be used or a new one computed (default FALSE)}
 
 \item{...}{additional parameters to \code{dc.func}}
@@ -35,7 +35,7 @@ If \code{dc.func} is a character, the existing methods in the
   function as shown in the examples.
 
   If \code{precomputed} is TRUE while \code{dc.func} is a character,
-  precomputed results will be used. These can then be evaluated using
+  pre-computed results will be used. These can then be evaluated using
   \code{dcEvaluate}.
 
   Custom pipelines need to be coded into a function which can then be
@@ -58,7 +58,7 @@ resStd <- dcPipeline(sim102, dc.func = 'zscore')
 #run a standard pipeline and specify params
 resParam <- dcPipeline(sim102, dc.func = 'zscore', cor.method = 'pearson')
 
-#retrieve precomputed results
+#retrieve pre-computed results
 resPrecomputed <- dcPipeline(sim102, dc.func = 'zscore', precomputed = TRUE)
 
 #run a custom pipeline

@@ -28,7 +28,7 @@
 #'@return a list, containing \code{emat}, a matrix representing the expression
 #'  data, \code{condition}, a numeric containing the classification of samples,
 #'  and , \code{condition_c}, a numeric containing the expression levels of the
-#'  KD gene (continous condition) for \code{getSimData}; the names of all genes
+#'  KD gene (continuous condition) for \code{getSimData}; the names of all genes
 #'  that are KD for \code{getConditionNames}; and an adjacency matrix for
 #'  \code{getTrueNetwork}.
 #'@seealso \code{\link{dcScore}}

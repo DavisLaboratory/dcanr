@@ -20,7 +20,7 @@ a plot of the network
 }
 \description{
 Plots either the source network or the true differential network
-  for all KOs performed in the simulation. KO nodes are coloured with their
+  for all KDs performed in the simulation. KD nodes are coloured with their
   resulting differential networks coloured accordingly.
 }
 \details{
