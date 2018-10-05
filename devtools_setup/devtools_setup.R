@@ -53,3 +53,7 @@ devtools::test() # Ctrl + Shift + T
 # formatR::tidy_dir('R')
 # lintr::lint_package()
 # devtools::spell_check(dict = 'en_AU')
+
+
+#changing package name
+#https://www.njtierney.com/post/2017/10/27/change-pkg-name/
