@@ -1,4 +1,4 @@
 library(testthat)
-library(dcevalr)
+library(dcanr)
 
-test_check("dcevalr")
+test_check("dcanr")

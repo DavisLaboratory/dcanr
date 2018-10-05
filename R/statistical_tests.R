@@ -116,7 +116,7 @@ perm.test <- function(dcscores, emat, condition, B = 20, perm.seed = sample.int(
   randseeds = sample.int(1e6, B)
 
   #package requirements
-  pckgs = c('dcevalr')
+  pckgs = c('dcanr')
 
   #perform permutation
   pvals = foreach(

@@ -1,4 +1,4 @@
-library(dcevalr)
+library(dcanr)
 library(Biobase)
 library(edgeR)
 library(SummarizedExperiment)

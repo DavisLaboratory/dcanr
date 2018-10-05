@@ -1,12 +1,12 @@
 ---
-title: "Differential co-expression analysis using dcevalr"
+title: "Differential co-expression analysis using dcanr"
 author:
   - name: Dharmesh D Bhuva
     affiliation:
       - Bioinformatics Division, Walter and Eliza Hall Institute of Medical Research, Parkville, VIC 3052, Australia
       - School of Mathematics and Statistics, University of Melbourne, Parkville, VIC 3010, Australia
 date: "`r Sys.Date()`"
-package: dcevalr
+package: dcanr
 output:
   BiocStyle::html_document:
     toc_float: true
@@ -33,8 +33,8 @@ provided by the method are introduced.
 # Installation
 The package can be downloaded from github.
 ```{r installationBio}
-#devtools::install_github('http://github.com/bhuva.d/dcevalr')
-library(dcevalr)
+#devtools::install_github('http://github.com/bhuva.d/dcanr')
+library(dcanr)
 ```
 
 # Available inference methods

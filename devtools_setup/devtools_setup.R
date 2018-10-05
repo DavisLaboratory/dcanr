@@ -37,8 +37,8 @@ devtools::document() # Ctrl + Shift + D
 devtools::test() # Ctrl + Shift + T
 
 # #vignettes: to setup vignettes
-# devtools::use_vignette('dcevalr_vignette')
-# devtools::use_vignette('dcevalr_evaluation_vignette')
+# devtools::use_vignette('dcanr_vignette')
+# devtools::use_vignette('dcanr_evaluation_vignette')
 
 # #testing: to setup testing
 # devtools::use_testthat()

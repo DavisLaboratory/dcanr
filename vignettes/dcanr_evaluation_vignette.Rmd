@@ -1,12 +1,12 @@
 ---
-title: "DC method evaluation using dcevalr"
+title: "DC method evaluation using dcanr"
 author:
   - name: Dharmesh D Bhuva
     affiliation:
       - Bioinformatics Division, Walter and Eliza Hall Institute of Medical Research, Parkville, VIC 3052, Australia
       - School of Mathematics and Statistics, University of Melbourne, Parkville, VIC 3010, Australia
 date: "`r Sys.Date()`"
-package: dcevalr
+package: dcanr
 output:
   BiocStyle::html_document:
     toc_float: true

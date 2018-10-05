@@ -1,4 +1,4 @@
-library(dcevalr)
+library(dcanr)
 library(igraph)
 library(stringr)
 library(EBcoexpress)
