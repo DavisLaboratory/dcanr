@@ -1,0 +1,42 @@
+---
+title: "DC method evaluation using dcevalr"
+author:
+  - name: Dharmesh D Bhuva
+    affiliation:
+      - Bioinformatics Division, Walter and Eliza Hall Institute of Medical Research, Parkville, VIC 3052, Australia
+      - School of Mathematics and Statistics, University of Melbourne, Parkville, VIC 3010, Australia
+date: "`r Sys.Date()`"
+package: dcevalr
+output:
+  BiocStyle::html_document:
+    toc_float: true
+vignette: >
+  %\VignetteIndexEntry{2. DC method evaluation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+Along with methods, the package provides an evaluation framework to benchmark 
+methods. Real data is rarely available for the evaluation of differential co-expression 
+methods as such experiments are difficult to perform. As such, simulations are the
+only means to perform evaluation successfully. Data from 812 simulations was 
+generated and the settings and parameters are described in **PAPER**. This
+data has been simulated previously and the results are made available here.
+Along with the data, a suite of visualisation and performance metrics are implemented.
+
+This vignette describes the functions in this package that enable comparative
+evaluation of inference methods. All methods within the package can be evaluated
+with custom evaluations made possible where required.
+
+# Simulation setup used to create the data
+
+# Download the full simulated dataset
+
+# Running a pipeline on a simulation
+# Evaluate a pipeline
+
+# Session info {.unnumbered}
+```{r sessionInfo, echo=FALSE}
+sessionInfo()
+```

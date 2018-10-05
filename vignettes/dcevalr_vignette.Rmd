@@ -1,17 +1,17 @@
 ---
-title: "Differential co-expression analysis"
+title: "Differential co-expression analysis using dcevalr"
 author:
   - name: Dharmesh D Bhuva
     affiliation:
-      - School of Mathematics and Statistics, University of Melbourne, Parkville, VIC 3010, Australia
       - Bioinformatics Division, Walter and Eliza Hall Institute of Medical Research, Parkville, VIC 3052, Australia
+      - School of Mathematics and Statistics, University of Melbourne, Parkville, VIC 3010, Australia
 date: "`r Sys.Date()`"
 package: dcevalr
 output:
   BiocStyle::html_document:
     toc_float: true
 vignette: >
-  %\VignetteIndexEntry{Differential co-expression analysis}
+  %\VignetteIndexEntry{1. Differential co-expression analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -26,12 +26,9 @@ changes across a continous condition can also be integrated into the package in
 the future. 10 methods are available in the package with 8 novel implementations
 and 2 interfaces to existing packages to allow ease of application.
 
-Along with methods, the package provides an evaluation framework to benchmark 
-methods. Real data is rarely available for the evaluation of differential co-expression 
-methods therefore data simulated from dynamical systems models is included. This
-data has been previously simulated and the results are made available here.
-Specific details on the simulation method and framework can be found in PAPER.
-Along with the data, a suite of visualisation and performance metrics are implemented.
+This vignette focuses on application of differential co-expression inference
+methods to real data. Available methods, putative pipelines and visualisation
+provided by the method are introduced.
 
 # Installation
 The package can be downloaded from github.
@@ -39,8 +36,6 @@ The package can be downloaded from github.
 #devtools::install_github('http://github.com/bhuva.d/dcevalr')
 library(dcevalr)
 ```
-
-# Download the full simulated dataset
 
 # Available inference methods
 The package implements 10 methods that infer differential co-expression on binary
@@ -51,8 +46,7 @@ function.
 dcMethods()
 ```
 
-
-# A simple analysis
+# A generic differential co-expression analysis pipeline
 A differential co-expression pipeline can consist of 4 steps:
 
 1. Generating scores/statistics for each pair of genes
@@ -68,7 +62,7 @@ test and the $p$-values from this test are used as scores, therefore step 2 is s
 The z-score based method requires all these steps. A standard analysis with this
 method is shown here. 
 
-## Step 0: Load an example dataset (simulated)
+# Load an example dataset (simulated)
 We first load an example simulated dataset included in the package and extract the
 expression matrix and condition vector. Do note that multiple knock-down experiments
 are performed per simulation. We will just use one such knock-down as a condition.
@@ -87,7 +81,7 @@ print(emat[1:5, 1:5]) #149 genes and 406 samples
 head(ume6_kd) #NOTE: binary conditions encoded with 1's and 2's
 ```
 
-## Step 1: Compute scores
+# Step 1: Compute scores
 All inference methods can be accessed using the same call therefore making it easier
 to change between methods. Method specific parameters can be passed to this function
 and will be distributed accordingly. The default inference method is z-score
@@ -101,7 +95,7 @@ z_scores <- dcScore(emat, ume6_kd, cor.method = 'spearman')
 print(z_scores[1:5, 1:5])
 ```
 
-## Step 2: Perform a statistical test
+# Step 2: Perform a statistical test
 Appropriate statistical tests are automatically selected for the method applied.
 Tests are applied on the result of the `dcScore()` function (z-test for the 
 z-score method and permutation tests for the remainder of methods). The testing
@@ -124,7 +118,7 @@ can be specified by the `B` parameter. Permutation tests are computationally int
 therefore we provide a parallelisable implementation. See the help page for `dcTest`
 for examples.
 
-## Step 3: Correct for multiple hypothesis testing
+# Step 3: Correct for multiple hypothesis testing
 Since all pairwise combinations of genes are tested, $p$-values need to be adjusted.
 Given $n$ genes, the total number of hypothesis is $\frac{n(n-1)}{2}$ as the score
 matrices are symmetric. Adjustment is performed accordingly. The default adjustment
@@ -138,7 +132,7 @@ adj_p <- dcAdjust(raw_p, f = p.adjust, method = 'fdr')
 print(adj_p[1:5, 1:5])
 ```
 
-## Step 4: Generating the differential co-expression network
+# Step 4: Generating the differential co-expression network
 The last step is thresholding the score/adjusted $p$-value matrix to select
 differential associations. Default adjusted $p$-value thresholds of 0.1 are applied
 where statistical tests are performed (to control for FDR at 0.1). Results are
@@ -157,11 +151,6 @@ print(adjmat[1:5, 1:5])
 edgedf <- as_data_frame(dcnet, what = 'edges')
 print(head(edgedf))
 ```
-
-
-# Running a pipeline on a simulation
-# Evaluate a pipeline
-# Application to real data
 
 # Session info {.unnumbered}
 ```{r sessionInfo, echo=FALSE}

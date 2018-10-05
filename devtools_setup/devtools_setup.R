@@ -1,5 +1,5 @@
 #devtools setup
-# devtools::create('dcevalr')
+# devtools::create('dcanr')
 
 #packages to use: imports
 devtools::use_package('igraph')
@@ -38,6 +38,7 @@ devtools::test() # Ctrl + Shift + T
 
 # #vignettes: to setup vignettes
 # devtools::use_vignette('dcevalr_vignette')
+# devtools::use_vignette('dcevalr_evaluation_vignette')
 
 # #testing: to setup testing
 # devtools::use_testthat()

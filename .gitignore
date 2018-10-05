@@ -2,5 +2,5 @@
 .Rhistory
 .RData
 dcevalr.Rproj
-
+vignettes/*.html
 inst/doc
