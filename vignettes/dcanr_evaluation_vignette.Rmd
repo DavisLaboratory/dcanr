@@ -51,13 +51,193 @@ simdata <- load('simdata_directory/simdata.rda')
 sim10 <- simdata[[10]]
 ```
 
-
 # Running a pipeline on a simulation
+Evaluations in the package are performed by creating an analysis pipeline and packaging
+it into a function. Three possible ways exist to perform this:
+
+1. Using standard in-built pipelines
+2. Using custom pipelines
+3. Retrieving pre-computed results from the standard pipelines
+
+All of the above are made possible using a single function `dcPipeline` and are processed
+depending on the arguments specified.
+
 ## Standard pipelines
+A standard pipeline runs the inbuilt inference methods with their default parameters.
+All 4 steps of an analysis are performed in sequence as described in their respective
+publications. To run a standard pipeline on a simulation, simply pass in a simulation
+and a method name from `dcMethods()`.
+
+```{r message=FALSE, warning=FALSE, fig.wide=TRUE, fig.asp=1, fig.cap='Differential network analysis on simulations. Top-left to bottom-right: The original regulatory network, the true induced differential network that results from both ADR1 and UME6 knock-downs (KDs), the predicted ADR1 knock-down differential network, and the predicted UME6 knock-down differential network.'}
+library(dcanr)
+
+#load the data: a simulation
+data(sim102) 
+#run a standard pipeline with the z-score method
+dcnets <- dcPipeline(sim102, dc.func = 'zscore')
+#plot the source network, true differential network and inferred networks
+op <- par(no.readonly = TRUE)
+par(mfrow = c(2, 2))
+plotSimNetwork(sim102, main = 'Regulatory network')
+plotSimNetwork(sim102, what = 'association', main = 'True differential association network')
+plot(dcnets$ADR1, main = 'ADR1 KD predicted network')
+plot(dcnets$UME6, main = 'UME6 KD predicted network')
+par(op)
+```
+Results of a pipeline is a list of `igraph` objects representing the inferred network.
+True positive predictions are coloured based on the colour of the knocked-down node and
+false positived coloured grey. The `plotSimNetwork` function can be used to retrieve
+and plot the true differential networks and the source regulatory network.
+
+Any additional parameters to intermmediate steps in a pipeline can also be passed
+as shown in the example below. However, doing so will produce results different to
+the precomputed results discussed in (Section \@ref(precomp)).
+
+```{r}
+#run a standard pipeline with the z-score method with custom params
+dcnets_sp <- dcPipeline(sim102,
+                        dc.func = 'zscore',
+                        cor.method = 'spearman', #use Spearman's correlation
+                        thresh = 0.2) #cut-off for creating the network
+```
+
 ## Custom pipelines
-## Retrieving precomputed results
+The most common use case of an evaluation framework is to benchmark new methods. As
+such, the framework should allow seemless integration of new methods. This is made
+possible in `dcanr` by providing a single function to the `dcPipeline` method. This
+function should have the following structure:
+
+```{r eval=FALSE}
+#emat, a named matrix with samples along the columns and genes along the rows
+#condition, a binary named vector consisiting of 1's and 2's
+#returns a named adjacency matrix or an igraph object
+myInference <- function(emat, condition, ...) {
+  #your code here
+  return(dcnet)
+}
+```
+
+The following code shows the function used to call an inbuilt pipeline and how a
+custom pipeline can be run.
+```{r}
+#custom pipeline function
+analysisInbuilt <- function(emat, condition, dc.method = 'zscore', ...) {
+  #compute scores
+  score = dcScore(emat, condition, dc.method, ...)
+  #perform statistical test
+  pvals = dcTest(score, emat, condition, ...)
+  #adjust tests for multiple testing
+  adjp = dcAdjust(pvals, ...)
+  #threshold and generate network
+  dcnet = dcNetwork(score, adjp, ...)
+
+  return(dcnet)
+}
+
+#call the custom pipeline
+custom_nets <- dcPipeline(sim102, dc.func = analysisInbuilt)
+```
+
+## Retrieving pre-computed results {#precomp}
+Following evaluation of a novel method, it is generally of interest to compare
+how it performs against previous methods. Re-computing predictions for the 10
+methods implemented in this package can be time consuming. As such, all simulations
+come packged up with the results of applying a standard pipeline using each inference
+method. Pre-computed results are also retrieved using the `dcPipeline` function
+and setting the `precomputed` argument to `TRUE`.
+
+```{r message=FALSE, warning=FALSE}
+#retrieve results of applying all available methods
+allnets <- lapply(dcMethods(), function(m) {
+  dcPipeline(sim102, dc.func = m, precomputed = TRUE)
+})
+names(allnets) <- dcMethods() #name the results based on methods
+
+#get the size of the UME6 KD differential network
+netsizes <- lapply(allnets, function(net) {
+  length(igraph::E(net$UME6))
+})
+print(unlist(netsizes))
+```
 
 # Evaluate a pipeline
+After inferring the differential co-expression network, the final step is to evaluate
+performance based on the truth. True differential networks are computed by performing
+sensitivity analysis as described in the **PAPER**. Three levels of true differential
+networks are generated:
+
+1. Direct - this represents direct TF-target regulatory interactions that are affected
+by the knock-down (condition)
+2. Influence - this network includes upstream TF-target interactions which are indirect
+but causative
+3. Association - this network includes all associations in the influence network but
+adds all non-causative associations that are differential conditioned on the knock-down
+
+All three levels of truth are packaged within the simulation. Predicted networks can
+be evaluated against any of these. We recommend using the differential association
+network.
+
+Along with the true differential co-expression network, a metric is required to summarise
+performance of a method. The package provides 6 different metrics which can be accessed
+by calling `perfMethods()`.
+
+```{r}
+#available performance metrics
+print(perfMethods())
+```
+
+Evaluation is performed using the `dcEvaluate` function. We will run this with the 
+precomputed inferences as described in (Section \@ref(precomp)). The F1-measure will
+be computed to assess performance.
+
+```{r message=FALSE, warning=FALSE}
+#compute the F1-measure for the prediction made by each method
+f1_scores <- lapply(allnets, function (net) {
+  dcEvaluate(sim102, net, truth.type = 'association', combine = TRUE)
+})
+print(sort(unlist(f1_scores), decreasing = TRUE))
+#compute the Matthew's correlation coefficient of the z-score inference
+z_mcc <- dcEvaluate(sim102, dcnets, perf.method = 'MCC')
+print(z_mcc)
+```
+
+These methods combined can be used to learn more about the strengths and weaknesses of
+methods. For instance, the precision and recall characteristics of the different methods
+can be computed. This shows that the entropy-based method excels at recall while the
+z-score based method has high precision.
+
+```{r message=FALSE, warning=FALSE}
+#compute precision
+dcprec <- lapply(allnets, function (net) {
+  dcEvaluate(sim102, net, perf.method = 'precision')
+})
+#compute recall
+dcrecall <- lapply(allnets, function (net) {
+  dcEvaluate(sim102, net, perf.method = 'recall')
+})
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.small=TRUE}
+#plot the precision and recall
+plot(
+  unlist(dcprec),
+  unlist(dcrecall),
+  type = 'n',
+  main = 'Precision v recall',
+  xlim = c(-0.25, 1),
+  ylim = c(0, 1)
+  )
+text(
+  unlist(dcprec),
+  unlist(dcrecall),
+  labels = names(allnets),
+  type = 'n',
+  main = 'Precision vs recall',
+  cex = 1.2
+  )
+```
+
+
 
 # Session info {.unnumbered}
 ```{r sessionInfo, echo=FALSE}

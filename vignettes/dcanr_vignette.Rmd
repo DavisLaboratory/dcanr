@@ -138,7 +138,7 @@ differential associations. Default adjusted $p$-value thresholds of 0.1 are appl
 where statistical tests are performed (to control for FDR at 0.1). Results are
 presented as an `igraph` object.
 
-```{r message=FALSE, warning=FALSE, fig.small=TRUE}
+```{r message=FALSE, warning=FALSE, fig.wide=TRUE}
 library(igraph)
 
 #get the differential network
