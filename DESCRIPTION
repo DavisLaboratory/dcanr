@@ -38,6 +38,7 @@ Suggests: EBcoexpress,
     BiocStyle
 RoxygenNote: 6.1.0
 Collate:
+    'dcanr.R'
     'statistical_tests.R'
     'performance_metrics.R'
     'multtest_adjust.R'
@@ -45,6 +46,7 @@ Collate:
     'inference_methods.R'
     'inference_methods_generic.R'
     'network_inference.R'
+    'sim102.R'
     'simulation_accessors.R'
     'simulation_plot.R'
 VignetteBuilder: knitr
