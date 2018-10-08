@@ -19,8 +19,8 @@
 #'   (150 node network)}
 #'   \item{infnet}{an igraph object, representing the true differential network
 #'   as determined using sensitivity analysis of the model}
-#'   \item{netlayout}{a matrix (150 x 2), storing the (x, y) positions of nodes
-#'   for laying out the graph}
+#'   \item{netlayout}{a matrix (150 x 2), storing the (x, y) positions
+#'   of nodes for laying out the graph}
 #'   \item{infdens}{a numeric, network density of the true differential
 #'   association network}
 #'   \item{numinput}{a numeric, the number of input genes in the regulatory
@@ -35,7 +35,7 @@
 #'   \item{data}{an S4 Matrix, the expression data with samples along the columns
 #'   and genes along the rows. Condition classification (KD vs WT) are stored as
 #'   attributes of this object}
-#'   \item{tripltes}{a data frame, consisting of gene triplets representing TF-
+#'   \item{triplets}{a data frame, consisting of gene triplets representing TF-
 #'   Target associations conditioned on the gene knocked-down. Triplets are
 #'   annotated for being in either the direct, influence and association networks}
 #'   \item{sensmat}{an S4 Matrix, sensitivities of genes to TFs based on
