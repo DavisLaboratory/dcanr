@@ -4,7 +4,8 @@
 \alias{dcPipeline}
 \title{Run a DC pipeline on a simulation}
 \usage{
-dcPipeline(simulation, dc.func = "zscore", precomputed = FALSE, ...)
+dcPipeline(simulation, dc.func = "zscore", precomputed = FALSE,
+  continuous = FALSE, ...)
 }
 \arguments{
 \item{simulation}{a list, storing data and results generated from simulations}
@@ -15,6 +16,11 @@ A function can be used to provide custom processing pipelines (see details)}
 
 \item{precomputed}{a logical, indicating whether the precomputed inference
 should be used or a new one computed (default FALSE)}
+
+\item{continuous}{a logical, indicating whether binary or continuous
+conditions should be used (default FALSE). No methods implemented currently
+use continuous conditions. This is to allow custom methods that require
+continuous conditions}
 
 \item{...}{additional parameters to \code{dc.func}}
 }

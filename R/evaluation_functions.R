@@ -13,6 +13,10 @@ NULL
 #'   A function can be used to provide custom processing pipelines (see details)
 #' @param precomputed a logical, indicating whether the precomputed inference
 #'   should be used or a new one computed (default FALSE)
+#' @param continuous a logical, indicating whether binary or continuous
+#'   conditions should be used (default FALSE). No methods implemented currently
+#'   use continuous conditions. This is to allow custom methods that require
+#'   continuous conditions
 #' @param ... additional parameters to \code{dc.func}
 #'
 #' @details If \code{dc.func} is a character, the existing methods in the
@@ -73,7 +77,7 @@ NULL
 #' plot(resCustom[[1]])
 #'
 #' @export
-dcPipeline <- function(simulation, dc.func = 'zscore', precomputed = FALSE, ...) {
+dcPipeline <- function(simulation, dc.func = 'zscore', precomputed = FALSE, continuous = FALSE, ...) {
   if (is.character(dc.func)) {
     stopifnot(dc.func %in% dcMethods())
     dc.method = dc.func
@@ -93,7 +97,11 @@ dcPipeline <- function(simulation, dc.func = 'zscore', precomputed = FALSE, ...)
     #get data from simulation
     simdata = getSimData(simulation, cond.name = cond, full = FALSE)
     emat = simdata$emat
-    condition = simdata$condition
+    if (continuous) {
+      condition = simdata$condition_c
+    } else {
+      condition = simdata$condition
+    }
 
     #evaluate function
     dcnet = suppressWarnings(dc.func(emat = emat, condition = condition, ...))
