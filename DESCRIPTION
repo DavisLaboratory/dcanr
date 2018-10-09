@@ -54,5 +54,5 @@ VignetteBuilder: knitr
 Enhances: parallel,
     doSNOW,
     doParallel
-URL: https://github.com/bhuvad/dcanr
-BugReports: https://github.com/bhuvad/dcanr
+URL: https://github.com/DavisLaboratory/dcanr
+BugReports: https://github.com/DavisLaboratory/dcanr/issues
