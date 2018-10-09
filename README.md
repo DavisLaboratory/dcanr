@@ -10,5 +10,5 @@ to existing implementations to enable ease of application and evaluations.
 `dcanr` can be installed using devtools:
 
 ```r
-devtools::install_github('DavisLaboratory/dcanr.git')
+devtools::install_github('DavisLaboratory/dcanr')
 ```
