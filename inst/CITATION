@@ -1,0 +1,11 @@
+citHeader("Please cite the paper below for the dcanr software itself.  Please also try to cite the appropriate methodology articles that describe the statistical methods implemented in dcanr, depending on which dcanr functions you are using.")
+
+citEntry(entry = "Manual",
+  title = "dcanr: Differential co-expression/association network analysis",
+  author = c(person(c("Dharmesh", "D"), "Bhuva"),
+             person("Joseph", "Cursons"),
+             person(c("Melissa", "J"), "Davis")),
+  year = 2018,
+
+  textVersion = "Bhuva, D.D., Cursons, J., Davis, M.J. (2018). dcanr: Differential co-expression/association network analysis."
+)
