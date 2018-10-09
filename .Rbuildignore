@@ -5,3 +5,5 @@
 ^\.git\*
 ^\.gitignore*
 ^\README.md*
+^README\.Rmd$
+^README-.*\.png$
