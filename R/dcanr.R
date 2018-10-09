@@ -13,6 +13,7 @@
 #'
 #' @section Differential co-expression methods (DC):
 #' \itemize{
+#'    \item{\code{\link{dcMethods}}}
 #'    \item{\code{\link{dcScore}}}
 #'    \item{\code{\link{dcTest}}}
 #'    \item{\code{\link{dcAdjust}}}

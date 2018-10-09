@@ -1,0 +1,77 @@
+template:
+  params:
+    bootswatch: cerulean
+
+articles:
+- title: All vignettes
+  desc: ~
+  contents:
+  - '`dcanr_vignette`'
+  - '`dcanr_evaluation_vignette`'
+
+reference:
+- title: Differential co-expression analysis methods
+  desc: >
+    These functions are used to perform a differential co-expression analysis on
+    experimental data with binary conditions.
+  contents:
+  - dcMethods
+  - dcScore
+  - dcTest
+  - dcAdjust
+  - dcNetwork
+- title: Functions to evaluate DC methods
+  desc: >
+    These functions are used to evaluate methods implemented in the package and
+    novel methods on simulated data. Expression data is simulated for two
+    conditions, wild-type and knock-down of given genes.
+  contents:
+  - sim102
+  - getConditionNames
+  - getSimData
+  - getTrueNetwork
+  - plotSimNetwork
+  - dcPipeline
+  - dcEvaluate
+- title: Additional general use functions
+  desc: >
+    These are functions used in the package but have further uses in general
+  contents:
+  - cor.pairs
+  - mi.ap
+  - perfMethods
+  - performanceMeasure
+
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right: github
+  components:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    intro:
+      text: Get started
+      href: articles/dcanr_vignette.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    articles:
+      text: Articles
+      menu:
+      - text: Differential co-expression analysis using dcanr
+        href: articles/dcanr_vignette.html
+      - text: DC method evaluation using dcanr
+        href: articles/dcanr_evaluation_vignette.html
+    news:
+      text: Changelog
+      href: news/index.html
+    github:
+      icon: fa-github fa-lg
+      href: https://github.com/DavisLaboratory/dcanr

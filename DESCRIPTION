@@ -1,7 +1,7 @@
 Package: dcanr
 Title: Differential co-expression/association network analysis
 Version: 0.99.0
-Authors@R: person("Dharmesh", "Bhuva", email = "bhuva.d@wehi.edu.au", role = c("aut", "cre"))
+Authors@R: person("Dharmesh", "Bhuva", email = "bhuva.d@wehi.edu.au", role = c("aut", "cre"), comment = c(ORCID = '0000-0002-6398-9157'))
 Description: Application and evaluation of methods to infer differential co-expression/associations.
   An evaluation framework for testing differential co-expression methods in
   R. Simulated expression data with differential associations is used to assess inference methods.
@@ -54,5 +54,5 @@ VignetteBuilder: knitr
 Enhances: parallel,
     doSNOW,
     doParallel
-URL: https://github.com/DavisLaboratory/dcanr
+URL: https://davislaboratory.github.io/dcanr/, https://github.com/DavisLaboratory/dcanr
 BugReports: https://github.com/DavisLaboratory/dcanr/issues

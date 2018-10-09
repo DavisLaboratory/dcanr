@@ -29,6 +29,7 @@ There are three categories of functions available
 \section{Differential co-expression methods (DC)}{
 
 \itemize{
+   \item{\code{\link{dcMethods}}}
    \item{\code{\link{dcScore}}}
    \item{\code{\link{dcTest}}}
    \item{\code{\link{dcAdjust}}}
@@ -70,13 +71,14 @@ These are functions used in the package but have further uses in general:
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://davislaboratory.github.io/dcanr/}
   \item \url{https://github.com/DavisLaboratory/dcanr}
   \item Report bugs at \url{https://github.com/DavisLaboratory/dcanr/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Dharmesh Bhuva \email{bhuva.d@wehi.edu.au}
+\strong{Maintainer}: Dharmesh Bhuva \email{bhuva.d@wehi.edu.au} (0000-0002-6398-9157)
 
 }
 \keyword{classif}
