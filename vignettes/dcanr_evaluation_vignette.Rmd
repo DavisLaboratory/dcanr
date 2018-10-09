@@ -237,8 +237,6 @@ text(
   )
 ```
 
-
-
 # Session info {.unnumbered}
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()
