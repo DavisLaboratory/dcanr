@@ -35,7 +35,8 @@ Suggests: EBcoexpress,
     Biobase,
     knitr,
     rmarkdown,
-    BiocStyle
+    BiocStyle,
+    edgeR
 RoxygenNote: 6.1.0
 Collate:
     'dcanr.R'

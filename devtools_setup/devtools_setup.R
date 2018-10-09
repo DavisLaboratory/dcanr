@@ -24,6 +24,7 @@ devtools::use_package('mclust', type = 'Suggests')
 devtools::use_package('minqa', type = 'Suggests')
 devtools::use_package('testthat', type = 'Suggests')
 devtools::use_package('SummarizedExperiment', type = 'Suggests')
+devtools::use_package('edgeR', type = 'Suggests')
 devtools::use_package('Biobase', type = 'Suggests')
 devtools::use_package('BiocStyle', type = 'Suggests')
 
