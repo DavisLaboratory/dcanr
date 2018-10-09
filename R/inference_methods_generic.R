@@ -43,7 +43,9 @@ NULL
 #'
 #'   EBcoexpress, GGM-based and ECF are implemented by providing interfaces to,
 #'   or using functions from the \code{EBcoexpress}, \code{GeneNet}, and
-#'   \code{COSINE} packages respectively.
+#'   \code{COSINE} packages respectively. If using any of these methods, please
+#'   \strong{cite} the appropriate packages and the appropriate methodology
+#'   articles.
 #'
 #' @name dcScore
 #' @return a matrix, of scores/statistics representing differential
