@@ -32,9 +32,9 @@ provided by the method are introduced.
 
 # Installation
 The package can be downloaded from github.
-```{r installationBio}
-#devtools::install_github('http://github.com/bhuva.d/dcanr')
-library(dcanr)
+```{r gh-installation, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("DavisLaboratory/dcanr")
 ```
 
 # Available inference methods
@@ -43,6 +43,7 @@ conditions. The list of available methods can be accessed by the `dcMethods()`
 function.
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(dcanr)
 dcMethods()
 ```
 

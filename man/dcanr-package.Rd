@@ -70,8 +70,8 @@ These are functions used in the package but have further uses in general:
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/bhuvad/dcanr}
-  \item Report bugs at \url{https://github.com/bhuvad/dcanr}
+  \item \url{https://github.com/DavisLaboratory/dcanr}
+  \item Report bugs at \url{https://github.com/DavisLaboratory/dcanr/issues}
 }
 
 }
