@@ -69,12 +69,14 @@ When using data from sequencing experiments, make sure appropriate
   \code{diffcoex.beta} (defaults to 6). This enable soft thresholding of
   correlations similar to WGCNA.
 
-  EBcoexpress specific parameters include \code{ebcoexpress.seed}
-  representing the randomisation seed for the EM algorithm,
-  \code{ebcoexpress.useBWMC} (defaults to \code{TRUE}) representing whether
-  to use the bi-weight mid-correlation coefficient or not and
-  \code{ebcoexpress.plot} which plots the diagnostic plots if set to
-  \code{TRUE} (defaults to \code{FALSE}).
+  EBcoexpress specific parameters include \code{ebcoexpress.useBWMC}
+  (defaults to \code{TRUE}) representing whether to use the bi-weight
+  mid-correlation coefficient or not, and \code{ebcoexpress.plot} which plots
+  the diagnostic plots if set to \code{TRUE} (defaults to \code{FALSE}).
+
+  EBcoexpress, GGM-based and ECF are implemented by providing interfaces to,
+  or using functions from the \code{EBcoexpress}, \code{GeneNet}, and
+  \code{COSINE} packages respectively.
 }
 \examples{
 x <- matrix(rnorm(60), 2, 30)

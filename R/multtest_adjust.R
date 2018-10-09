@@ -30,7 +30,7 @@ NULL
 #' @name dcAdjust
 #' @return a matrix, of adjusted p-values (or scores in the case of DiffCoEx and
 #'   EBcoexpress) representing significance of differential associations.
-#' @seealso \code{\link{dcTest}}
+#' @seealso \code{\link{dcTest}} \code{\link[stats]{p.adjust}}
 #'
 #' @examples
 #' x <- matrix(rnorm(60), 2, 30)

@@ -221,7 +221,7 @@ diffcoex.score <- function(emat, condition, cor.method = 'pearson', diffcoex.bet
   return(1 - T.ovlap)
 }
 
-ebcoexpress.score <- function(emat, condition, ebcoexpress.seed = sample.int(1e6, 1), ebcoexpress.useBWMC = TRUE, ebcoexpress.plot = FALSE, ...) {
+ebcoexpress.score <- function(emat, condition, ebcoexpress.useBWMC = TRUE, ebcoexpress.plot = FALSE, ...) {
   if (!requireNamespace("EBcoexpress", quietly = TRUE)){
     stop('\'EBcoexpress\' needed for this function to work. Please install it.', call. = FALSE)
   }
@@ -237,7 +237,6 @@ ebcoexpress.score <- function(emat, condition, ebcoexpress.seed = sample.int(1e6
   scoremat = matrix(rep(0, nrow(emat)^2), nrow = nrow(emat))
   colnames(scoremat) = rownames(scoremat) = rownames(emat)
 
-  set.seed(ebcoexpress.seed)
   pat = EBarrays::ebPatterns(c("1,1", "1,2"))
   D = NULL
   tryCatch(expr = {
@@ -288,7 +287,6 @@ ebcoexpress.score <- function(emat, condition, ebcoexpress.seed = sample.int(1e6
   #add run parameters as attributes
   attributes(scoremat) = c(
     attributes(scoremat),
-    'ebcoexpress.seed' = ebcoexpress.seed,
     'ebcoexpress.useBWMC' = ebcoexpress.useBWMC,
     'call' = match.call()
   )

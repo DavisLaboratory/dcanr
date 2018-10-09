@@ -49,5 +49,5 @@ dcAdjust(pvals, p.adjust, method = 'fdr')
 
 }
 \seealso{
-\code{\link{dcTest}}
+\code{\link{dcTest}} \code{\link[stats]{p.adjust}}
 }
