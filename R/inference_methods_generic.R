@@ -90,14 +90,12 @@ setMethod(
 
     #names of features
     if (is.null(rownames(emat))) {
-      warning('rownames missing, assigning default rownames')
-      rownames(emat) = 1:nrow(emat)
+      rownames(emat) = seq_len(nrow(emat))
     }
 
     #names of observations
     if (is.null(colnames(emat))) {
-      warning('colnames missing, assigning default colnames')
-      rownames(emat) = 1:nrow(emat)
+      colnames(emat) = seq_len(ncol(emat))
     }
 
     #convert conditions to numeric
@@ -143,7 +141,7 @@ setMethod(
                         condition,
                         dc.method = 'zscore',
                         ...) {
-    stopifnot(all(sapply(emat, class) %in% 'numeric'))
+    stopifnot(all(vapply(emat, is.numeric, TRUE)))
 
     #default method
     if (missing(dc.method)) {

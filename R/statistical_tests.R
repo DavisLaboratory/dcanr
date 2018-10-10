@@ -120,7 +120,7 @@ perm.test <- function(dcscores, emat, condition, B = 20, perm.seed = sample.int(
 
   #perform permutation
   pvals = foreach(
-    b = 1:B,
+    b = seq_len(B),
     .combine = function(...) {mapply(sum, ...)},
     .packages = pckgs,
     .export = c('emat')
@@ -135,7 +135,7 @@ perm.test <- function(dcscores, emat, condition, B = 20, perm.seed = sample.int(
     #count elements greater than obs
     permsc = abs(permsc)
     permsc = permsc[!(is.na(permsc) || is.infinite(permsc))]
-    permcounts = sapply(abs(obs), function(x) sum(permsc > x))
+    permcounts = vapply(abs(obs), function(x) sum(permsc > x), 0)
     return(c(permcounts, length(permsc)))
   }
 

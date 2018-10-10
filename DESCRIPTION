@@ -8,7 +8,7 @@ Description: Application and evaluation of methods to infer differential co-expr
   The package provides methods to evaluate inference methods and visualise predictions. Inference
   methods without implementations have been added to the package along with interfaces
   to existing implementations to enable ease of application and evaluations.
-biocViews: NetworkInference, GraphAndNetwork
+biocViews: NetworkInference, GraphAndNetwork, DifferentialExpression, Network
 Depends: R (>= 3.5.0)
 License: GPL-3
 Encoding: UTF-8

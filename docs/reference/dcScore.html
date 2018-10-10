@@ -227,7 +227,7 @@ condition), a factor with 2 levels or a character representing 2 conditions</p><
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>rnorm</span>(<span class='fl'>60</span>), <span class='fl'>2</span>, <span class='fl'>30</span>)
 <span class='no'>cond</span> <span class='kw'>&lt;-</span> <span class='fu'>rep</span>(<span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>15</span>)
-<span class='fu'>dcScore</span>(<span class='no'>x</span>, <span class='no'>cond</span>) <span class='co'>#defaults to zscore</span></div><div class='output co'>#&gt; <span class='warning'>Warning: rownames missing, assigning default rownames</span></div><div class='output co'>#&gt; <span class='warning'>Warning: colnames missing, assigning default colnames</span></div><div class='output co'>#&gt;            1          2
+<span class='fu'>dcScore</span>(<span class='no'>x</span>, <span class='no'>cond</span>) <span class='co'>#defaults to zscore</span></div><div class='output co'>#&gt;            1          2
 #&gt; 1         NA -0.9225325
 #&gt; 2 -0.9225325         NA
 #&gt; attr(,"cor.method")
@@ -235,7 +235,7 @@ condition), a factor with 2 levels or a character representing 2 conditions</p><
 #&gt; attr(,"call")
 #&gt; z.score(emat = emat, condition = condition)
 #&gt; attr(,"dc.method")
-#&gt; [1] "zscore"</div><div class='input'><span class='fu'>dcScore</span>(<span class='no'>x</span>, <span class='no'>cond</span>, <span class='kw'>dc.method</span> <span class='kw'>=</span> <span class='st'>'diffcoex'</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: rownames missing, assigning default rownames</span></div><div class='output co'>#&gt; <span class='warning'>Warning: colnames missing, assigning default colnames</span></div><div class='output co'>#&gt;              1            2
+#&gt; [1] "zscore"</div><div class='input'><span class='fu'>dcScore</span>(<span class='no'>x</span>, <span class='no'>cond</span>, <span class='kw'>dc.method</span> <span class='kw'>=</span> <span class='st'>'diffcoex'</span>)</div><div class='output co'>#&gt;              1            2
 #&gt; 1           NA 0.0001079725
 #&gt; 2 0.0001079725           NA
 #&gt; attr(,"cor.method")

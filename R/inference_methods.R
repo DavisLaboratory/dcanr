@@ -174,8 +174,8 @@ magic.score <- function(emat, condition, cor.method = 'pearson', ...) {
 ftgi.score <- function(emat, condition, ...) {
   message('Results will be a matrix of p-values, not scores')
 
-  score <- foreach(i = 1:nrow(emat), .combine = cbind) %:%
-    foreach(j = 1:nrow(emat), .combine = rbind) %dopar% {
+  score <- foreach(i = seq_len(nrow(emat)), .combine = cbind) %:%
+    foreach(j = seq_len(nrow(emat)), .combine = rbind) %dopar% {
       e1 = as.numeric(emat[i, ])
       e2 = as.numeric(emat[j, ])
       m1 = glm(as.factor(condition) ~ e1 + e2, family = binomial(link = "logit"))
@@ -278,7 +278,7 @@ ebcoexpress.score <- function(emat, condition, ebcoexpress.useBWMC = TRUE, ebcoe
   # convert to matrix
   corpairs = plyr::ldply(stringr::str_split(names(ppbDC1), "~"))
   corpairs["prob"] = ppbDC1
-  for (i in 1:nrow(corpairs)) {
+  for (i in seq_len(nrow(corpairs))) {
     g1 = as.character(corpairs[i, 1])
     g2 = as.character(corpairs[i, 2])
     scoremat[g1, g2] = scoremat[g2, g1] = corpairs[i, 3]
@@ -370,7 +370,7 @@ mi.ap.single <- function(x, y) {
 
   while (!is.null(testgrid)) {
     newtestgrid = c()
-    for (i in 1:nrow(testgrid)) {
+    for (i in seq_len(nrow(testgrid))) {
       # partition grid
       ptsx = seq(testgrid$sx[i], testgrid$ex[i], length.out = 3)[-3]
       ptsy = seq(testgrid$sy[i], testgrid$ey[i], length.out = 3)[-3]
@@ -431,7 +431,7 @@ mi.ap.single <- function(x, y) {
 #' mi.ap(x)
 mi.ap <- function(mat) {
   if (is.null(colnames(mat))){
-    colnames(mat) = 1:ncol(mat)
+    colnames(mat) = seq_len(ncol(mat))
   }
 
   gpairs = expand.grid(colnames(mat), colnames(mat))
