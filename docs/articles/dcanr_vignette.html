@@ -5,15 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Differential co-expression analysis using dcanr • dcanr</title>
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Differential co-expression analysis using dcanr">
+<title>Performing differential co-expression analysis using dcanr • dcanr</title>
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Performing differential co-expression analysis using dcanr">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
-<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -31,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dcanr</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.0</span>
       </span>
     </div>
 
@@ -57,10 +56,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/dcanr_evaluation_vignette.html">DC method evaluation using dcanr</a>
+      <a href="../articles/dcanr_evaluation_vignette.html">Evaluating differential co-expression methods using dcanr</a>
     </li>
     <li>
-      <a href="../articles/dcanr_vignette.html">Differential co-expression analysis using dcanr</a>
+      <a href="../articles/dcanr_vignette.html">Performing differential co-expression analysis using dcanr</a>
     </li>
   </ul>
 </li>
@@ -87,10 +86,10 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Differential co-expression analysis using dcanr</h1>
+      <h1>Performing differential co-expression analysis using dcanr</h1>
                         <h4 class="author">Dharmesh D Bhuva</h4>
             <address class="author_afil">
-      Bioinformatics Division, Walter and Eliza Hall Institute of Medical Research, Parkville, VIC 3052, Australia<br><h4 class="date">2018-10-10</h4>
+      Bioinformatics Division, Walter and Eliza Hall Institute of Medical Research, Parkville, VIC 3052, Australia<br><h4 class="date">2019-03-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/DavisLaboratory/dcanr/blob/master/vignettes/dcanr_vignette.Rmd"><code>vignettes/dcanr_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>dcanr_vignette.Rmd</code></div>
@@ -103,21 +102,21 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>This package provides methods to perform differential co-expression analysis and to evaluate differential co-expression methods using simulated data. Differential co-expression analysis attempts to identify gene-gene associations that change across conditions. Currently available methods identify such changes across binary conditions however the package is not limited to these. Methods that identify changes across a continous condition can also be integrated into the package in the future. 10 methods are available in the package with 8 novel implementations and 2 interfaces to existing packages to allow ease of application.</p>
-<p>This vignette focuses on application of differential co-expression inference methods to real data. Available methods, putative pipelines and visualisation provided by the method are introduced.</p>
+<p>This package provides methods to perform differential co-expression analysis and to evaluate differential co-expression methods using simulated data. Differential co-expression analysis attempts to identify gene-gene associations that change across conditions. Currently, 10 methods that identify changes between binary conditions are included: 8 are novel Bioconductor implementations of previously published methods, and; 2 are accessed through interfaces to existing packages.</p>
+<p>This vignette focuses on the application of differential co-expression inference methods to real data. Available methods, putative pipelines, and visualisations provided by the method are introduced.</p>
 </div>
 <div id="installation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h1>
 <p>The package can be downloaded from github.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"DavisLaboratory/dcanr"</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"DavisLaboratory/dcanr"</span>)</code></pre></div>
 </div>
 <div id="available-inference-methods" class="section level1">
 <h1 class="hasAnchor">
 <a href="#available-inference-methods" class="anchor"></a>Available inference methods</h1>
-<p>The package implements 10 methods that infer differential co-expression on binary conditions. The list of available methods can be accessed by the <code><a href="../reference/dcMethods.html">dcMethods()</a></code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dcanr)
+<p>The package implements 10 methods to infer differential co-expression networks across binary conditions. The list of available methods can be accessed by the <code><a href="../reference/dcMethods.html">dcMethods()</a></code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dcanr)
 <span class="kw"><a href="../reference/dcMethods.html">dcMethods</a></span>()</code></pre></div>
 <pre><code>##  [1] "dicer"       "diffcoex"    "ebcoexpress" "ecf"         "entropy"    
 ##  [6] "ftgi"        "ggm-based"   "magic"       "mindy"       "zscore"</code></pre>
@@ -125,21 +124,21 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <div id="a-generic-differential-co-expression-analysis-pipeline" class="section level1">
 <h1 class="hasAnchor">
 <a href="#a-generic-differential-co-expression-analysis-pipeline" class="anchor"></a>A generic differential co-expression analysis pipeline</h1>
-<p>A differential co-expression pipeline can consist of 4 steps:</p>
+<p>A differential co-expression pipeline generally consists of 4 steps:</p>
 <ol style="list-style-type: decimal">
 <li>Generating scores/statistics for each pair of genes</li>
 <li>Assessing scores using statistical tests</li>
-<li>Correcting tests for multiple hypothesis testing</li>
+<li>Correcting for multiple hypothesis testing</li>
 <li>Selecting differential associations</li>
 </ol>
-<p>Not all methods follow this pipeline. EBcoexpress computes posterior probabilities therefore no statistical test needs to be performed and steps 2-3 can be skipped. Like-wise DiffCoEx does not perform any statistical tests and instead performs a soft-thresholding on the scores. FTGI performs a statistical test and the <span class="math inline">\(p\)</span>-values from this test are used as scores, therefore step 2 is skipped. The z-score based method requires all these steps. A standard analysis with this method is shown here.</p>
+<p>Not all methods follow this pipeline. EBcoexpress computes posterior probabilities therefore no statistical test needs to be performed and steps 2-3 can be skipped. Like-wise DiffCoEx does not perform any statistical tests and instead performs a soft-thresholding on the scores. FTGI performs a statistical test and <span class="math inline">\(p\)</span>-values from this test are used as scores, therefore step 2 is skipped. A standard analysis with the z-score method using all 4 steps is shown here.</p>
 </div>
 <div id="load-an-example-dataset-simulated" class="section level1">
 <h1 class="hasAnchor">
 <a href="#load-an-example-dataset-simulated" class="anchor"></a>Load an example dataset (simulated)</h1>
-<p>We first load an example simulated dataset included in the package and extract the expression matrix and condition vector. Do note that multiple knock-down experiments are performed per simulation. We will just use one such knock-down as a condition. The list of all knock-downs can be retrieved using <code><a href="../reference/getSimData.html">getConditionNames()</a></code>.</p>
+<p>We first load an example simulated dataset (included in the package) to extract the expression matrix and condition vector. Please note that multiple knock-down experiments are performed per simulation and we use one such knock-down as a condition here. The list of all knock-downs can be retrieved using <code><a href="../reference/getSimData.html">getConditionNames()</a></code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#load data</span>
-<span class="kw">data</span>(sim102)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(sim102)
 <span class="co">#get available conditions</span>
 <span class="kw"><a href="../reference/getSimData.html">getConditionNames</a></span>(sim102)</code></pre></div>
 <pre><code>## [1] "ADR1" "UME6"</code></pre>
@@ -147,24 +146,24 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 simdata &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getSimData.html">getSimData</a></span>(sim102, <span class="dt">cond.name =</span> <span class="st">'UME6'</span>, <span class="dt">full =</span> <span class="ot">FALSE</span>)
 emat &lt;-<span class="st"> </span>simdata<span class="op">$</span>emat
 ume6_kd &lt;-<span class="st"> </span>simdata<span class="op">$</span>condition
-<span class="kw">print</span>(emat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]) <span class="co">#149 genes and 406 samples</span></code></pre></div>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(emat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]) <span class="co">#149 genes and 406 samples</span></code></pre></div>
 <pre><code>##       sample_1  sample_2  sample_3  sample_4   sample_5
 ## ADR1 0.4997864 0.4692072 0.3937255 0.1390989 0.05291159
 ## FLO8 0.3340156 0.2845828 0.3682575 0.2263656 0.19292056
 ## GIS1 0.3955383 0.4922471 0.5006614 0.2672858 0.48041978
 ## IME4 0.4658504 0.3529325 0.4188025 0.3824827 0.33371681
 ## KAR4 0.3705384 0.5812146 0.5282095 0.4945329 0.46677489</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(ume6_kd) <span class="co">#NOTE: binary conditions encoded with 1's and 2's</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(ume6_kd) <span class="co">#NOTE: binary conditions encoded with 1's and 2's</span></code></pre></div>
 <pre><code>## sample_1 sample_2 sample_3 sample_4 sample_5 sample_6 
 ##        2        2        1        1        1        1</code></pre>
 </div>
 <div id="step-1-compute-scores" class="section level1">
 <h1 class="hasAnchor">
 <a href="#step-1-compute-scores" class="anchor"></a>Step 1: Compute scores</h1>
-<p>All inference methods can be accessed using the same call therefore making it easier to change between methods. Method specific parameters can be passed to this function and will be distributed accordingly. The default inference method is z-score therefore it does not need to be specified via <code>dc.method</code>. We recommend using the Spearman correlation as a measure of correlation as it is robust to outliers which would normally be present in RNA-seq data.</p>
+<p>All inference methods can be accessed using the same call therefore making it easier to change between methods. Method specific parameters can be passed to this function and will be managed accordingly. The default inference method is z-score therefore it does not need to be specified via <code>dc.method</code>. We recommend using the Spearman correlation as a measure of correlation as it is robust to outliers which may be present in RNA-seq data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#apply the z-score method with Spearman correlations</span>
 z_scores &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcScore.html">dcScore</a></span>(emat, ume6_kd, <span class="dt">cor.method =</span> <span class="st">'spearman'</span>)
-<span class="kw">print</span>(z_scores[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</code></pre></div>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(z_scores[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</code></pre></div>
 <pre><code>##             ADR1        FLO8       GIS1       IME4       KAR4
 ## ADR1          NA -0.05890109  1.0645602 -0.6869672 -0.2843683
 ## FLO8 -0.05890109          NA  0.1855110  0.9256449  0.6803593
@@ -175,26 +174,26 @@ z_scores &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dc
 <div id="step-2-perform-a-statistical-test" class="section level1">
 <h1 class="hasAnchor">
 <a href="#step-2-perform-a-statistical-test" class="anchor"></a>Step 2: Perform a statistical test</h1>
-<p>Appropriate statistical tests are automatically selected for the method applied. Tests are applied on the result of the <code><a href="../reference/dcScore.html">dcScore()</a></code> function (z-test for the z-score method and permutation tests for the remainder of methods). The testing function returns the score matrix (unmodified) if the method is either EBcoexpress, FTGI or DiffCoEx.</p>
-<p><em>NOTE: Do NOT modify the result of the scoring method as this will result in failure of the testing function. This is intended as tests should be performed for all computed scores and subsequent correction for multiple hypothesis testing should remain unbiased. The same applies for the next step.</em></p>
+<p>Appropriate statistical tests are automatically selected for the method applied. Tests are applied on the result of the <code><a href="../reference/dcScore.html">dcScore()</a></code> function (z-test for the z-score method and permutation tests for other methods). The testing function returns the score matrix (unmodified) if the method is either EBcoexpress, FTGI or DiffCoEx.</p>
+<p><em>NOTE: Do NOT modify the result of the scoring method as this will result in failure of the testing function. This is intended as tests should be performed for all computed scores to prevent bias in the subsequent correction for multiple hypothesis testing. The same applies for the next step.</em></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#perform a statistical test: the z-test is selected automatically</span>
 raw_p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcTest.html">dcTest</a></span>(z_scores, emat, ume6_kd)
-<span class="kw">print</span>(raw_p[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</code></pre></div>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(raw_p[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</code></pre></div>
 <pre><code>##           ADR1      FLO8      GIS1      IME4      KAR4
 ## ADR1        NA 0.9530309 0.2870750 0.4921034 0.7761282
 ## FLO8 0.9530309        NA 0.8528283 0.3546306 0.4962770
 ## GIS1 0.2870750 0.8528283        NA 0.5263095 0.2109766
 ## IME4 0.4921034 0.3546306 0.5263095        NA 0.6575023
 ## KAR4 0.7761282 0.4962770 0.2109766 0.6575023        NA</code></pre>
-<p>For methods such as MINDy that require a permutation test, the number of permutations can be specified by the <code>B</code> parameter. Permutation tests are computationally intense therefore we provide a parallelisable implementation. See the help page for <code>dcTest</code> for examples.</p>
+<p>For methods such as MINDy that require a permutation test, the number of permutations can be specified by the <code>B</code> parameter. Permutation tests are computationally expensive therefore we also provide a parallelised implementation. See the help page of <code>dcTest</code> for examples.</p>
 </div>
-<div id="step-3-correct-for-multiple-hypothesis-testing" class="section level1">
+<div id="step-3-correcting-for-multiple-hypothesis-testing" class="section level1">
 <h1 class="hasAnchor">
-<a href="#step-3-correct-for-multiple-hypothesis-testing" class="anchor"></a>Step 3: Correct for multiple hypothesis testing</h1>
-<p>Since all pairwise combinations of genes are tested, <span class="math inline">\(p\)</span>-values need to be adjusted. Given <span class="math inline">\(n\)</span> genes, the total number of hypothesis is <span class="math inline">\(\frac{n(n-1)}{2}\)</span> as the score matrices are symmetric. Adjustment is performed accordingly. The default adjustment function is <code><a href="http://www.rdocumentation.org/packages/stats/topics/p.adjust">stats::p.adjust</a></code> however custom functions and their parameters can be specified instead. <code>dcAdjust</code> provides a wrapper to apply an adjustment method to the raw <span class="math inline">\(p\)</span>-value matrix. Results from EBcoexpress and DiffCoEx remain unmodified.</p>
+<a href="#step-3-correcting-for-multiple-hypothesis-testing" class="anchor"></a>Step 3: Correcting for multiple hypothesis testing</h1>
+<p>Since all pairwise combinations of genes are tested, <span class="math inline">\(p\)</span>-values need to be adjusted. Given <span class="math inline">\(n\)</span> genes, the total number of hypothesis is <span class="math inline">\(\frac{n(n-1)}{2}\)</span> as the score matrices are symmetric. Adjustment is performed accordingly. The default adjustment function is <code><a href="https://www.rdocumentation.org/packages/stats/topics/p.adjust">stats::p.adjust</a></code> with the ‘fdr’ method used, however, custom functions and their parameters can be specified instead. <code>dcAdjust</code> provides a wrapper to apply an adjustment method to the raw <span class="math inline">\(p\)</span>-value matrix. Results from EBcoexpress and DiffCoEx remain unmodified.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#adjust p-values (raw p-values from dcTest should NOT be modified)</span>
 adj_p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcAdjust.html">dcAdjust</a></span>(raw_p, <span class="dt">f =</span> p.adjust, <span class="dt">method =</span> <span class="st">'fdr'</span>)
-<span class="kw">print</span>(adj_p[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</code></pre></div>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(adj_p[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</code></pre></div>
 <pre><code>##           ADR1      FLO8      GIS1      IME4      KAR4
 ## ADR1        NA 0.9933963 0.8879726 0.9289498 0.9655700
 ## FLO8 0.9933963        NA 0.9748335 0.9116214 0.9289498
@@ -205,16 +204,16 @@ adj_p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcAdj
 <div id="step-4-generating-the-differential-co-expression-network" class="section level1">
 <h1 class="hasAnchor">
 <a href="#step-4-generating-the-differential-co-expression-network" class="anchor"></a>Step 4: Generating the differential co-expression network</h1>
-<p>The last step is thresholding the score/adjusted <span class="math inline">\(p\)</span>-value matrix to select differential associations. Default adjusted <span class="math inline">\(p\)</span>-value thresholds of 0.1 are applied where statistical tests are performed (to control for FDR at 0.1). Results are presented as an <code>igraph</code> object.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(igraph)
+<p>The last step is thresholding the score/adjusted <span class="math inline">\(p\)</span>-value matrix to select differential associations. Default adjusted <span class="math inline">\(p\)</span>-value thresholds of 0.1 are applied where statistical tests are performed (to control for FDR at 0.1). Results are presented as an <code>igraph</code> object shown below where edges are coloured based on the score (negative to positive scores are represented using the purple to green gradient of colours).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(igraph)
 
 <span class="co">#get the differential network</span>
 dcnet &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcNetwork.html">dcNetwork</a></span>(z_scores, adj_p)
-<span class="kw">plot</span>(dcnet, <span class="dt">vertex.label =</span> <span class="st">''</span>)</code></pre></div>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(dcnet, <span class="dt">vertex.label =</span> <span class="st">''</span>)</code></pre></div>
 <p><img src="dcanr_vignette_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#convert to an adjacency matrix</span>
-adjmat &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/igraph/topics/as_adjacency_matrix">as_adj</a></span>(dcnet, <span class="dt">sparse =</span> <span class="ot">FALSE</span>)
-<span class="kw">print</span>(adjmat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</code></pre></div>
+adjmat &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/igraph/topics/as_adjacency_matrix">as_adj</a></span>(dcnet, <span class="dt">sparse =</span> <span class="ot">FALSE</span>)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(adjmat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</code></pre></div>
 <pre><code>##      ADR1 FLO8 GIS1 IME4 KAR4
 ## ADR1    0    0    0    0    0
 ## FLO8    0    0    0    0    0
@@ -222,8 +221,8 @@ adjmat &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocum
 ## IME4    0    0    0    0    0
 ## KAR4    0    0    0    0    0</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#convert to a data.frame</span>
-edgedf &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/igraph/topics/graph_from_data_frame">as_data_frame</a></span>(dcnet, <span class="dt">what =</span> <span class="st">'edges'</span>)
-<span class="kw">print</span>(<span class="kw">head</span>(edgedf))</code></pre></div>
+edgedf &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/igraph/topics/graph_from_data_frame">as_data_frame</a></span>(dcnet, <span class="dt">what =</span> <span class="st">'edges'</span>)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(edgedf))</code></pre></div>
 <pre><code>##    from   to     score     color
 ## 1  ADR1 ACS1 -3.648617 #671F73B3
 ## 2  ADR1 CTA1 -4.399843 #40004BB3
@@ -235,13 +234,13 @@ edgedf &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocum
 <div id="session-info" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h1>
-<pre><code>## R version 3.5.0 (2018-04-23)
+<pre><code>## R version 3.5.1 (2018-07-02)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: CentOS release 6.4 (Final)
 ## 
 ## Matrix products: default
-## BLAS: /wehisan/general/system/bioinf-software/bioinfsoftware/R/R-3.5.0/lib64/R/lib/libRblas.so
-## LAPACK: /wehisan/general/system/bioinf-software/bioinfsoftware/R/R-3.5.0/lib64/R/lib/libRlapack.so
+## BLAS: /stornext/System/data/bioinf-centos6/bioinf-software/bioinfsoftware/R/R-3.5.1/lib64/R/lib/libRblas.so
+## LAPACK: /stornext/System/data/bioinf-centos6/bioinf-software/bioinfsoftware/R/R-3.5.1/lib64/R/lib/libRlapack.so
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -255,21 +254,21 @@ edgedf &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocum
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] igraph_1.2.2    dcanr_0.99.0    BiocStyle_2.7.9
+## [1] igraph_1.2.4    dcanr_0.99.0    BiocStyle_2.8.2
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.17        rstudioapi_0.8      knitr_1.20         
-##  [4] xml2_1.2.0          magrittr_1.5        roxygen2_6.1.0     
-##  [7] MASS_7.3-50         colorspace_1.4-0    R6_2.3.0           
-## [10] rlang_0.2.2         foreach_1.4.6       stringr_1.3.1      
-## [13] tools_3.5.0         grid_3.5.0          circlize_0.4.4     
-## [16] xfun_0.3            iterators_1.0.9     htmltools_0.3.6    
-## [19] commonmark_1.5      yaml_2.2.0          rprojroot_1.3-2    
-## [22] digest_0.6.17       assertthat_0.2.0    bookdown_0.7       
-## [25] pkgdown_1.1.0.9000  crayon_1.3.4        RColorBrewer_1.1-2 
+##  [1] Rcpp_1.0.0          rstudioapi_0.9.0    knitr_1.20         
+##  [4] xml2_1.2.0          magrittr_1.5        roxygen2_6.1.1     
+##  [7] MASS_7.3-50         colorspace_1.4-0    R6_2.4.0           
+## [10] rlang_0.3.1         foreach_1.5.0       stringr_1.3.1      
+## [13] tools_3.5.1         grid_3.5.1          circlize_0.4.4     
+## [16] xfun_0.3            iterators_1.0.11    htmltools_0.3.6    
+## [19] commonmark_1.5      yaml_2.2.0          digest_0.6.18      
+## [22] assertthat_0.2.0    rprojroot_1.3-2     bookdown_0.7       
+## [25] pkgdown_1.3.0       crayon_1.3.4        RColorBrewer_1.1-2 
 ## [28] GlobalOptions_0.1.0 codetools_0.2-15    fs_1.2.6           
 ## [31] shape_1.4.4         memoise_1.1.0       evaluate_0.11      
-## [34] rmarkdown_1.10      stringi_1.2.3       compiler_3.5.0     
+## [34] rmarkdown_1.11      stringi_1.3.1       compiler_3.5.1     
 ## [37] desc_1.2.0          backports_1.1.2     pkgconfig_2.0.2</code></pre>
 </div>
   </div>
@@ -286,7 +285,7 @@ edgedf &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocum
       <li><a href="#load-an-example-dataset-simulated">Load an example dataset (simulated)</a></li>
       <li><a href="#step-1-compute-scores">Step 1: Compute scores</a></li>
       <li><a href="#step-2-perform-a-statistical-test">Step 2: Perform a statistical test</a></li>
-      <li><a href="#step-3-correct-for-multiple-hypothesis-testing">Step 3: Correct for multiple hypothesis testing</a></li>
+      <li><a href="#step-3-correcting-for-multiple-hypothesis-testing">Step 3: Correcting for multiple hypothesis testing</a></li>
       <li><a href="#step-4-generating-the-differential-co-expression-network">Step 4: Generating the differential co-expression network</a></li>
       <li><a href="#session-info">Session info</a></li>
       </ul>
@@ -301,9 +300,8 @@ edgedf &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocum
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
-
       </footer>
 </div>
 

@@ -5,15 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DC method evaluation using dcanr • dcanr</title>
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="DC method evaluation using dcanr">
+<title>Evaluating differential co-expression methods using dcanr • dcanr</title>
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Evaluating differential co-expression methods using dcanr">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
-<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -31,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dcanr</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.0</span>
       </span>
     </div>
 
@@ -57,10 +56,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/dcanr_evaluation_vignette.html">DC method evaluation using dcanr</a>
+      <a href="../articles/dcanr_evaluation_vignette.html">Evaluating differential co-expression methods using dcanr</a>
     </li>
     <li>
-      <a href="../articles/dcanr_vignette.html">Differential co-expression analysis using dcanr</a>
+      <a href="../articles/dcanr_vignette.html">Performing differential co-expression analysis using dcanr</a>
     </li>
   </ul>
 </li>
@@ -87,10 +86,10 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>DC method evaluation using dcanr</h1>
+      <h1>Evaluating differential co-expression methods using dcanr</h1>
                         <h4 class="author">Dharmesh D Bhuva</h4>
             <address class="author_afil">
-      Bioinformatics Division, Walter and Eliza Hall Institute of Medical Research, Parkville, VIC 3052, Australia<br><h4 class="date">2018-10-10</h4>
+      Bioinformatics Division, Walter and Eliza Hall Institute of Medical Research, Parkville, VIC 3052, Australia<br><h4 class="date">2019-03-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/DavisLaboratory/dcanr/blob/master/vignettes/dcanr_evaluation_vignette.Rmd"><code>vignettes/dcanr_evaluation_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>dcanr_evaluation_vignette.Rmd</code></div>
@@ -103,25 +102,25 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>Along with methods, the package provides an evaluation framework to benchmark methods. Real data is rarely available for the evaluation of differential co-expression methods as such experiments are difficult to perform. As such, simulations are the only means to perform evaluation successfully. Data from 812 simulations was generated and the settings and parameters are described in <strong>PAPER</strong>. This data has been simulated previously and the results are made available here. Along with the data, a suite of visualisation and performance metrics are implemented.</p>
-<p>This vignette describes the functions in this package that enable comparative evaluation of inference methods. All methods within the package can be evaluated with custom evaluations made possible where required.</p>
+<p>Along with implementations for several differential co-expression analysis methods, this package provides an evaluation framework to benchmark methods. Real data are rarely available for the evaluation of differential co-expression methods as such experiments are difficult to perform and in almost all cases, the true/gold-standard network is unknown. As such, simulations are the only means to perform a rigorous comparison and evaluation. Data from 812 simulations were generated with settings and parameters are described in <strong>Bhuva et al. (manuscript in preparation)</strong> and results included here. Along with the data, a suite of visualisation and performance metrics are implemented.</p>
+<p>This vignette describes functions in this package that enable comparative evaluation of inference methods. All methods implemented in the package can be evaluated and novel methods can be integrated into the evaluation framework with relative ease.</p>
 </div>
 <div id="simulation-setup-used-to-create-the-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#simulation-setup-used-to-create-the-data" class="anchor"></a>Simulation setup used to create the data</h1>
-<p>A dynamical systems simulator was used to simulate expression data with differential associations. Regulatory networks of 150 genes were sampled from a S. Cerevisiae regulatory network. Perturbation experiments were performed when simulating data to induce differential associations. Simulation parameters and networks were sampled therefore producing 812 distinct simulations. Data included in the package <code>sim102</code> is an example of one such simulation where two knock-downs were performed simultaneously but independently therefore some samples may have both knock-downs whereas other may have either one or none. Details on the simulation procedure can be found in the <strong>PAPER</strong>. Upto 500 observations are sampled in each simulation.</p>
+<p>A dynamical systems simulator was used to generate synthetic expression data with differential associations. Regulatory networks of 150 genes were sampled from a <em>S. cerevisiae</em> regulatory network. Perturbation experiments were performed when simulating data to induce differential associations. Simulation parameters and networks were sampled to produce 812 distinct simulations. The dataset included in dcanr, <code>sim102</code>, is an example of one such simulation. Two knock-downs were performed simultaneously but independent of each other, therefore, some samples may have both knock-downs while other may have either one or none. Details on the simulation procedure can be found in the <strong>Bhuva et al. (manuscript in preparation)</strong>. Up to 500 observations are sampled in each simulation.</p>
 </div>
 <div id="download-the-full-simulated-dataset" class="section level1">
 <h1 class="hasAnchor">
 <a href="#download-the-full-simulated-dataset" class="anchor"></a>Download the full simulated dataset</h1>
-<p>As the simulation is computationally intensive, data from the 812 simulations has been precomputed and is available at <strong>LINK</strong>. The downloaded file contains a list of simulation results such as <code>sim102</code> which is packaged with <code>dcanr</code>. Each simulation can be accessed as shown below.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simdata &lt;-<span class="st"> </span><span class="kw">load</span>(<span class="st">'simdata_directory/simdata.rda'</span>)
+<p>As the simulation is computationally intensive, data from the 812 simulations have been precomputed and are available at <strong>LINK</strong>. The downloaded file contains a list of simulation results which includes <code>sim102</code>, packaged with <code>dcanr</code>. Each simulation can be accessed as shown below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simdata &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/load">load</a></span>(<span class="st">'simdata_directory/simdata.rda'</span>)
 sim10 &lt;-<span class="st"> </span>simdata[[<span class="dv">10</span>]]</code></pre></div>
 </div>
 <div id="running-a-pipeline-on-a-simulation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#running-a-pipeline-on-a-simulation" class="anchor"></a>Running a pipeline on a simulation</h1>
-<p>Evaluations in the package are performed by creating an analysis pipeline and packaging it into a function. Three possible ways exist to perform this:</p>
+<p>Evaluations in the package are performed by creating an analysis pipeline and packaging this into a function. Three possible ways exist to perform this:</p>
 <ol style="list-style-type: decimal">
 <li>Using standard in-built pipelines</li>
 <li>Using custom pipelines</li>
@@ -131,28 +130,28 @@ sim10 &lt;-<span class="st"> </span>simdata[[<span class="dv">10</span>]]</code>
 <div id="standard-pipelines" class="section level2">
 <h2 class="hasAnchor">
 <a href="#standard-pipelines" class="anchor"></a>Standard pipelines</h2>
-<p>A standard pipeline runs the inbuilt inference methods with their default parameters. All 4 steps of an analysis are performed in sequence as described in their respective publications. To run a standard pipeline on a simulation, simply pass in a simulation and a method name from <code><a href="../reference/dcMethods.html">dcMethods()</a></code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dcanr)
+<p>A standard pipeline runs the in-built inference methods with their default parameters. All 4 steps of an analysis are performed in sequence as described in their respective publications. To run a standard pipeline on a simulation, simply pass in a simulation and a method name from <code><a href="../reference/dcMethods.html">dcMethods()</a></code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dcanr)
 
 <span class="co">#load the data: a simulation</span>
-<span class="kw">data</span>(sim102) 
+<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(sim102) 
 <span class="co">#run a standard pipeline with the z-score method</span>
 dcnets &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcPipeline.html">dcPipeline</a></span>(sim102, <span class="dt">dc.func =</span> <span class="st">'zscore'</span>)
 <span class="co">#plot the source network, true differential network and inferred networks</span>
-op &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">no.readonly =</span> <span class="ot">TRUE</span>)
-<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))
+op &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">no.readonly =</span> <span class="ot">TRUE</span>)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">mfrow =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">2</span>))
 <span class="kw"><a href="../reference/plotSimNetwork.html">plotSimNetwork</a></span>(sim102, <span class="dt">main =</span> <span class="st">'Regulatory network'</span>)
 <span class="kw"><a href="../reference/plotSimNetwork.html">plotSimNetwork</a></span>(sim102, <span class="dt">what =</span> <span class="st">'association'</span>, <span class="dt">main =</span> <span class="st">'True differential association network'</span>)
-<span class="kw">plot</span>(dcnets<span class="op">$</span>ADR1, <span class="dt">main =</span> <span class="st">'ADR1 KD predicted network'</span>)
-<span class="kw">plot</span>(dcnets<span class="op">$</span>UME6, <span class="dt">main =</span> <span class="st">'UME6 KD predicted network'</span>)</code></pre></div>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(dcnets<span class="op">$</span>ADR1, <span class="dt">main =</span> <span class="st">'ADR1 KD predicted network'</span>)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(dcnets<span class="op">$</span>UME6, <span class="dt">main =</span> <span class="st">'UME6 KD predicted network'</span>)</code></pre></div>
 <div class="figure">
-<img src="dcanr_evaluation_vignette_files/figure-html/unnamed-chunk-2-1.png" alt="Differential network analysis on simulations. Top-left to bottom-right: The original regulatory network, the true induced differential network that results from both ADR1 and UME6 knock-downs (KDs), the predicted ADR1 knock-down differential network, and the predicted UME6 knock-down differential network." width="700"><p class="caption">
-Differential network analysis on simulations. Top-left to bottom-right: The original regulatory network, the true induced differential network that results from both ADR1 and UME6 knock-downs (KDs), the predicted ADR1 knock-down differential network, and the predicted UME6 knock-down differential network.
+<img src="dcanr_evaluation_vignette_files/figure-html/unnamed-chunk-2-1.png" alt="Differential network analysis on simulations. Top-left to bottom-right: The original regulatory network used for simulations; the true induced differential network that results from both ADR1 and UME6 knock-downs (KDs); the predicted ADR1 knock-down differential network, and; the predicted UME6 knock-down differential network. Reg and green edges in the regulatory network represent activation and repression respectively. Edges in the differential network are coloured based on the knock-down that results in their differential co-expression. True positives in the predicted network are coloured based on their knock-down while false positives are coloured grey" width="700"><p class="caption">
+Differential network analysis on simulations. Top-left to bottom-right: The original regulatory network used for simulations; the true induced differential network that results from both ADR1 and UME6 knock-downs (KDs); the predicted ADR1 knock-down differential network, and; the predicted UME6 knock-down differential network. Reg and green edges in the regulatory network represent activation and repression respectively. Edges in the differential network are coloured based on the knock-down that results in their differential co-expression. True positives in the predicted network are coloured based on their knock-down while false positives are coloured grey
 </p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(op)</code></pre></div>
-<p>Results of a pipeline is a list of <code>igraph</code> objects representing the inferred network. True positive predictions are coloured based on the colour of the knocked-down node and false positived coloured grey. The <code>plotSimNetwork</code> function can be used to retrieve and plot the true differential networks and the source regulatory network.</p>
-<p>Any additional parameters to intermmediate steps in a pipeline can also be passed as shown in the example below. However, doing so will produce results different to the precomputed results discussed in (Section @ref(precomp)).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(op)</code></pre></div>
+<p>Results from a pipeline are provided as a list of <code>igraph</code> objects representing the inferred networks, one for each knock-down. True positive predictions are coloured based on the colour of the knocked-down node and false positives are coloured grey. The <code>plotSimNetwork</code> function can be used to retrieve and plot the true differential networks and the source regulatory network.</p>
+<p>Any additional parameters for intermediate steps in a standard pipeline can be passed as shown in the example below. However, doing so will produce results different from the precomputed results discussed in (Section @ref(precomp)).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#run a standard pipeline with the z-score method with custom params</span>
 dcnets_sp &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcPipeline.html">dcPipeline</a></span>(sim102,
                         <span class="dt">dc.func =</span> <span class="st">'zscore'</span>,
@@ -162,15 +161,15 @@ dcnets_sp &lt;-<span class="st"> </span><span class="kw"><a href="../reference/d
 <div id="custom-pipelines" class="section level2">
 <h2 class="hasAnchor">
 <a href="#custom-pipelines" class="anchor"></a>Custom pipelines</h2>
-<p>The most common use case of an evaluation framework is to benchmark new methods. As such, the framework should allow seemless integration of new methods. This is made possible in <code>dcanr</code> by providing a single function to the <code>dcPipeline</code> method. This function should have the following structure:</p>
+<p>The most common use case of an evaluation framework is to benchmark new methods. As such, this framework allows seamless integration of new methods. This is made possible in <code>dcanr</code> by providing a single function to the <code>dcPipeline</code> method. This function should follow the skeleton below:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#emat, a named matrix with samples along the columns and genes along the rows</span>
 <span class="co">#condition, a binary named vector consisiting of 1's and 2's</span>
 <span class="co">#returns a named adjacency matrix or an igraph object</span>
 myInference &lt;-<span class="st"> </span><span class="cf">function</span>(emat, condition, ...) {
   <span class="co">#your code here</span>
-  <span class="kw">return</span>(dcnet)
+  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/function">return</a></span>(dcnet)
 }</code></pre></div>
-<p>The following code shows the function used to call an inbuilt pipeline and how a custom pipeline can be run.</p>
+<p>The following code shows the function used to call an in-built pipeline and how a custom pipeline can be run.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#custom pipeline function</span>
 analysisInbuilt &lt;-<span class="st"> </span><span class="cf">function</span>(emat, condition, <span class="dt">dc.method =</span> <span class="st">'zscore'</span>, ...) {
   <span class="co">#compute scores</span>
@@ -182,7 +181,7 @@ analysisInbuilt &lt;-<span class="st"> </span><span class="cf">function</span>(e
   <span class="co">#threshold and generate network</span>
   dcnet =<span class="st"> </span><span class="kw"><a href="../reference/dcNetwork.html">dcNetwork</a></span>(score, adjp, ...)
 
-  <span class="kw">return</span>(dcnet)
+  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/function">return</a></span>(dcnet)
 }
 
 <span class="co">#call the custom pipeline</span>
@@ -191,18 +190,18 @@ custom_nets &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 <div id="precomp" class="section level2">
 <h2 class="hasAnchor">
 <a href="#precomp" class="anchor"></a>Retrieving pre-computed results</h2>
-<p>Following evaluation of a novel method, it is generally of interest to compare how it performs against previous methods. Re-computing predictions for the 10 methods implemented in this package can be time consuming. As such, all simulations come packged up with the results of applying a standard pipeline using each inference method. Pre-computed results are also retrieved using the <code>dcPipeline</code> function and setting the <code>precomputed</code> argument to <code>TRUE</code>.</p>
+<p>Following evaluation of a novel method, it is generally of interest to compare how it performs against previous methods. Re-computing predictions for the 10 methods implemented in this package can be time consuming. As such, all simulations come packaged with results from applying a standard pipeline using each inference method. Pre-computed results are also retrieved using the <code>dcPipeline</code> function, with the <code>precomputed</code> argument set to <code>TRUE</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#retrieve results of applying all available methods</span>
-allnets &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw"><a href="../reference/dcMethods.html">dcMethods</a></span>(), <span class="cf">function</span>(m) {
+allnets &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply</a></span>(<span class="kw"><a href="../reference/dcMethods.html">dcMethods</a></span>(), <span class="cf">function</span>(m) {
   <span class="kw"><a href="../reference/dcPipeline.html">dcPipeline</a></span>(sim102, <span class="dt">dc.func =</span> m, <span class="dt">precomputed =</span> <span class="ot">TRUE</span>)
 })
-<span class="kw">names</span>(allnets) &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcMethods.html">dcMethods</a></span>() <span class="co">#name the results based on methods</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(allnets) &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcMethods.html">dcMethods</a></span>() <span class="co">#name the results based on methods</span>
 
 <span class="co">#get the size of the UME6 KD differential network</span>
-netsizes &lt;-<span class="st"> </span><span class="kw">lapply</span>(allnets, <span class="cf">function</span>(net) {
-  <span class="kw">length</span>(igraph<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/igraph/topics/E">E</a></span>(net<span class="op">$</span>UME6))
+netsizes &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply</a></span>(allnets, <span class="cf">function</span>(net) {
+  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(igraph<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/igraph/topics/E">E</a></span>(net<span class="op">$</span>UME6))
 })
-<span class="kw">print</span>(<span class="kw">unlist</span>(netsizes))</code></pre></div>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/unlist">unlist</a></span>(netsizes))</code></pre></div>
 <pre><code>##       dicer    diffcoex ebcoexpress         ecf     entropy        ftgi 
 ##         119         175        2914        1979         351           8 
 ##   ggm-based       magic       mindy      zscore 
@@ -212,38 +211,38 @@ netsizes &lt;-<span class="st"> </span><span class="kw">lapply</span>(allnets, <
 <div id="evaluate-a-pipeline" class="section level1">
 <h1 class="hasAnchor">
 <a href="#evaluate-a-pipeline" class="anchor"></a>Evaluate a pipeline</h1>
-<p>After inferring the differential co-expression network, the final step is to evaluate performance based on the truth. True differential networks are computed by performing sensitivity analysis as described in the <strong>PAPER</strong>. Three levels of true differential networks are generated:</p>
+<p>After inferring the differential co-expression network, the final step is to evaluate performance based on the truth. True differential networks are computed by performing a sensitivity analysis as described in the <strong>Bhuva et al. (manuscript in preparation)</strong>. Three levels of true differential networks are generated:</p>
 <ol style="list-style-type: decimal">
 <li>Direct - this represents direct TF-target regulatory interactions that are affected by the knock-down (condition)</li>
 <li>Influence - this network includes upstream TF-target interactions which are indirect but causative</li>
-<li>Association - this network includes all associations in the influence network but adds all non-causative associations that are differential conditioned on the knock-down</li>
+<li>Association - this network includes all associations in the influence network but adds all non-causative associations that are differential when conditioned on the knock-down</li>
 </ol>
-<p>All three levels of truth are packaged within the simulation. Predicted networks can be evaluated against any of these. We recommend using the differential association network.</p>
+<p>All three levels of truth are included within the simulated data. Predicted networks can be evaluated against any of these. We recommend using the differential association network.</p>
 <p>Along with the true differential co-expression network, a metric is required to summarise performance of a method. The package provides 6 different metrics which can be accessed by calling <code><a href="../reference/perfMethods.html">perfMethods()</a></code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#available performance metrics</span>
-<span class="kw">print</span>(<span class="kw"><a href="../reference/perfMethods.html">perfMethods</a></span>())</code></pre></div>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="../reference/perfMethods.html">perfMethods</a></span>())</code></pre></div>
 <pre><code>## [1] "AC"        "accuracy"  "f.measure" "MCC"       "precision" "recall"</code></pre>
 <p>Evaluation is performed using the <code>dcEvaluate</code> function. We will run this with the precomputed inferences as described in (Section @ref(precomp)). The F1-measure will be computed to assess performance.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#compute the F1-measure for the prediction made by each method</span>
-f1_scores &lt;-<span class="st"> </span><span class="kw">lapply</span>(allnets, <span class="cf">function</span> (net) {
+f1_scores &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply</a></span>(allnets, <span class="cf">function</span> (net) {
   <span class="kw"><a href="../reference/dcEvaluate.html">dcEvaluate</a></span>(sim102, net, <span class="dt">truth.type =</span> <span class="st">'association'</span>, <span class="dt">combine =</span> <span class="ot">TRUE</span>)
 })
-<span class="kw">print</span>(<span class="kw">sort</span>(<span class="kw">unlist</span>(f1_scores), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sort">sort</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/unlist">unlist</a></span>(f1_scores), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>))</code></pre></div>
 <pre><code>##     entropy      zscore        ftgi    diffcoex       dicer         ecf 
 ##  0.69625247  0.56259660  0.43928571  0.37606838  0.35130435  0.24793388 
 ##       mindy       magic ebcoexpress   ggm-based 
 ##  0.23625255  0.11428571  0.01183932  0.00000000</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#compute the Matthew's correlation coefficient of the z-score inference</span>
 z_mcc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcEvaluate.html">dcEvaluate</a></span>(sim102, dcnets, <span class="dt">perf.method =</span> <span class="st">'MCC'</span>)
-<span class="kw">print</span>(z_mcc)</code></pre></div>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(z_mcc)</code></pre></div>
 <pre><code>## [1] 0.5761074</code></pre>
-<p>These methods combined can be used to learn more about the strengths and weaknesses of methods. For instance, the precision and recall characteristics of the different methods can be computed. This shows that the entropy-based method excels at recall while the z-score based method has high precision.</p>
+<p>These metrics can be combined to learn more about the advantages and limitations of different methods. For instance, the precision and recall characteristics of the different methods can be computed. For sim102, this shows that the entropy-based method excels at recall while the z-score based method has high precision.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#compute precision</span>
-dcprec &lt;-<span class="st"> </span><span class="kw">lapply</span>(allnets, <span class="cf">function</span> (net) {
+dcprec &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply</a></span>(allnets, <span class="cf">function</span> (net) {
   <span class="kw"><a href="../reference/dcEvaluate.html">dcEvaluate</a></span>(sim102, net, <span class="dt">perf.method =</span> <span class="st">'precision'</span>)
 })
 <span class="co">#compute recall</span>
-dcrecall &lt;-<span class="st"> </span><span class="kw">lapply</span>(allnets, <span class="cf">function</span> (net) {
+dcrecall &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply</a></span>(allnets, <span class="cf">function</span> (net) {
   <span class="kw"><a href="../reference/dcEvaluate.html">dcEvaluate</a></span>(sim102, net, <span class="dt">perf.method =</span> <span class="st">'recall'</span>)
 })</code></pre></div>
 <p><img src="dcanr_evaluation_vignette_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
@@ -251,13 +250,13 @@ dcrecall &lt;-<span class="st"> </span><span class="kw">lapply</span>(allnets, <
 <div id="session-info" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h1>
-<pre><code>## R version 3.5.0 (2018-04-23)
+<pre><code>## R version 3.5.1 (2018-07-02)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: CentOS release 6.4 (Final)
 ## 
 ## Matrix products: default
-## BLAS: /wehisan/general/system/bioinf-software/bioinfsoftware/R/R-3.5.0/lib64/R/lib/libRblas.so
-## LAPACK: /wehisan/general/system/bioinf-software/bioinfsoftware/R/R-3.5.0/lib64/R/lib/libRlapack.so
+## BLAS: /stornext/System/data/bioinf-centos6/bioinf-software/bioinfsoftware/R/R-3.5.1/lib64/R/lib/libRblas.so
+## LAPACK: /stornext/System/data/bioinf-centos6/bioinf-software/bioinfsoftware/R/R-3.5.1/lib64/R/lib/libRlapack.so
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -271,23 +270,23 @@ dcrecall &lt;-<span class="st"> </span><span class="kw">lapply</span>(allnets, <
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] dcanr_0.99.0    BiocStyle_2.7.9
+## [1] dcanr_0.99.0    BiocStyle_2.8.2
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.17        compiler_3.5.0      RColorBrewer_1.1-2 
-##  [4] highr_0.6           iterators_1.0.9     tools_3.5.0        
-##  [7] digest_0.6.17       lattice_0.20-35     evaluate_0.11      
-## [10] memoise_1.1.0       pkgconfig_2.0.2     rlang_0.2.2        
-## [13] Matrix_1.2-14       foreach_1.4.6       igraph_1.2.2       
-## [16] rstudioapi_0.8      commonmark_1.5      yaml_2.2.0         
-## [19] pkgdown_1.1.0.9000  xfun_0.3            stringr_1.3.1      
-## [22] roxygen2_6.1.0      xml2_1.2.0          knitr_1.20         
+##  [1] Rcpp_1.0.0          compiler_3.5.1      RColorBrewer_1.1-2 
+##  [4] highr_0.7           iterators_1.0.11    tools_3.5.1        
+##  [7] digest_0.6.18       lattice_0.20-35     evaluate_0.11      
+## [10] memoise_1.1.0       pkgconfig_2.0.2     rlang_0.3.1        
+## [13] Matrix_1.2-14       foreach_1.5.0       igraph_1.2.4       
+## [16] rstudioapi_0.9.0    commonmark_1.5      yaml_2.2.0         
+## [19] pkgdown_1.3.0       xfun_0.3            stringr_1.3.1      
+## [22] roxygen2_6.1.1      xml2_1.2.0          knitr_1.20         
 ## [25] desc_1.2.0          fs_1.2.6            GlobalOptions_0.1.0
-## [28] rprojroot_1.3-2     grid_3.5.0          R6_2.3.0           
-## [31] rmarkdown_1.10      bookdown_0.7        magrittr_1.5       
+## [28] rprojroot_1.3-2     grid_3.5.1          R6_2.4.0           
+## [31] rmarkdown_1.11      bookdown_0.7        magrittr_1.5       
 ## [34] backports_1.1.2     codetools_0.2-15    htmltools_0.3.6    
 ## [37] MASS_7.3-50         assertthat_0.2.0    shape_1.4.4        
-## [40] circlize_0.4.4      colorspace_1.4-0    stringi_1.2.3      
+## [40] circlize_0.4.4      colorspace_1.4-0    stringi_1.3.1      
 ## [43] crayon_1.3.4</code></pre>
 </div>
   </div>
@@ -321,9 +320,8 @@ dcrecall &lt;-<span class="st"> </span><span class="kw">lapply</span>(allnets, <
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
-
       </footer>
 </div>
 

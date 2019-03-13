@@ -1,5 +1,5 @@
 ---
-title: "DC method evaluation using dcanr"
+title: "Evaluating differential co-expression methods using dcanr"
 author:
   - name: Dharmesh D Bhuva
     affiliation:
@@ -10,6 +10,8 @@ package: dcanr
 output:
   BiocStyle::html_document:
     toc_float: true
+    fig_caption: true
+    number_sections: true
 vignette: >
   %\VignetteIndexEntry{2. DC method evaluation}
   %\VignetteEngine{knitr::rmarkdown}
@@ -17,34 +19,39 @@ vignette: >
 ---
 
 # Introduction
-Along with methods, the package provides an evaluation framework to benchmark 
-methods. Real data is rarely available for the evaluation of differential co-expression 
-methods as such experiments are difficult to perform. As such, simulations are the
-only means to perform evaluation successfully. Data from 812 simulations was 
-generated and the settings and parameters are described in **PAPER**. This
-data has been simulated previously and the results are made available here.
-Along with the data, a suite of visualisation and performance metrics are implemented.
+Along with implementations for several differential co-expression analysis
+methods, this package provides an evaluation framework to benchmark methods.
+Real data are rarely available for the evaluation of differential co-expression
+methods as such experiments are difficult to perform and in almost all cases,
+the true/gold-standard network is unknown. As such, simulations are the only
+means to perform a rigorous comparison and evaluation. Data from 812 simulations
+were generated with settings and parameters are described in **Bhuva et al.
+(manuscript in preparation)** and results included here. Along with the data, a
+suite of visualisation and performance metrics are implemented.
 
-This vignette describes the functions in this package that enable comparative
-evaluation of inference methods. All methods within the package can be evaluated
-with custom evaluations made possible where required.
+This vignette describes functions in this package that enable comparative
+evaluation of inference methods. All methods implemented in the package can be
+evaluated and novel methods can be integrated into the evaluation framework with
+relative ease.
 
 # Simulation setup used to create the data
-A dynamical systems simulator was used to simulate expression data with differential
-associations. Regulatory networks of 150 genes were sampled from a S. Cerevisiae
-regulatory network. Perturbation experiments were performed when simulating data
-to induce differential associations. Simulation parameters and networks were
-sampled therefore producing 812 distinct simulations. Data included in the package
-`sim102` is an example of one such simulation where two knock-downs were performed
-simultaneously but independently therefore some samples may have both knock-downs
-whereas other may have either one or none. Details on the simulation procedure can
-be found in the **PAPER**. Upto 500 observations are sampled in each simulation.
+A dynamical systems simulator was used to generate synthetic expression data
+with differential associations. Regulatory networks of 150 genes were sampled
+from a *S. cerevisiae* regulatory network. Perturbation experiments were
+performed when simulating data to induce differential associations. Simulation
+parameters and networks were sampled to produce 812 distinct simulations. The
+dataset included in dcanr, `sim102`, is an example of one such simulation. Two
+knock-downs were performed simultaneously but independent of each other,
+therefore, some samples may have both knock-downs while other may have either
+one or none. Details on the simulation procedure can be found in the **Bhuva et
+al. (manuscript in preparation)**. Up to 500 observations are sampled in each
+simulation.
 
 # Download the full simulated dataset
-As the simulation is computationally intensive, data from the 812 simulations has
-been precomputed and is available at **LINK**. The downloaded file contains a list
-of simulation results such as `sim102` which is packaged with `dcanr`. Each
-simulation can be accessed as shown below.
+As the simulation is computationally intensive, data from the 812 simulations
+have been precomputed and are available at **LINK**. The downloaded file
+contains a list of simulation results which includes `sim102`, packaged with
+`dcanr`. Each simulation can be accessed as shown below.
 
 ```{r eval=FALSE}
 simdata <- load('simdata_directory/simdata.rda')
@@ -52,8 +59,8 @@ sim10 <- simdata[[10]]
 ```
 
 # Running a pipeline on a simulation
-Evaluations in the package are performed by creating an analysis pipeline and packaging
-it into a function. Three possible ways exist to perform this:
+Evaluations in the package are performed by creating an analysis pipeline and
+packaging this into a function. Three possible ways exist to perform this:
 
 1. Using standard in-built pipelines
 2. Using custom pipelines
@@ -63,12 +70,12 @@ All of the above are made possible using a single function `dcPipeline` and are 
 depending on the arguments specified.
 
 ## Standard pipelines
-A standard pipeline runs the inbuilt inference methods with their default parameters.
-All 4 steps of an analysis are performed in sequence as described in their respective
-publications. To run a standard pipeline on a simulation, simply pass in a simulation
-and a method name from `dcMethods()`.
+A standard pipeline runs the in-built inference methods with their default
+parameters. All 4 steps of an analysis are performed in sequence as described in
+their respective publications. To run a standard pipeline on a simulation,
+simply pass in a simulation and a method name from `dcMethods()`.
 
-```{r message=FALSE, warning=FALSE, fig.wide=TRUE, fig.asp=1, fig.cap='Differential network analysis on simulations. Top-left to bottom-right: The original regulatory network, the true induced differential network that results from both ADR1 and UME6 knock-downs (KDs), the predicted ADR1 knock-down differential network, and the predicted UME6 knock-down differential network.'}
+```{r message=FALSE, warning=FALSE, fig.wide=TRUE, fig.asp=1, fig.cap='Differential network analysis on simulations. Top-left to bottom-right: The original regulatory network used for simulations; the true induced differential network that results from both ADR1 and UME6 knock-downs (KDs); the predicted ADR1 knock-down differential network, and; the predicted UME6 knock-down differential network. Reg and green edges in the regulatory network represent activation and repression respectively. Edges in the differential network are coloured based on the knock-down that results in their differential co-expression. True positives in the predicted network are coloured based on their knock-down while false positives are coloured grey'}
 library(dcanr)
 
 #load the data: a simulation
@@ -84,14 +91,16 @@ plot(dcnets$ADR1, main = 'ADR1 KD predicted network')
 plot(dcnets$UME6, main = 'UME6 KD predicted network')
 par(op)
 ```
-Results of a pipeline is a list of `igraph` objects representing the inferred network.
-True positive predictions are coloured based on the colour of the knocked-down node and
-false positived coloured grey. The `plotSimNetwork` function can be used to retrieve
-and plot the true differential networks and the source regulatory network.
 
-Any additional parameters to intermmediate steps in a pipeline can also be passed
-as shown in the example below. However, doing so will produce results different to
-the precomputed results discussed in (Section \@ref(precomp)).
+Results from a pipeline are provided as a list of `igraph` objects representing
+the inferred networks, one for each knock-down. True positive predictions are
+coloured based on the colour of the knocked-down node and false positives are
+coloured grey. The `plotSimNetwork` function can be used to retrieve and plot
+the true differential networks and the source regulatory network.
+
+Any additional parameters for intermediate steps in a standard pipeline can be
+passed as shown in the example below. However, doing so will produce results
+different from the precomputed results discussed in (Section \@ref(precomp)).
 
 ```{r}
 #run a standard pipeline with the z-score method with custom params
@@ -102,10 +111,10 @@ dcnets_sp <- dcPipeline(sim102,
 ```
 
 ## Custom pipelines
-The most common use case of an evaluation framework is to benchmark new methods. As
-such, the framework should allow seemless integration of new methods. This is made
-possible in `dcanr` by providing a single function to the `dcPipeline` method. This
-function should have the following structure:
+The most common use case of an evaluation framework is to benchmark new methods.
+As such, this framework allows seamless integration of new methods. This is made
+possible in `dcanr` by providing a single function to the `dcPipeline` method.
+This function should follow the skeleton below:
 
 ```{r eval=FALSE}
 #emat, a named matrix with samples along the columns and genes along the rows
@@ -117,8 +126,9 @@ myInference <- function(emat, condition, ...) {
 }
 ```
 
-The following code shows the function used to call an inbuilt pipeline and how a
-custom pipeline can be run.
+The following code shows the function used to call an in-built pipeline and how
+a custom pipeline can be run.
+
 ```{r}
 #custom pipeline function
 analysisInbuilt <- function(emat, condition, dc.method = 'zscore', ...) {
@@ -141,10 +151,10 @@ custom_nets <- dcPipeline(sim102, dc.func = analysisInbuilt)
 ## Retrieving pre-computed results {#precomp}
 Following evaluation of a novel method, it is generally of interest to compare
 how it performs against previous methods. Re-computing predictions for the 10
-methods implemented in this package can be time consuming. As such, all simulations
-come packged up with the results of applying a standard pipeline using each inference
-method. Pre-computed results are also retrieved using the `dcPipeline` function
-and setting the `precomputed` argument to `TRUE`.
+methods implemented in this package can be time consuming. As such, all
+simulations come packaged with results from applying a standard pipeline using
+each inference method. Pre-computed results are also retrieved using the
+`dcPipeline` function, with the `precomputed` argument set to `TRUE`.
 
 ```{r message=FALSE, warning=FALSE}
 #retrieve results of applying all available methods
@@ -161,21 +171,23 @@ print(unlist(netsizes))
 ```
 
 # Evaluate a pipeline
-After inferring the differential co-expression network, the final step is to evaluate
-performance based on the truth. True differential networks are computed by performing
-sensitivity analysis as described in the **PAPER**. Three levels of true differential
-networks are generated:
+After inferring the differential co-expression network, the final step is to
+evaluate performance based on the truth. True differential networks are computed
+by performing a sensitivity analysis as described in the **Bhuva et al.
+(manuscript in preparation)**. Three levels of true differential networks are
+generated:
 
-1. Direct - this represents direct TF-target regulatory interactions that are affected
-by the knock-down (condition)
-2. Influence - this network includes upstream TF-target interactions which are indirect
-but causative
-3. Association - this network includes all associations in the influence network but
-adds all non-causative associations that are differential conditioned on the knock-down
+1. Direct - this represents direct TF-target regulatory interactions that are
+affected by the knock-down (condition)
+2. Influence - this network includes upstream TF-target interactions which are
+indirect but causative
+3. Association - this network includes all associations in the influence network
+but adds all non-causative associations that are differential when conditioned
+on the knock-down
 
-All three levels of truth are packaged within the simulation. Predicted networks can
-be evaluated against any of these. We recommend using the differential association
-network.
+All three levels of truth are included within the simulated data. Predicted
+networks can be evaluated against any of these. We recommend using the
+differential association network.
 
 Along with the true differential co-expression network, a metric is required to summarise
 performance of a method. The package provides 6 different metrics which can be accessed
@@ -201,10 +213,11 @@ z_mcc <- dcEvaluate(sim102, dcnets, perf.method = 'MCC')
 print(z_mcc)
 ```
 
-These methods combined can be used to learn more about the strengths and weaknesses of
-methods. For instance, the precision and recall characteristics of the different methods
-can be computed. This shows that the entropy-based method excels at recall while the
-z-score based method has high precision.
+These metrics can be combined to learn more about the advantages and limitations
+of different methods. For instance, the precision and recall characteristics of
+the different methods can be computed. For sim102, this shows that the
+entropy-based method excels at recall while the z-score based method has high
+precision.
 
 ```{r message=FALSE, warning=FALSE}
 #compute precision

@@ -37,7 +37,7 @@ Suggests: EBcoexpress,
     rmarkdown,
     BiocStyle,
     edgeR
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Collate:
     'dcanr.R'
     'statistical_tests.R'
