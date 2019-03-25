@@ -46,7 +46,7 @@
 #' @examples
 #' x <- matrix(rnorm(60), 2, 30)
 #' cond <- rep(1:2, 15)
-#' ecfscores <- dcScore(x, cond, dc.method = 'ecf')
+#' ecfscores <- dcScore(x, cond, dc.method = 'mindy')
 #' dcTest(ecfscores, emat = x, condition = cond)
 #'
 #' \dontrun{
