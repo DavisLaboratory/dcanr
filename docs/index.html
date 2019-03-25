@@ -116,7 +116,7 @@ emat &lt;-<span class="st"> </span>simdata<span class="op">$</span>emat
 ume6_kd &lt;-<span class="st"> </span>simdata<span class="op">$</span>condition
 
 <span class="co">#apply the z-score method with Spearman correlations</span>
-z_scores &lt;-<span class="st"> </span><span class="kw"><a href="reference/dcScore.html">dcScore</a></span>(emat, ume6_kd, <span class="dt">cor.method =</span> <span class="st">'spearman'</span>)
+z_scores &lt;-<span class="st"> </span><span class="kw"><a href="reference/dcScore.html">dcScore</a></span>(emat, ume6_kd, <span class="dt">dc.method =</span> <span class="st">'zscore'</span>, <span class="dt">cor.method =</span> <span class="st">'spearman'</span>)
 
 <span class="co">#perform a statistical test: the z-test is selected automatically</span>
 raw_p &lt;-<span class="st"> </span><span class="kw"><a href="reference/dcTest.html">dcTest</a></span>(z_scores, emat, ume6_kd)

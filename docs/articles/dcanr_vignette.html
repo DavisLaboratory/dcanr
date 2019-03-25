@@ -89,7 +89,7 @@
       <h1>Performing differential co-expression analysis using dcanr</h1>
                         <h4 class="author">Dharmesh D Bhuva</h4>
             <address class="author_afil">
-      Bioinformatics Division, Walter and Eliza Hall Institute of Medical Research, Parkville, VIC 3052, Australia<br><h4 class="date">2019-03-13</h4>
+      Bioinformatics Division, Walter and Eliza Hall Institute of Medical Research, Parkville, VIC 3052, Australia<br><h4 class="date">2019-03-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/DavisLaboratory/dcanr/blob/master/vignettes/dcanr_vignette.Rmd"><code>vignettes/dcanr_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>dcanr_vignette.Rmd</code></div>
@@ -162,7 +162,7 @@ ume6_kd &lt;-<span class="st"> </span>simdata<span class="op">$</span>condition
 <a href="#step-1-compute-scores" class="anchor"></a>Step 1: Compute scores</h1>
 <p>All inference methods can be accessed using the same call therefore making it easier to change between methods. Method specific parameters can be passed to this function and will be managed accordingly. The default inference method is z-score therefore it does not need to be specified via <code>dc.method</code>. We recommend using the Spearman correlation as a measure of correlation as it is robust to outliers which may be present in RNA-seq data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#apply the z-score method with Spearman correlations</span>
-z_scores &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcScore.html">dcScore</a></span>(emat, ume6_kd, <span class="dt">cor.method =</span> <span class="st">'spearman'</span>)
+z_scores &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcScore.html">dcScore</a></span>(emat, ume6_kd, <span class="dt">dc.method =</span> <span class="st">'zscore'</span>, <span class="dt">cor.method =</span> <span class="st">'spearman'</span>)
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(z_scores[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</code></pre></div>
 <pre><code>##             ADR1        FLO8       GIS1       IME4       KAR4
 ## ADR1          NA -0.05890109  1.0645602 -0.6869672 -0.2843683
