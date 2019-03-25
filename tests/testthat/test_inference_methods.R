@@ -13,19 +13,29 @@ colnames(x) = 1:ncol(x)
 rownames(x) = 1:nrow(x)
 cond <- rep(1:2, each = 30)
 
+#define methods
+infmethods = dcMethods()
+if (!require('EBcoexpress')) {
+  infmethods = setdiff(infmethods, 'ebcoexpress')
+}
+if (!require('COSINE')) {
+  infmethods = setdiff(infmethods, 'ecf')
+}
+
 test_that('Inference method calls work', {
   expect_is(dcScore(x, cond), 'matrix')
   expect_is(dcScore(x, cond, dc.method = 'zscore'), 'matrix')
-  for (m in setdiff(dcMethods(), 'ebcoexpress')) {
+  for (m in infmethods) {
     expect_is(dcScore(x, cond, !!m), 'matrix')
   }
 
   try(detach('package:EBcoexpress', unload = T), silent = TRUE)
   try(detach('package:mclust', unload = T), silent = TRUE)
   try(detach('package:minqa', unload = T), silent = TRUE)
-  expect_error(dcScore(x, cond, 'ebcoexpress'), 'loading the EBcoexpress library')
-  library(EBcoexpress)
-  expect_is(dcScore(x, cond, 'ebcoexpress'), 'matrix')
+  if(require(EBcoexpress))
+    expect_is(dcScore(x, cond, 'ebcoexpress'), 'matrix')
+  else
+    expect_error(dcScore(x, cond, 'ebcoexpress'), '\'EBcoexpress\' needed for this function to work')
 
   expect_error(dcScore(x, cond, 'fakemethod'), 'not TRUE')
   expect_error(dcScore(x, cond, cor.method = 'kendall'), 'not TRUE')
@@ -34,25 +44,25 @@ test_that('Inference method calls work', {
 })
 
 test_that('Correct dimensions of results', {
-  for (m in dcMethods()) {
+  for (m in infmethods) {
     expect_equal(dim(dcScore(x, cond, !!m)), c(4, 4))
   }
 })
 
 test_that('Attributes attached to results', {
-  for (m in dcMethods()) {
+  for (m in infmethods) {
     expect_equal(attr(dcScore(x, cond, !!m), 'dc.method'), m)
   }
 })
 
 test_that('Diagonals are NAs', {
-  for (m in dcMethods()) {
+  for (m in infmethods) {
     expect_equal(sum(is.na(diag(dcScore(x, cond, !!m)))), nrow(x))
   }
 })
 
 test_that('Row and column names are the same', {
-  for (m in dcMethods()) {
+  for (m in infmethods) {
     expect_equal(rownames(dcScore(x, cond, !!m)), colnames(dcScore(x, cond, !!m)))
   }
 })
