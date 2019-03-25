@@ -1,14 +1,21 @@
 library(dcanr)
 library(igraph)
 library(stringr)
-library(EBcoexpress)
 
 context('Simulation accessors ')
 
 data("sim102")
+#pick a representative set
+infmethods = c('zscore', 'diffcoex', 'dicer', 'ebcoexpress')
+if (!require('EBcoexpress')) {
+  infmethods = setdiff(infmethods, 'ebcoexpress')
+}
+if (!require('COSINE')) {
+  infmethods = setdiff(infmethods, 'ecf')
+}
 
 test_that('Result of pipeline ', {
-  for(m in c('zscore', 'diffcoex', 'dicer', 'ebcoexpress')) {
+  for(m in infmethods) {
     res = dcPipeline(sim102, dc.func = m)
     expect_equal(length(res), 2, info = m)
     expect_equal(as.numeric(lapply(res, function(x) length(V(x)))), rep(nrow(sim102$data), 2), info = m)
@@ -17,7 +24,7 @@ test_that('Result of pipeline ', {
 })
 
 test_that('Evaluation of pipeline results ', {
-  for(m in c('zscore', 'diffcoex', 'dicer', 'ebcoexpress')) {
+  for(m in infmethods) {
     nets = dcPipeline(sim102, dc.func = m)
     res = dcEvaluate(sim102, dclist = nets, perf.method = 'f.measure', combine = TRUE)
     expect_equal(length(res), 1, info = m)

@@ -2,20 +2,27 @@ library(dcanr)
 library(Biobase)
 library(edgeR)
 library(SummarizedExperiment)
-library(EBcoexpress)
 
 context('Statistical tests ')
 
 #data to test methods
 set.seed(360)
-x <- matrix(rnorm(240), 4, 60)
+x = matrix(rnorm(240), 4, 60)
 colnames(x) = 1:ncol(x)
 rownames(x) = 1:nrow(x)
-cond <- rep(1:2, each = 30)
+cond = rep(1:2, each = 30)
 
 #run all methods and store results
-scorelist <- lapply(dcMethods(), function (m) dcScore(x, cond, m))
-names(scorelist) <- dcMethods()
+infmethods = dcMethods()
+if (!require('EBcoexpress')) {
+  infmethods = setdiff(infmethods, 'ebcoexpress')
+}
+if (!require('COSINE')) {
+  infmethods = setdiff(infmethods, 'ecf')
+}
+
+scorelist = lapply(infmethods, function (m) dcScore(x, cond, m))
+names(scorelist) = infmethods
 
 #generate test matrices
 testmats <- lapply(scorelist, function(s) dcTest(s, x, cond))
