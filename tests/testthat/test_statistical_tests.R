@@ -20,6 +20,9 @@ if (!require('EBcoexpress')) {
 if (!require('COSINE')) {
   infmethods = setdiff(infmethods, 'ecf')
 }
+if (!require('GeneNet')) {
+  infmethods = setdiff(infmethods, 'ggm-based')
+}
 
 scorelist <- lapply(infmethods, function (m) dcScore(x, cond, m))
 names(scorelist) <- infmethods

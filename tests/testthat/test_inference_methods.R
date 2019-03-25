@@ -29,9 +29,9 @@ test_that('Inference method calls work', {
     expect_is(dcScore(x, cond, !!m), 'matrix')
   }
 
-  try(detach('package:EBcoexpress', unload = T), silent = TRUE)
-  try(detach('package:mclust', unload = T), silent = TRUE)
-  try(detach('package:minqa', unload = T), silent = TRUE)
+  try(detach('package:EBcoexpress', unload = TRUE), silent = TRUE)
+  try(detach('package:mclust', unload = TRUE), silent = TRUE)
+  try(detach('package:minqa', unload = TRUE), silent = TRUE)
   if(require(EBcoexpress))
     expect_is(dcScore(x, cond, 'ebcoexpress'), 'matrix')
   else

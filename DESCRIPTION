@@ -1,10 +1,10 @@
 Package: dcanr
 Title: Differential co-expression/association network analysis
-Version: 0.99.3
+Version: 0.99.4
 Authors@R: person("Dharmesh", "Bhuva", email = "bhuva.d@wehi.edu.au", role = c("aut", "cre"), comment = c(ORCID = '0000-0002-6398-9157'))
 Description: Methods and an evaluation framework for the inference of differential co-expression/association networks.
 biocViews: NetworkInference, GraphAndNetwork, DifferentialExpression, Network
-Depends: R (>= 3.5.0)
+Depends: R (>= 3.6.0)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
