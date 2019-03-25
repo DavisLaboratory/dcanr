@@ -36,38 +36,38 @@ getScoreList <- function(){
 #compute matrices holding the results of tests (p-values, probs or orig scores)
 getTestMatrices <- function() {
   #generate test matrices
-  testmats <- lapply(scorelist, function(s) dcTest(s, x, cond))
+  testmats <- lapply(getScoreList(), function(s) dcTest(s, x, cond))
 
   return(testmats)
 }
 
 test_that('Testing calls work', {
   for (m in getInfMethods()) {
-    expect_is(dcTest(getScoreList[[!!m]], x, cond), 'matrix')
+    expect_is(dcTest(getScoreList()[[!!m]], x, cond), 'matrix')
   }
 })
 
 test_that('Correct dimensions of results', {
   for (m in getInfMethods()) {
-    expect_equal(dim(getTestMatrices[[!!m]]), c(4, 4))
+    expect_equal(dim(getTestMatrices()[[!!m]]), c(4, 4))
   }
 })
 
 test_that('Attributes attached to results', {
   for (m in getInfMethods()) {
-    expect_output(str(attr(getTestMatrices[[!!m]], 'dc.test')), regexp = '.')
+    expect_output(str(attr(getTestMatrices()[[!!m]], 'dc.test')), regexp = '.')
   }
 })
 
 test_that('Diagonals are NAs', {
   for (m in getInfMethods()) {
-    expect_equal(sum(is.na(diag(getTestMatrices[[!!m]]))), nrow(x))
+    expect_equal(sum(is.na(diag(getTestMatrices()[[!!m]]))), nrow(x))
   }
 })
 
 test_that('Values are in range for statistical tests', {
   for (m in setdiff(getInfMethods(), 'diffcoex')) {
-    expect_gte(min(getTestMatrices[[!!m]], na.rm = TRUE), 0)
-    expect_lte(max(getTestMatrices[[!!m]], na.rm = TRUE), 1)
+    expect_gte(min(getTestMatrices()[[!!m]], na.rm = TRUE), 0)
+    expect_lte(max(getTestMatrices()[[!!m]], na.rm = TRUE), 1)
   }
 })

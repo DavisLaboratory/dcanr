@@ -39,7 +39,7 @@ getScoreList <- function(){
 #compute matrices holding the results of tests (p-values, probs or orig scores)
 getTestMatrices <- function() {
   #generate test matrices
-  testmats <- lapply(scorelist, function(s) dcTest(s, x, cond))
+  testmats <- lapply(getScoreList(), function(s) dcTest(s, x, cond))
 
   return(testmats)
 }
