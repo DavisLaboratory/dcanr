@@ -1,8 +1,8 @@
-library(dcanr)
-library(Biobase)
-library(edgeR)
-library(SummarizedExperiment)
-library(Matrix)
+# library(dcanr)
+# library(Biobase)
+# library(edgeR)
+# library(SummarizedExperiment)
+# library(Matrix)
 
 context('Inference methods ')
 
@@ -91,10 +91,10 @@ test_that('Different condition types', {
 })
 
 test_that('Different matrix types', {
-  dge = DGEList(counts = round(getData() * 10) + 100)
-  eset = ExpressionSet(assayData = getData())
-  se = SummarizedExperiment(getData())
-  Mat = Matrix(getData())
+  dge = edgeR::DGEList(counts = round(getData() * 10) + 100)
+  eset = Biobase::ExpressionSet(assayData = getData())
+  se = SummarizedExperiment::SummarizedExperiment(getData())
+  Mat = Matrix::Matrix(getData())
 
   expect_is(dcScore(getData(), getCondition()), 'matrix')
   expect_is(dcScore(as.data.frame(getData()), getCondition()), 'matrix')

@@ -1,4 +1,4 @@
-library(dcanr)
+# library(dcanr)
 
 context('Simulation accessors ')
 

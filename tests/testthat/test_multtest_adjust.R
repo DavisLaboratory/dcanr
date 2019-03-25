@@ -1,7 +1,4 @@
-library(dcanr)
-library(Biobase)
-library(edgeR)
-library(SummarizedExperiment)
+# library(dcanr)
 
 context('Statistical tests ')
 
