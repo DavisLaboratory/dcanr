@@ -28,16 +28,17 @@ names(scorelist) = infmethods
 testmats <- lapply(scorelist, function(s) dcTest(s, x, cond))
 
 test_that('Testing calls work', {
-  for (m in setdiff(dcMethods(), c('ebcoexpress', 'diffcoex'))) {
+  for (m in setdiff(infmethods, c('ebcoexpress', 'diffcoex'))) {
     expect_is(dcAdjust(testmats[[!!m]]), 'matrix')
   }
 
-  expect_is(dcAdjust(testmats[['ebcoexpress']]), 'matrix')
+  if ('ebcoexpress' %in% infmethods)
+    expect_is(dcAdjust(testmats[['ebcoexpress']]), 'matrix')
   expect_is(dcAdjust(testmats[['diffcoex']]), 'matrix')
 })
 
 test_that('Testing attribute changes', {
-  for (m in setdiff(dcMethods(), c('ebcoexpress', 'diffcoex'))) {
+  for (m in setdiff(infmethods, c('ebcoexpress', 'diffcoex'))) {
     expect_output(str(attr(dcAdjust(testmats[[!!m]]), 'dc.test')), regexp = 'adj')
   }
 })
