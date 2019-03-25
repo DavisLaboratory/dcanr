@@ -1,6 +1,4 @@
 library(dcanr)
-library(igraph)
-library(stringr)
 
 context('Simulation accessors ')
 
@@ -13,6 +11,8 @@ getInfMethods <- function() {
   if (!require('COSINE')) {
     infmethods = setdiff(infmethods, 'ecf')
   }
+
+  return(infmethods)
 }
 
 test_that('Result of pipeline ', {
