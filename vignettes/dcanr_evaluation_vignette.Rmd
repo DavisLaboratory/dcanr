@@ -237,6 +237,8 @@ plot(
   unlist(dcrecall),
   type = 'n',
   main = 'Precision v recall',
+  xlab = 'Precision',
+  ylab = 'Recall',
   xlim = c(-0.25, 1),
   ylim = c(0, 1)
   )
@@ -245,7 +247,6 @@ text(
   unlist(dcrecall),
   labels = names(allnets),
   type = 'n',
-  main = 'Precision vs recall',
   cex = 1.2
   )
 ```

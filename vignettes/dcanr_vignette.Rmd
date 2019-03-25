@@ -93,7 +93,7 @@ outliers which may be present in RNA-seq data.
 
 ```{r}
 #apply the z-score method with Spearman correlations
-z_scores <- dcScore(emat, ume6_kd, cor.method = 'spearman')
+z_scores <- dcScore(emat, ume6_kd, dc.method = 'zscore', cor.method = 'spearman')
 print(z_scores[1:5, 1:5])
 ```
 

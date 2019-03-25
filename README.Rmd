@@ -43,7 +43,7 @@ emat <- simdata$emat
 ume6_kd <- simdata$condition
 
 #apply the z-score method with Spearman correlations
-z_scores <- dcScore(emat, ume6_kd, cor.method = 'spearman')
+z_scores <- dcScore(emat, ume6_kd, dc.method = 'zscore', cor.method = 'spearman')
 
 #perform a statistical test: the z-test is selected automatically
 raw_p <- dcTest(z_scores, emat, ume6_kd)
