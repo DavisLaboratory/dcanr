@@ -51,34 +51,34 @@ getTestMatrices <- function() {
   return(testmats)
 }
 
-test_that('Testing calls work', {
-  scorelist = getScoreList()
-  for (m in getInfMethods()) {
-    expect_is(dcTest(scorelist[[!!m]], getData(), getCondition()), 'matrix')
-  }
-})
-
-test_that('Correct dimensions of results', {
-  for (m in getInfMethods()) {
-    expect_equal(dim(getTestMatrices()[[!!m]]), c(4, 4))
-  }
-})
-
-test_that('Attributes attached to results', {
-  for (m in getInfMethods()) {
-    expect_output(str(attr(getTestMatrices()[[!!m]], 'dc.test')), regexp = '.')
-  }
-})
-
-test_that('Diagonals are NAs', {
-  for (m in getInfMethods()) {
-    expect_equal(sum(is.na(diag(getTestMatrices()[[!!m]]))), nrow(getData()))
-  }
-})
-
-test_that('Values are in range for statistical tests', {
-  for (m in setdiff(getInfMethods(), 'diffcoex')) {
-    expect_gte(min(getTestMatrices()[[!!m]], na.rm = TRUE), 0)
-    expect_lte(max(getTestMatrices()[[!!m]], na.rm = TRUE), 1)
-  }
-})
+# test_that('Testing calls work', {
+#   scorelist = getScoreList()
+#   for (m in getInfMethods()) {
+#     expect_is(dcTest(scorelist[[!!m]], getData(), getCondition()), 'matrix')
+#   }
+# })
+#
+# test_that('Correct dimensions of results', {
+#   for (m in getInfMethods()) {
+#     expect_equal(dim(getTestMatrices()[[!!m]]), c(4, 4))
+#   }
+# })
+#
+# test_that('Attributes attached to results', {
+#   for (m in getInfMethods()) {
+#     expect_output(str(attr(getTestMatrices()[[!!m]], 'dc.test')), regexp = '.')
+#   }
+# })
+#
+# test_that('Diagonals are NAs', {
+#   for (m in getInfMethods()) {
+#     expect_equal(sum(is.na(diag(getTestMatrices()[[!!m]]))), nrow(getData()))
+#   }
+# })
+#
+# test_that('Values are in range for statistical tests', {
+#   for (m in setdiff(getInfMethods(), 'diffcoex')) {
+#     expect_gte(min(getTestMatrices()[[!!m]], na.rm = TRUE), 0)
+#     expect_lte(max(getTestMatrices()[[!!m]], na.rm = TRUE), 1)
+#   }
+# })

@@ -50,18 +50,18 @@ getTestMatrices <- function() {
   return(testmats)
 }
 
-test_that('Testing calls work', {
-  for (m in setdiff(getInfMethods(), c('ebcoexpress', 'diffcoex'))) {
-    expect_is(dcAdjust(getTestMatrices()[[!!m]]), 'matrix')
-  }
-
-  if ('ebcoexpress' %in% getInfMethods())
-    expect_is(dcAdjust(getTestMatrices()[['ebcoexpress']]), 'matrix')
-  expect_is(dcAdjust(getTestMatrices()[['diffcoex']]), 'matrix')
-})
-
-test_that('Testing attribute changes', {
-  for (m in setdiff(getInfMethods(), c('ebcoexpress', 'diffcoex'))) {
-    expect_output(str(attr(dcAdjust(getTestMatrices()[[!!m]]), 'dc.test')), regexp = 'adj')
-  }
-})
+# test_that('Testing calls work', {
+#   for (m in setdiff(getInfMethods(), c('ebcoexpress', 'diffcoex'))) {
+#     expect_is(dcAdjust(getTestMatrices()[[!!m]]), 'matrix')
+#   }
+#
+#   if ('ebcoexpress' %in% getInfMethods())
+#     expect_is(dcAdjust(getTestMatrices()[['ebcoexpress']]), 'matrix')
+#   expect_is(dcAdjust(getTestMatrices()[['diffcoex']]), 'matrix')
+# })
+#
+# test_that('Testing attribute changes', {
+#   for (m in setdiff(getInfMethods(), c('ebcoexpress', 'diffcoex'))) {
+#     expect_output(str(attr(dcAdjust(getTestMatrices()[[!!m]]), 'dc.test')), regexp = 'adj')
+#   }
+# })
