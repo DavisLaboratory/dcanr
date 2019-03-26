@@ -1,14 +1,10 @@
-# library(dcanr)
-# library(Biobase)
-# library(edgeR)
-# library(SummarizedExperiment)
-# library(Matrix)
+library(dcanr)
 
 context('Inference methods ')
 
 #select methods that can be run
 getInfMethods <- function() {
-  infmethods = c('zscore', 'diffcoex', 'dicer', 'ebcoexpress')
+  infmethods = dcMethods()
   if (!require('EBcoexpress')) {
     infmethods = setdiff(infmethods, 'ebcoexpress')
   }

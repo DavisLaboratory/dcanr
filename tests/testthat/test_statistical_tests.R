@@ -1,10 +1,10 @@
-# library(dcanr)
+library(dcanr)
 
 context('Statistical tests ')
 
 #select methods that can be run
 getInfMethods <- function() {
-  infmethods = c('zscore', 'diffcoex', 'dicer', 'ebcoexpress')
+  infmethods = c('zscore', 'diffcoex', 'ebcoexpress', 'ecf', 'ggm-based')
   if (!require('EBcoexpress')) {
     infmethods = setdiff(infmethods, 'ebcoexpress')
   }
@@ -35,9 +35,10 @@ getData <- function() {
 getScoreList <- function(){
   x = getData()
   cond = getCondition()
+  infmethods = suppressMessages(suppressWarnings(getInfMethods()))
 
-  scorelist = lapply(getInfMethods(), function (m) dcScore(x, cond, m))
-  names(scorelist) = getInfMethods()
+  scorelist = lapply(infmethods, function (m) dcScore(x, cond, m))
+  names(scorelist) = infmethods
 
   return(scorelist)
 }
@@ -45,14 +46,15 @@ getScoreList <- function(){
 #compute matrices holding the results of tests (p-values, probs or orig scores)
 getTestMatrices <- function() {
   #generate test matrices
-  testmats <- lapply(getScoreList(), function(s) dcTest(s, getData(), getCondition()))
+  testmats <- suppressWarnings(lapply(getScoreList(), function(s) dcTest(s, getData(), getCondition())))
 
   return(testmats)
 }
 
 test_that('Testing calls work', {
+  scorelist = getScoreList()
   for (m in getInfMethods()) {
-    expect_is(dcTest(getScoreList()[[!!m]], getData(), getCondition()), 'matrix')
+    expect_is(dcTest(scorelist[[!!m]], getData(), getCondition()), 'matrix')
   }
 })
 

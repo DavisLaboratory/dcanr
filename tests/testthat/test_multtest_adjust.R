@@ -1,10 +1,10 @@
-# library(dcanr)
+library(dcanr)
 
 context('Statistical tests ')
 
 #select methods that can be run
 getInfMethods <- function() {
-  infmethods = c('zscore', 'diffcoex', 'dicer', 'ebcoexpress')
+  infmethods = c('zscore', 'diffcoex', 'ebcoexpress', 'ecf', 'ggm-based')
   if (!require('EBcoexpress')) {
     infmethods = setdiff(infmethods, 'ebcoexpress')
   }

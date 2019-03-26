@@ -1,15 +1,18 @@
-# library(dcanr)
+library(dcanr)
 
 context('Simulation accessors ')
 
 #pick a representative set
 getInfMethods <- function() {
-  infmethods = c('zscore', 'diffcoex', 'dicer', 'ebcoexpress')
+  infmethods = c('zscore', 'diffcoex', 'ebcoexpress', 'ecf', 'ggm-based')
   if (!require('EBcoexpress')) {
     infmethods = setdiff(infmethods, 'ebcoexpress')
   }
   if (!require('COSINE')) {
     infmethods = setdiff(infmethods, 'ecf')
+  }
+  if (!require('GeneNet')) {
+    infmethods = setdiff(infmethods, 'ggm-based')
   }
 
   return(infmethods)
