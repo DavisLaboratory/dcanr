@@ -4,7 +4,8 @@ context('Inference methods ')
 
 #select methods that can be run
 getInfMethods <- function() {
-  infmethods = dcMethods()
+  infmethods = c('zscore', 'diffcoex', 'ebcoexpress', 'ecf', 'ggm-based')
+  # infmethods = dcMethods()
   if (!require('EBcoexpress')) {
     infmethods = setdiff(infmethods, 'ebcoexpress')
   }
