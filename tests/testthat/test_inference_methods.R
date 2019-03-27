@@ -1,11 +1,20 @@
 library(dcanr)
+library(Biobase)
+library(edgeR)
+library(SummarizedExperiment)
+library(Matrix)
 
 context('Inference methods ')
 
-#select methods that can be run
+#data to test methods
+set.seed(360)
+x <- matrix(rnorm(240), 4, 60)
+colnames(x) = 1:ncol(x)
+rownames(x) = 1:nrow(x)
+cond <- rep(1:2, each = 30)
+
 getInfMethods <- function() {
-  infmethods = c('zscore', 'diffcoex', 'ebcoexpress', 'ecf', 'ggm-based')
-  # infmethods = dcMethods()
+  infmethods = dcMethods()
   if (!require('EBcoexpress')) {
     infmethods = setdiff(infmethods, 'ebcoexpress')
   }
@@ -19,84 +28,70 @@ getInfMethods <- function() {
   return(infmethods)
 }
 
-getCondition <- function() {
-  return(rep(1:2, each = 30))
-}
-
-#compute dcScores for each method
-getData <- function(){
-  #data to test methods
-  set.seed(360)
-  x = matrix(rnorm(240), 4, 60)
-  colnames(x) = 1:ncol(x)
-  rownames(x) = 1:nrow(x)
-
-  return(x)
-}
-
 test_that('Inference method calls work', {
-  expect_is(dcScore(getData(), getCondition()), 'matrix')
-  expect_is(dcScore(getData(), getCondition(), dc.method = 'zscore'), 'matrix')
+  expect_is(dcScore(x, cond), 'matrix')
+  expect_is(dcScore(x, cond, dc.method = 'zscore'), 'matrix')
   for (m in getInfMethods()) {
-    expect_is(dcScore(getData(), getCondition(), !!m), 'matrix')
+    expect_is(dcScore(x, cond, !!m), 'matrix')
   }
 
-  try(detach('package:EBcoexpress', unload = TRUE), silent = TRUE)
-  try(detach('package:mclust', unload = TRUE), silent = TRUE)
-  try(detach('package:minqa', unload = TRUE), silent = TRUE)
-  if(require('EBcoexpress'))
-    expect_is(dcScore(getData(), getCondition(), 'ebcoexpress'), 'matrix')
-  else
-    expect_error(dcScore(getData(), getCondition(), 'ebcoexpress'), '\'EBcoexpress\' needed for this function to work')
+  if (!'ebcoexpress' %in% getInfMethods()) {
+    expect_error(dcScore(x, cond, 'ebcoexpress'), 'needed for this function to work')
+  }
+  if (!'ecf' %in% getInfMethods()) {
+    expect_error(dcScore(x, cond, 'ecf'), 'needed for this function to work')
+  }
+  if (!'ggm-based' %in% getInfMethods()) {
+    expect_error(dcScore(x, cond, 'ggm-based'), 'needed for this function to work')
+  }
 
-  expect_error(dcScore(getData(), getCondition(), 'fakemethod'), 'not TRUE')
-  expect_error(dcScore(getData(), getCondition(), cor.method = 'kendall'), 'not TRUE')
-  expect_error(dcScore(getData(), c(getCondition(), 3)), 'not TRUE')
-  expect_error(dcScore(getData(), c(getCondition(), 2)), 'not TRUE')
+  expect_error(dcScore(x, cond, 'fakemethod'), 'not TRUE')
+  expect_error(dcScore(x, cond, cor.method = 'kendall'), 'not TRUE')
+  expect_error(dcScore(x, c(cond, 3)), 'not TRUE')
+  expect_error(dcScore(x, c(cond, 2)), 'not TRUE')
 })
 
 test_that('Correct dimensions of results', {
   for (m in getInfMethods()) {
-    expect_equal(dim(dcScore(getData(), getCondition(), !!m)), c(4, 4))
+    expect_equal(dim(dcScore(x, cond, !!m)), c(4, 4))
   }
 })
 
 test_that('Attributes attached to results', {
   for (m in getInfMethods()) {
-    expect_equal(attr(dcScore(getData(), getCondition(), !!m), 'dc.method'), m)
+    expect_equal(attr(dcScore(x, cond, !!m), 'dc.method'), m)
   }
 })
 
 test_that('Diagonals are NAs', {
   for (m in getInfMethods()) {
-    expect_equal(sum(is.na(diag(dcScore(getData(), getCondition(), !!m)))), nrow(getData()))
+    expect_equal(sum(is.na(diag(dcScore(x, cond, !!m)))), nrow(x))
   }
 })
 
 test_that('Row and column names are the same', {
   for (m in getInfMethods()) {
-    expect_equal(rownames(dcScore(getData(), getCondition(), !!m)), colnames(dcScore(getData(), getCondition(), !!m)))
+    expect_equal(rownames(dcScore(x, cond, !!m)), colnames(dcScore(x, cond, !!m)))
   }
 })
 
 test_that('Different condition types', {
-  expect_is(dcScore(getData(), getCondition()), 'matrix')
-  cond_char = LETTERS[1:2][getCondition()]
-  expect_is(dcScore(getData(), cond_char), 'matrix')
-  expect_is(dcScore(getData(), as.factor(cond_char)), 'matrix')
-  expect_error(dcScore(getData(), as.matrix(getCondition())), 'not TRUE')
+  expect_is(dcScore(x, cond), 'matrix')
+  condchar = LETTERS[1:2][cond]
+  expect_is(dcScore(x, condchar), 'matrix')
+  expect_is(dcScore(x, as.factor(condchar)), 'matrix')
+  expect_error(dcScore(x, as.matrix(cond)), 'not TRUE')
 })
 
 test_that('Different matrix types', {
-  dge = edgeR::DGEList(counts = round(getData() * 10) + 100)
-  eset = Biobase::ExpressionSet(assayData = getData())
-  se = SummarizedExperiment::SummarizedExperiment(getData())
-  Mat = Matrix::Matrix(getData())
+  dge = DGEList(counts = round(x * 10) + 100)
+  eset = ExpressionSet(assayData = x)
+  se = SummarizedExperiment(x)
+  Mat = Matrix(x)
 
-  expect_is(dcScore(getData(), getCondition()), 'matrix')
-  expect_is(dcScore(as.data.frame(getData()), getCondition()), 'matrix')
-  expect_is(dcScore(dge, getCondition()), 'matrix')
-  expect_is(dcScore(eset, getCondition()), 'matrix')
-  expect_is(dcScore(se, getCondition()), 'matrix')
+  expect_is(dcScore(x, cond), 'matrix')
+  expect_is(dcScore(as.data.frame(x), cond), 'matrix')
+  expect_is(dcScore(dge, cond), 'matrix')
+  expect_is(dcScore(eset, cond), 'matrix')
+  expect_is(dcScore(se, cond), 'matrix')
 })
-

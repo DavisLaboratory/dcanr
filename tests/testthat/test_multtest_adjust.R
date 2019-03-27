@@ -1,8 +1,18 @@
 library(dcanr)
+library(Biobase)
+library(edgeR)
+library(SummarizedExperiment)
 
 context('Statistical tests ')
 
-#select methods that can be run
+#data to test methods
+set.seed(360)
+x = matrix(rnorm(240), 4, 60)
+colnames(x) = 1:ncol(x)
+rownames(x) = 1:nrow(x)
+cond = rep(1:2, each = 30)
+
+#pick a representative set - exclude any method that uses perm test during check
 getInfMethods <- function() {
   infmethods = c('zscore', 'diffcoex', 'ebcoexpress', 'ecf', 'ggm-based')
   if (!require('EBcoexpress')) {
@@ -18,50 +28,21 @@ getInfMethods <- function() {
   return(infmethods)
 }
 
-getCondition <- function() {
-  return(rep(1:2, each = 30))
-}
+scorelist = lapply(getInfMethods(), function (m) dcScore(x, cond, m))
+names(scorelist) = getInfMethods()
 
-getData <- function() {
-  #data to test methods
-  set.seed(360)
-  x = matrix(rnorm(240), 4, 60)
-  colnames(x) = 1:ncol(x)
-  rownames(x) = 1:nrow(x)
-  return(x)
-}
+#generate test matrices
+testmats <- lapply(scorelist, function(s) dcTest(s, x, cond))
 
-#compute dcScores for each method
-getScoreList <- function(){
-  x = getData()
-  cond = getCondition()
+test_that('Testing calls work', {
+  for (m in getInfMethods()) {
+    expect_is(dcAdjust(testmats[[!!m]]), 'matrix')
+  }
+})
 
-  scorelist = lapply(getInfMethods(), function (m) dcScore(x, cond, m))
-  names(scorelist) = getInfMethods()
-
-  return(scorelist)
-}
-
-#compute matrices holding the results of tests (p-values, probs or orig scores)
-getTestMatrices <- function() {
-  #generate test matrices
-  testmats <- lapply(getScoreList(), function(s) dcTest(s, getData(), getCondition()))
-
-  return(testmats)
-}
-
-# test_that('Testing calls work', {
-#   for (m in setdiff(getInfMethods(), c('ebcoexpress', 'diffcoex'))) {
-#     expect_is(dcAdjust(getTestMatrices()[[!!m]]), 'matrix')
-#   }
-#
-#   if ('ebcoexpress' %in% getInfMethods())
-#     expect_is(dcAdjust(getTestMatrices()[['ebcoexpress']]), 'matrix')
-#   expect_is(dcAdjust(getTestMatrices()[['diffcoex']]), 'matrix')
-# })
-#
-# test_that('Testing attribute changes', {
-#   for (m in setdiff(getInfMethods(), c('ebcoexpress', 'diffcoex'))) {
-#     expect_output(str(attr(dcAdjust(getTestMatrices()[[!!m]]), 'dc.test')), regexp = 'adj')
-#   }
-# })
+test_that('Testing attribute changes', {
+  for (m in setdiff(getInfMethods(), 'diffcoex')) {
+    expect_output(str(attr(dcAdjust(testmats[[!!m]]), 'dc.test')), regexp = 'adj')
+  }
+  expect_output(str(attr(dcAdjust(testmats[['diffcoex']]), 'dc.test')), regexp = 'none')
+})
