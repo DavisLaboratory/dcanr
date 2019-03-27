@@ -73,7 +73,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Dharmesh Bhuva \email{bhuva.d@wehi.edu.au} (0000-0002-6398-9157)
+\strong{Maintainer}: Dharmesh D. Bhuva \email{bhuva.d@wehi.edu.au} (0000-0002-6398-9157)
 
 }
 \keyword{classif}

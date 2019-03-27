@@ -8,7 +8,7 @@ data("sim102")
 
 #pick a representative set - exclude any method that uses perm test during check
 getInfMethods <- function() {
-  infmethods = c('zscore', 'diffcoex', 'ebcoexpress', 'ecf', 'ggm-based')
+  infmethods = c('zscore', 'diffcoex')
   if (!require('EBcoexpress')) {
     infmethods = setdiff(infmethods, 'ebcoexpress')
   }

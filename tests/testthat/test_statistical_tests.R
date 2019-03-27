@@ -7,10 +7,10 @@ context('Statistical tests ')
 
 #data to test methods
 set.seed(360)
-x <- matrix(rnorm(240), 4, 60)
+x <- matrix(rnorm(40), 4, 10)
 colnames(x) = 1:ncol(x)
 rownames(x) = 1:nrow(x)
-cond <- rep(1:2, each = 30)
+cond <- rep(1:2, each = ncol(x) / 2)
 
 #pick a representative set - exclude any method that uses perm test during check
 getInfMethods <- function() {
