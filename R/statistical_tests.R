@@ -30,8 +30,7 @@
 #'
 #'   Additional method specific parameters can be supplied to the function when
 #'   performing permutation tests. \code{B} specifies the number of permutations
-#'   to be performed and defaults to 20. \code{perm.seed} can be used to fix the
-#'   seed when reproducibility is required.
+#'   to be performed and defaults to 20.
 #'
 #'   If a cluster exists, computation in a permutation test will be performed in
 #'   parallel (see examples).
@@ -46,7 +45,7 @@
 #' @examples
 #' x <- matrix(rnorm(60), 2, 30)
 #' cond <- rep(1:2, 15)
-#' ecfscores <- dcScore(x, cond, dc.method = 'ecf')
+#' ecfscores <- dcScore(x, cond, dc.method = 'mindy')
 #' dcTest(ecfscores, emat = x, condition = cond)
 #'
 #' \dontrun{
@@ -110,9 +109,8 @@ vec2mat <- function(v) {
   return(m)
 }
 
-perm.test <- function(dcscores, emat, condition, B = 20, perm.seed = sample.int(1e6, 1)) {
+perm.test <- function(dcscores, emat, condition, B = 20) {
   obs = mat2vec(dcscores)
-  set.seed(perm.seed)
   randseeds = sample.int(1e6, B)
 
   #package requirements

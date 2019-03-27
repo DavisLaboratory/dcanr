@@ -95,4 +95,3 @@ test_that('Different matrix types', {
   expect_is(dcScore(eset, cond), 'matrix')
   expect_is(dcScore(se, cond), 'matrix')
 })
-
