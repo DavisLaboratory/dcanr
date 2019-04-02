@@ -1,3 +1,6 @@
+#' @importFrom foreach foreach %:% %dopar%
+#' @importFrom doRNG %dorng%
+
 #' @title Statistical test for differential association analysis
 #' @description Perform statistical tests for scores generated using
 #'   \code{dcScore}. Selects appropriate tests for the different methods used
@@ -45,15 +48,16 @@
 #' @examples
 #' x <- matrix(rnorm(60), 2, 30)
 #' cond <- rep(1:2, 15)
-#' ecfscores <- dcScore(x, cond, dc.method = 'mindy')
-#' dcTest(ecfscores, emat = x, condition = cond)
+#' scores <- dcScore(x, cond, dc.method = 'mindy')
+#' dcTest(scores, emat = x, condition = cond)
 #'
 #' \dontrun{
 #' #running in parallel
 #' num_cores = 2
 #' cl <- parallel::makeCluster(num_cores)
 #' doSNOW::registerDoSNOW(cl) #or doParallel
-#' dcTest(ecfscores, emat = x, condition = cond, B = 100)
+#' set.seed(36) #for reproducibility
+#' dcTest(scores, emat = x, condition = cond, B = 100)
 #' parallel::stopCluster(cl)
 #' }
 #'
@@ -111,7 +115,6 @@ vec2mat <- function(v) {
 
 perm.test <- function(dcscores, emat, condition, B = 20) {
   obs = mat2vec(dcscores)
-  randseeds = sample.int(1e6, B)
 
   #package requirements
   pckgs = c('dcanr')
@@ -120,14 +123,16 @@ perm.test <- function(dcscores, emat, condition, B = 20) {
   pvals = foreach(
     b = seq_len(B),
     .combine = function(...) {mapply(sum, ...)},
+    .multicombine = TRUE,
+    .inorder = FALSE,
     .packages = pckgs,
-    .export = c('emat')
-  ) %dopar% {
-    set.seed(randseeds[b])
-
+    .noexport = c('dcscores', 'condition', 'emat', 'obs')
+  ) %dorng% {
     #shuffle condition and recalculate scores
-    condition = sample(condition, length(condition), replace = FALSE)
-    permsc = eval(attr(dcscores, 'call'))
+    env = new.env()
+    assign('emat', emat, envir = env)
+    assign('condition', sample(condition, length(condition)), envir = env)
+    permsc = eval(attr(dcscores, 'call'), envir = env)
     permsc = mat2vec(permsc)
 
     #count elements greater than obs

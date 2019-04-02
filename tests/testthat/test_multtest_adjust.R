@@ -45,5 +45,6 @@ test_that('Testing attribute changes', {
     expect_output(str(attr(dcAdjust(testmats[[!!m]]), 'dc.test')), regexp = 'adj')
   }
   expect_output(str(attr(dcAdjust(testmats[['diffcoex']]), 'dc.test')), regexp = 'none')
-  expect_output(str(attr(dcAdjust(testmats[['ebcoexpress']]), 'dc.test')), regexp = 'none')
+  if ('ebcoexpress' %in% getInfMethods())
+    expect_output(str(attr(dcAdjust(testmats[['ebcoexpress']]), 'dc.test')), regexp = 'none')
 })
