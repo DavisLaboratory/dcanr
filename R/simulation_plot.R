@@ -29,7 +29,8 @@ NULL
 #' plotSimNetwork(sim102, what = 'association')
 #'
 #' @export
-plotSimNetwork <- function(simulation, what = c('source', 'direct', 'influence', 'association')[1], ...) {
+plotSimNetwork <- function(simulation, what = c('source', 'direct', 'influence', 'association'), ...) {
+  what = match.arg(what)
   if (what == 'source') {
     net = simulation$staticnet
   } else {

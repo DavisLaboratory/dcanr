@@ -46,7 +46,7 @@ test_that('Inference method calls work', {
   }
 
   expect_error(dcScore(x, cond, 'fakemethod'), 'not TRUE')
-  expect_error(dcScore(x, cond, cor.method = 'kendall'), 'not TRUE')
+  expect_error(dcScore(x, cond, cor.method = 'kendall'), 'should be one of ')
   expect_error(dcScore(x, c(cond, 3)), 'not TRUE')
   expect_error(dcScore(x, c(cond, 2)), 'not TRUE')
 })

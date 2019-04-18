@@ -84,7 +84,8 @@ getConditionNames <- function(simulation) {
 
 #' @describeIn getSimData get the true differential network
 #' @export
-getTrueNetwork <- function(simulation, cond.name = NULL, truth.type = c('association', 'influence', 'direct')[1], full = FALSE) {
+getTrueNetwork <- function(simulation, cond.name = NULL, truth.type = c('association', 'influence', 'direct'), full = FALSE) {
+  truth.type = match.arg(truth.type)
   truth.type = stringr::str_to_title(truth.type)
   if (is.null(cond.name)) {
     cond.name = getConditionNames(simulation)[1]

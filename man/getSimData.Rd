@@ -11,8 +11,7 @@ getSimData(simulation, cond.name = NULL, full = FALSE)
 getConditionNames(simulation)
 
 getTrueNetwork(simulation, cond.name = NULL,
-  truth.type = c("association", "influence", "direct")[1],
-  full = FALSE)
+  truth.type = c("association", "influence", "direct"), full = FALSE)
 }
 \arguments{
 \item{simulation}{a list, storing data and results generated from simulations}

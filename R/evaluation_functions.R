@@ -147,10 +147,12 @@ dcPipeline <- function(simulation, dc.func = 'zscore', precomputed = FALSE, cont
 dcEvaluate <-
   function(simulation,
            dclist,
-           truth.type = c('association', 'influence', 'direct')[1],
+           truth.type = c('association', 'influence', 'direct'),
            perf.method = 'f.measure',
            combine = TRUE,
            ...) {
+  truth.type = match.arg(truth.type)
+
   #retrieve the truth vectors
   truthvecs = lapply(names(dclist), function(cond.name) {
     adjmat = getTrueNetwork(simulation, cond.name, truth.type = truth.type)

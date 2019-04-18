@@ -4,7 +4,7 @@
 \alias{cor.pairs}
 \title{Fast pairwise correlation estimation}
 \usage{
-cor.pairs(emat, cor.method = "pearson")
+cor.pairs(emat, cor.method = c("pearson", "spearman"))
 }
 \arguments{
 \item{emat}{a numeric matrix}

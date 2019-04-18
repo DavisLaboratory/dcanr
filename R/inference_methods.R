@@ -58,8 +58,8 @@ dcMethods <- function() {
 #' x <- matrix(rnorm(200), 100, 2)
 #' cor.pairs(x)
 #' cor.pairs(x, cor.method = 'spearman')
-cor.pairs <- function(emat, cor.method = 'pearson') {
-  stopifnot(cor.method %in% c('pearson', 'spearman'))
+cor.pairs <- function(emat, cor.method = c('pearson', 'spearman')) {
+  cor.method = match.arg(cor.method)
 
   if (cor.method %in% 'spearman') {
     #spearman is pearson on ranked data
@@ -77,7 +77,8 @@ cor.pairs <- function(emat, cor.method = 'pearson') {
   return(c)
 }
 
-z.score <- function(emat, condition, cor.method = 'pearson', ...) {
+z.score <- function(emat, condition, cor.method = c('pearson', 'spearman'), ...) {
+  cor.method = match.arg(cor.method)
   expr1 = emat[, condition == 1, drop = FALSE]
   expr2 = emat[, condition == 2, drop = FALSE]
 
@@ -142,7 +143,9 @@ ggm.score <- function(emat, condition, ...) {
   return(logOR)
 }
 
-magic.score <- function(emat, condition, cor.method = 'pearson', ...) {
+magic.score <- function(emat, condition, cor.method = c('pearson', 'spearman'), ...) {
+  cor.method = match.arg(cor.method)
+
   expr1 = emat[, condition == 1, drop = FALSE]
   expr2 = emat[, condition == 2, drop = FALSE]
 
@@ -193,7 +196,9 @@ ftgi.score <- function(emat, condition, ...) {
   return(score)
 }
 
-diffcoex.score <- function(emat, condition, cor.method = 'pearson', diffcoex.beta = 6, ...) {
+diffcoex.score <- function(emat, condition, cor.method = c('pearson', 'spearman'), diffcoex.beta = 6, ...) {
+  cor.method = match.arg(cor.method)
+
   expr1 = emat[, condition == 1, drop = FALSE]
   expr2 = emat[, condition == 2, drop = FALSE]
 
@@ -294,7 +299,9 @@ ebcoexpress.score <- function(emat, condition, ebcoexpress.useBWMC = TRUE, ebcoe
   return(scoremat)
 }
 
-dicer.score <- function(emat, condition, cor.method = 'pearson', ...) {
+dicer.score <- function(emat, condition, cor.method = c('pearson', 'spearman'), ...) {
+  cor.method = match.arg(cor.method)
+
   expr1 = emat[, condition == 1, drop = FALSE]
   expr2 = emat[, condition == 2, drop = FALSE]
 
@@ -335,7 +342,9 @@ ecf.score <- function(emat, condition, ...) {
   return(ecfscore)
 }
 
-ent.score <- function(emat, condition, cor.method = "pearson", ...) {
+ent.score <- function(emat, condition, cor.method = c('pearson', 'spearman'), ...) {
+  cor.method = match.arg(cor.method)
+
   expr1 = emat[, condition == 1, drop = FALSE]
   expr2 = emat[, condition == 2, drop = FALSE]
 

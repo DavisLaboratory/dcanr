@@ -5,7 +5,7 @@
 \title{Evaluate performance of DC methods on simulations}
 \usage{
 dcEvaluate(simulation, dclist, truth.type = c("association", "influence",
-  "direct")[1], perf.method = "f.measure", combine = TRUE, ...)
+  "direct"), perf.method = "f.measure", combine = TRUE, ...)
 }
 \arguments{
 \item{simulation}{a list, storing data and results generated from simulations}
