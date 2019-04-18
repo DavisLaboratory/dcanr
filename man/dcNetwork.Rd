@@ -35,6 +35,7 @@ No extra arguments required for this function. The ellipsis are used
 }
 \examples{
 #create data
+set.seed(360)
 x <- matrix(rnorm(120), 4, 30)
 cond <- rep(1:2, 15)
 
@@ -46,11 +47,10 @@ ig <- dcNetwork(zscores, pvals, 0.1)
 
 #perform analysis - DiffCoEx
 dcscores <- dcScore(x, cond, dc.method = 'diffcoex')
-ig <- dcNetwork(dcscores, 0.1)
+ig <- dcNetwork(dcscores, thresh = 0.001)
 
-\dontrun{
+#plot the resulting differential co-expression network
 igraph::plot.igraph(ig)
-}
 
 }
 \seealso{
