@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">dcanr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.16</span>
       </span>
     </div>
 
@@ -97,17 +97,20 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install dcanr from github with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"DavisLaboratory/dcanr"</span>)</code></pre></div>
+<p>Download the package from Bioconductor</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"BiocManager"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>))
+  <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"BiocManager"</span>)
+BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"dcanr"</span>)</code></pre></div>
+<p>Or install the development version of the package from Github.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"DavisLaboratory/dcanr"</span>)</code></pre></div>
+<p>Load the installed package into an R session.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dcanr)</code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
 <p>This example shows how a differential network can be derived. Simulated data within the package is used.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dcanr)
-
-<span class="co">#load simulated data</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#load simulated data</span>
 <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(sim102)
 
 <span class="co">#get expression data and conditions for 'UME6' knock-down</span>
@@ -159,7 +162,7 @@ dcnet &lt;-<span class="st"> </span><span class="kw"><a href="reference/dcNetwor
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Dharmesh Bhuva <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-6398-9157" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<li>Dharmesh D. Bhuva <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-6398-9157" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
 </ul>
 </div>
 
@@ -169,7 +172,7 @@ dcnet &lt;-<span class="st"> </span><span class="kw"><a href="reference/dcNetwor
 
 
       <footer><div class="copyright">
-  <p>Developed by Dharmesh Bhuva.</p>
+  <p>Developed by Dharmesh D. Bhuva.</p>
 </div>
 
 <div class="pkgdown">

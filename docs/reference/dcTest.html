@@ -68,7 +68,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dcanr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.16</span>
       </span>
     </div>
 
@@ -190,8 +190,7 @@ conditions. This should be the one passed to <code>dcScore</code></p></td>
   scores are used to evaluate a single observed score.</p>
 <p>Additional method specific parameters can be supplied to the function when
   performing permutation tests. <code>B</code> specifies the number of permutations
-  to be performed and defaults to 20. <code>perm.seed</code> can be used to fix the
-  seed when reproducibility is required.</p>
+  to be performed and defaults to 20.</p>
 <p>If a cluster exists, computation in a permutation test will be performed in
   parallel (see examples).</p>
     
@@ -203,14 +202,17 @@ conditions. This should be the one passed to <code>dcScore</code></p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>60</span>), <span class='fl'>2</span>, <span class='fl'>30</span>)
 <span class='no'>cond</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>15</span>)
-<span class='no'>ecfscores</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='dcScore.html'>dcScore</a></span>(<span class='no'>x</span>, <span class='no'>cond</span>, <span class='kw'>dc.method</span> <span class='kw'>=</span> <span class='st'>'ecf'</span>)
-<span class='fu'>dcTest</span>(<span class='no'>ecfscores</span>, <span class='kw'>emat</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>condition</span> <span class='kw'>=</span> <span class='no'>cond</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: executing %dopar% sequentially: no parallel backend registered</span></div><div class='output co'>#&gt;      1    2
-#&gt; 1   NA 0.85
-#&gt; 2 0.85   NA
+<span class='no'>scores</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='dcScore.html'>dcScore</a></span>(<span class='no'>x</span>, <span class='no'>cond</span>, <span class='kw'>dc.method</span> <span class='kw'>=</span> <span class='st'>'mindy'</span>)
+<span class='fu'>dcTest</span>(<span class='no'>scores</span>, <span class='kw'>emat</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>condition</span> <span class='kw'>=</span> <span class='no'>cond</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: executing %dopar% sequentially: no parallel backend registered</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: foreach</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: rngtools</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: pkgmaker</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: registry</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘pkgmaker’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:base’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    isFALSE</span></div><div class='output co'>#&gt;    1  2
+#&gt; 1 NA  0
+#&gt; 2  0 NA
 #&gt; attr(,"call")
-#&gt; ecf.score(emat = emat, condition = condition)
+#&gt; mindy.score(emat = emat, condition = condition)
 #&gt; attr(,"dc.method")
-#&gt; [1] "ecf"
+#&gt; [1] "mindy"
 #&gt; attr(,"dc.test")
 #&gt; [1] "permutation"</div><div class='input'>
 </div><span class='co'># NOT RUN {</span>
@@ -218,7 +220,8 @@ conditions. This should be the one passed to <code>dcScore</code></p></td>
 <span class='no'>num_cores</span> <span class='kw'>=</span> <span class='fl'>2</span>
 <span class='no'>cl</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>parallel</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/parallel/topics/makeCluster'>makeCluster</a></span>(<span class='no'>num_cores</span>)
 <span class='kw pkg'>doSNOW</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/doSNOW/topics/registerDoSNOW'>registerDoSNOW</a></span>(<span class='no'>cl</span>) <span class='co'>#or doParallel</span>
-<span class='fu'>dcTest</span>(<span class='no'>ecfscores</span>, <span class='kw'>emat</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>condition</span> <span class='kw'>=</span> <span class='no'>cond</span>, <span class='kw'>B</span> <span class='kw'>=</span> <span class='fl'>100</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>36</span>) <span class='co'>#for reproducibility</span>
+<span class='fu'>dcTest</span>(<span class='no'>scores</span>, <span class='kw'>emat</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>condition</span> <span class='kw'>=</span> <span class='no'>cond</span>, <span class='kw'>B</span> <span class='kw'>=</span> <span class='fl'>100</span>)
 <span class='kw pkg'>parallel</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/parallel/topics/makeCluster'>stopCluster</a></span>(<span class='no'>cl</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
@@ -242,7 +245,7 @@ conditions. This should be the one passed to <code>dcScore</code></p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Dharmesh Bhuva.</p>
+  <p>Developed by Dharmesh D. Bhuva.</p>
 </div>
 
 <div class="pkgdown">

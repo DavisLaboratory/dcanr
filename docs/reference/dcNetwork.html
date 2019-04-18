@@ -64,7 +64,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dcanr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.16</span>
       </span>
     </div>
 
@@ -179,6 +179,7 @@ EBcoexpress and 0.1 on the absolute score from DiffCoEx</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>#create data</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>360</span>)
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>120</span>), <span class='fl'>4</span>, <span class='fl'>30</span>)
 <span class='no'>cond</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fl'>15</span>)
 
@@ -190,10 +191,10 @@ EBcoexpress and 0.1 on the absolute score from DiffCoEx</p></td>
 
 <span class='co'>#perform analysis - DiffCoEx</span>
 <span class='no'>dcscores</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='dcScore.html'>dcScore</a></span>(<span class='no'>x</span>, <span class='no'>cond</span>, <span class='kw'>dc.method</span> <span class='kw'>=</span> <span class='st'>'diffcoex'</span>)
-<span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='fu'>dcNetwork</span>(<span class='no'>dcscores</span>, <span class='fl'>0.1</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: default thresholds being selected</span></div><div class='input'>
-</div><span class='co'># NOT RUN {</span>
-<span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/igraph/topics/plot.igraph'>plot.igraph</a></span>(<span class='no'>ig</span>)
-<span class='co'># }</span><div class='input'>
+<span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='fu'>dcNetwork</span>(<span class='no'>dcscores</span>, <span class='kw'>thresh</span> <span class='kw'>=</span> <span class='fl'>0.001</span>)
+
+<span class='co'>#plot the resulting differential co-expression network</span>
+<span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/igraph/topics/plot.igraph'>plot.igraph</a></span>(<span class='no'>ig</span>)</div><div class='img'><img src='dcNetwork-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -215,7 +216,7 @@ EBcoexpress and 0.1 on the absolute score from DiffCoEx</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Dharmesh Bhuva.</p>
+  <p>Developed by Dharmesh D. Bhuva.</p>
 </div>
 
 <div class="pkgdown">

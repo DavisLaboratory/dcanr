@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dcanr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.16</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@
       <h1>Performing differential co-expression analysis using dcanr</h1>
                         <h4 class="author">Dharmesh D Bhuva</h4>
             <address class="author_afil">
-      Bioinformatics Division, Walter and Eliza Hall Institute of Medical Research, Parkville, VIC 3052, Australia<br><h4 class="date">2019-03-25</h4>
+      Bioinformatics Division, Walter and Eliza Hall Institute of Medical Research, Parkville, VIC 3052, Australia<br><h4 class="date">2019-04-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/DavisLaboratory/dcanr/blob/master/vignettes/dcanr_vignette.Rmd"><code>vignettes/dcanr_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>dcanr_vignette.Rmd</code></div>
@@ -108,9 +108,14 @@
 <div id="installation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h1>
-<p>The package can be downloaded from github.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"DavisLaboratory/dcanr"</span>)</code></pre></div>
+<p>Download the package from Bioconductor</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"BiocManager"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>))
+  <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"BiocManager"</span>)
+BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"dcanr"</span>)</code></pre></div>
+<p>Or install the development version of the package from Github.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"DavisLaboratory/dcanr"</span>)</code></pre></div>
+<p>Load the installed package into an R session.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dcanr)</code></pre></div>
 </div>
 <div id="available-inference-methods" class="section level1">
 <h1 class="hasAnchor">
@@ -210,7 +215,7 @@ adj_p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcAdj
 <span class="co">#get the differential network</span>
 dcnet &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcNetwork.html">dcNetwork</a></span>(z_scores, adj_p)
 <span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(dcnet, <span class="dt">vertex.label =</span> <span class="st">''</span>)</code></pre></div>
-<p><img src="dcanr_vignette_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p><img src="dcanr_vignette_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#convert to an adjacency matrix</span>
 adjmat &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/igraph/topics/as_adjacency_matrix">as_adj</a></span>(dcnet, <span class="dt">sparse =</span> <span class="ot">FALSE</span>)
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(adjmat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</code></pre></div>
@@ -254,22 +259,25 @@ edgedf &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocu
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] igraph_1.2.4    dcanr_0.99.0    BiocStyle_2.8.2
+## [1] igraph_1.2.4    dcanr_0.99.15   BiocStyle_2.8.2
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.0          rstudioapi_0.9.0    knitr_1.20         
-##  [4] xml2_1.2.0          magrittr_1.5        roxygen2_6.1.1     
-##  [7] MASS_7.3-50         colorspace_1.4-0    R6_2.4.0           
-## [10] rlang_0.3.1         foreach_1.5.0       stringr_1.3.1      
-## [13] tools_3.5.1         grid_3.5.1          circlize_0.4.4     
-## [16] xfun_0.3            iterators_1.0.11    htmltools_0.3.6    
-## [19] commonmark_1.5      yaml_2.2.0          digest_0.6.18      
-## [22] assertthat_0.2.0    rprojroot_1.3-2     bookdown_0.7       
-## [25] pkgdown_1.3.0       crayon_1.3.4        RColorBrewer_1.1-2 
-## [28] GlobalOptions_0.1.0 codetools_0.2-15    fs_1.2.6           
-## [31] shape_1.4.4         memoise_1.1.0       evaluate_0.11      
-## [34] rmarkdown_1.11      stringi_1.3.1       compiler_3.5.1     
-## [37] desc_1.2.0          backports_1.1.2     pkgconfig_2.0.2</code></pre>
+##  [1] Rcpp_1.0.0          RColorBrewer_1.1-2  compiler_3.5.1     
+##  [4] iterators_1.0.11    tools_3.5.1         rngtools_1.3.1     
+##  [7] digest_0.6.18       evaluate_0.11       memoise_1.1.0      
+## [10] pkgconfig_2.0.2     rlang_0.3.1         doRNG_1.7.1        
+## [13] foreach_1.5.0       bibtex_0.4.2        registry_0.5       
+## [16] rstudioapi_0.9.0    commonmark_1.5      yaml_2.2.0         
+## [19] parallel_3.5.1      pkgdown_1.3.0       xfun_0.3           
+## [22] withr_2.1.2         stringr_1.3.1       pkgmaker_0.27      
+## [25] roxygen2_6.1.1      xml2_1.2.0          knitr_1.20         
+## [28] GlobalOptions_0.1.0 desc_1.2.0          fs_1.2.6           
+## [31] grid_3.5.1          rprojroot_1.3-2     R6_2.4.0           
+## [34] rmarkdown_1.11      bookdown_0.7        magrittr_1.5       
+## [37] backports_1.1.2     codetools_0.2-15    htmltools_0.3.6    
+## [40] MASS_7.3-50         assertthat_0.2.0    shape_1.4.4        
+## [43] colorspace_1.4-0    circlize_0.4.4      xtable_1.8-3       
+## [46] stringi_1.3.1       crayon_1.3.4</code></pre>
 </div>
   </div>
 
@@ -296,7 +304,7 @@ edgedf &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocu
 
 
       <footer><div class="copyright">
-  <p>Developed by Dharmesh Bhuva.</p>
+  <p>Developed by Dharmesh D. Bhuva.</p>
 </div>
 
 <div class="pkgdown">
