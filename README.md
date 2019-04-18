@@ -8,11 +8,24 @@ Methods and an evaluation framework for the inference of differential co-express
 Installation
 ------------
 
-You can install dcanr from github with:
+Download the package from Bioconductor
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("DavisLaboratory/dcanr")
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install("dcanr")
+```
+
+Or install the development version of the package from Github.
+
+``` r
+BiocManager::install("DavisLaboratory/dcanr")
+```
+
+Load the installed package into an R session.
+
+``` r
+library(dcanr)
 ```
 
 Example
@@ -21,8 +34,6 @@ Example
 This example shows how a differential network can be derived. Simulated data within the package is used.
 
 ``` r
-library(dcanr)
-
 #load simulated data
 data(sim102)
 

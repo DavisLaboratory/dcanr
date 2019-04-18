@@ -31,10 +31,25 @@ methods to real data. Available methods, putative pipelines, and visualisations
 provided by the method are introduced.
 
 # Installation
-The package can be downloaded from github.
-```{r gh-installation, eval = FALSE}
-# install.packages("devtools")
-devtools::install_github("DavisLaboratory/dcanr")
+
+Download the package from Bioconductor 
+
+```{r getPackage, eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install("dcanr")
+```
+
+Or install the development version of the package from Github.
+
+```{r, eval = FALSE}
+BiocManager::install("DavisLaboratory/dcanr")
+```
+
+Load the installed package into an R session.
+
+```{r Load, message=FALSE}
+library(dcanr)
 ```
 
 # Available inference methods
