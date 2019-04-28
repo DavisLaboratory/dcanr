@@ -49,12 +49,14 @@ simulation.
 
 # Download the full simulated dataset
 As the simulation is computationally intensive, data from the 812 simulations
-have been precomputed and are available at **LINK**. The downloaded file
-contains a list of simulation results which includes `sim102`, packaged with
-`dcanr`. Each simulation can be accessed as shown below.
+have been precomputed and are available at
+<https://melbourne.figshare.com/articles/812_simulated_expression_datasets_for_differential_co-expression_analysis/8010176>.
+The downloaded file contains a list of simulation results which includes
+`sim102`, packaged with `dcanr`. Each simulation can be accessed as shown below.
 
 ```{r eval=FALSE}
-simdata <- load('simdata_directory/simdata.rda')
+#Not evaluated
+simdata <- readRDS('simdata_directory/sim812.rds')
 sim10 <- simdata[[10]]
 ```
 
