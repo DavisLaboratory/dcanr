@@ -130,6 +130,8 @@ perm.test <- function(dcscores, emat, condition, B = 20) {
   ) %dorng% {
     #shuffle condition and recalculate scores
     env = new.env()
+    #convert conditions to numeric
+    condition = as.numeric(as.factor(condition))
     assign('emat', emat, envir = env)
     assign('condition', sample(condition, length(condition)), envir = env)
     permsc = eval(attr(dcscores, 'call'), envir = env)
