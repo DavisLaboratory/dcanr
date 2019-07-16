@@ -125,8 +125,7 @@ perm.test <- function(dcscores, emat, condition, B = 20) {
     .combine = function(...) {mapply(sum, ...)},
     .multicombine = TRUE,
     .inorder = FALSE,
-    .packages = pckgs,
-    .noexport = c('dcscores', 'condition', 'emat', 'obs')
+    .packages = pckgs
   ) %dorng% {
     #shuffle condition and recalculate scores
     env = new.env()
