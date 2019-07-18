@@ -203,7 +203,7 @@ validateResult <- function(emat, res) {
 
   #if matrix, check that it is binary
   if (class(res) %in% 'matrix') {
-    if (!all(table(res) %in% 0:1)) {
+    if (!all(res %in% 0:1)) {
       stop('result of the function must be a binary matrix')
     }
 
