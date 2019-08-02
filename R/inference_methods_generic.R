@@ -86,6 +86,8 @@ setMethod(
     #default method
     if (missing(dc.method)) {
       dc.method = 'zscore'
+    } else {
+      dc.method = match.arg(dc.method, dcMethods())
     }
 
     #names of features

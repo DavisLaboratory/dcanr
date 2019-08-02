@@ -80,7 +80,7 @@ NULL
 dcPipeline <- function(simulation, dc.func = 'zscore', precomputed = FALSE, continuous = FALSE, ...) {
   if (is.character(dc.func)) {
     stopifnot(dc.func %in% dcMethods())
-    dc.method = dc.func
+    dc.method = match.arg(dc.func, dcMethods())
 
     if (precomputed) {
       return(retrieveResult(simulation, dc.method))
@@ -269,6 +269,11 @@ analysisInbuilt <- function(emat, condition, dc.method = 'zscore', ...) {
 
 retrieveResult <- function(simulation, dc.method = 'zscore') {
   scores = Matrix::as.matrix(simulation$scores)
+
+  if (!dc.method %in% colnames(scores)) {
+    stop(paste0('Precomputed results not available for method: ', dc.method))
+  }
+
   scores = split(scores[, dc.method], scores[, 'bimid'])
   names(scores) = getConditionNames(simulation)
 
