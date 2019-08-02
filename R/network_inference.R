@@ -63,7 +63,7 @@ dcNetwork <- function(dcscores, dcpvals = NULL, thresh = NULL, ...) {
 
   #perform thresholding
   proc_annot = attributes(dcpvals) [-c(1, 2)]
-  if (dc.method %in% c('ebcoexpress', 'diffcoex')) {
+  if (dc.method %in% c('ebcoexpress', 'diffcoex', 'ldgm')) {
     dcpvals = abs(dcpvals) > thresh
   } else {
     dcpvals = dcpvals < thresh

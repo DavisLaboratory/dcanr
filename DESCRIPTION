@@ -35,6 +35,7 @@ Suggests: EBcoexpress,
     edgeR
 RoxygenNote: 6.1.1
 Collate:
+    'LDGM.R'
     'dcanr.R'
     'statistical_tests.R'
     'performance_metrics.R'
