@@ -5,7 +5,7 @@
 \title{Run a DC pipeline on a simulation}
 \usage{
 dcPipeline(simulation, dc.func = "zscore", precomputed = FALSE,
-  continuous = FALSE, ...)
+  continuous = FALSE, cond.args = list(), ...)
 }
 \arguments{
 \item{simulation}{a list, storing data and results generated from simulations}
@@ -21,6 +21,9 @@ should be used or a new one computed (default FALSE)}
 conditions should be used (default FALSE). No methods implemented currently
 use continuous conditions. This is to allow custom methods that require
 continuous conditions}
+
+\item{cond.args}{a list, containing condition-specific arguments for the DC
+inference pipeline. See details}
 
 \item{...}{additional parameters to \code{dc.func}}
 }
@@ -54,6 +57,14 @@ If \code{dc.func} is a character, the existing methods in the
   base R 'matrix' or the S4 'Matrix' class, containing all genes in the
   expression matrix 'emat'. See examples for how the in-built functions are
   combined into a pipeline.
+
+  If the pipeline (in-built or custom) requires condition-specific parameters
+  to run, cond.args can be used to pass these. For instance, LDGM requires
+  lambda OR the number of edges in the target network to be specified for
+  each inference/condition. For the latter case and with 3 different
+  conditions, this can be done by setting \code{cond.args =
+  list('ldgm.ntarget' = c(100, 140, 200))}. Non-specific arguments should be
+  passed directly to the \code{dcPipeline} function call.
 }
 \examples{
 data(sim102)
@@ -63,6 +74,14 @@ resStd <- dcPipeline(sim102, dc.func = 'zscore')
 
 #run a standard pipeline and specify params
 resParam <- dcPipeline(sim102, dc.func = 'zscore', cor.method = 'pearson')
+
+#run a standard pipeline and specify condition-specific params
+resParam <- dcPipeline(
+  sim102,
+  dc.func = 'diffcoex',
+  #arguments for the conditions ADR1 knockdown and UME6 knockdown resp.
+  cond.args = list(diffcoex.beta = c(6, 20))
+)
 
 #retrieve pre-computed results
 resPrecomputed <- dcPipeline(sim102, dc.func = 'zscore', precomputed = TRUE)

@@ -112,6 +112,22 @@ dcnets_sp <- dcPipeline(sim102,
                         thresh = 0.2) #cut-off for creating the network
 ```
 
+If the parameters need to be specified for each condition, the `cond.args`
+argument can be used. For example, the LDGM method requires the regularisation
+parameter to be specified for each condition. Since `sim102` has 2 conditions
+(*ADR1*-knockdown and *UME6*-knockdown), `ldgm.lambda` needs to be specified for
+each case. Alternatively, the number of edges in the DC network resulting from
+each condition can be passed using `ldgm.ntarget` in `cond.args`.
+
+```{r}
+sim102_lambdas = c(0.5145742607781790267651, 0.3486682118540171959609)
+dcnets_ldgm <- dcPipeline(sim102,
+                          dc.func = 'ldgm',
+                          cond.args = list(
+                            ldgm.lambda = sim102_lambdas
+                          ))
+```
+
 ## Custom pipelines
 The most common use case of an evaluation framework is to benchmark new methods.
 As such, this framework allows seamless integration of new methods. This is made

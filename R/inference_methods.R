@@ -480,3 +480,39 @@ mindy.score <- function(emat, condition, ...) {
 
   return(scoremat)
 }
+
+ldgm.score <- function(emat, condition, ldgm.lambda = NA, ldgm.ntarget = NA, ldgm.iter = 50) {
+  expr1 = emat[, condition == 1, drop = FALSE]
+  expr2 = emat[, condition == 2, drop = FALSE]
+
+  #compute latent correlation matrices in each condition
+  kendall1 = cor(t(expr1), method = 'kendall')
+  kendall2 = cor(t(expr2), method = 'kendall')
+  lcor1 = sin(pi/2 * kendall1) #latent correlation estimate
+  lcor2 = sin(pi/2 * kendall2) #latent correlation estimate
+  diag(lcor1) = diag(lcor2) = 1
+
+  if (is.na(ldgm.lambda) & is.na(ldgm.ntarget)) {
+    stop('Need to specify either lambda or num of edges in true dc network')
+  }
+
+  if (!is.na(ldgm.lambda)) {
+    #place holder to prioritise lambda choice over ldgm.ntarget
+  } else if (!is.na(ldgm.ntarget)) {
+    #search for lambda
+    lambda_max = find_lambda_max(lcor1, lcor2)
+    lambda_min = find_lambda_min(lcor1, lcor2, lambda_max, ldgm.ntarget)
+    ldgm.lambda = search_lambda(lcor1, lcor2, lambda_min, lambda_max, ldgm.ntarget, ldgm.iter)
+  }
+
+  delta = differential_graph(lcor1, lcor2, ldgm.lambda)
+  diag(delta) = NA
+
+  #add run parameters as attributes
+  attributes(delta) = c(attributes(delta),
+                        'lambda' = ldgm.lambda,
+                        'call' = match.call())
+
+  return(delta)
+}
+

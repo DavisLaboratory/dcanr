@@ -62,7 +62,8 @@ dcNetwork <- function(dcscores, dcpvals = NULL, thresh = NULL, ...) {
   }
 
   #perform thresholding
-  proc_annot = attributes(dcpvals) [-c(1, 2)]
+  proc_annot = attributes(dcpvals)
+  proc_annot = proc_annot[!grepl('dim', names(proc_annot))]
   if (dc.method %in% c('ebcoexpress', 'diffcoex', 'ldgm')) {
     dcpvals = abs(dcpvals) > thresh
   } else {
@@ -83,6 +84,7 @@ dcNetwork <- function(dcscores, dcpvals = NULL, thresh = NULL, ...) {
     E(ig)$color = colfunc(-minmax, minmax, RColorBrewer::brewer.pal(11, 'PRGn'))(E(ig)$score)
     E(ig)$color = stringr::str_replace(E(ig)$color, 'FF$', 'B3')
   }
+  attributes(ig) = c(attributes(ig), proc_annot)
 
   return(ig)
 }

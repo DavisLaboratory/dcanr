@@ -55,10 +55,7 @@ getSimData <- function(simulation, cond.name = NULL, full = FALSE) {
   condmat = attr(emat, 'classf')
 
   #checks for cond.name
-  if (is.null(cond.name)) {
-    cond.name = getConditionNames(simulation)[1]
-  }
-  stopifnot(cond.name %in% getConditionNames(simulation))
+  cond.name = match.arg(cond.name, getConditionNames(simulation))
   cond = condmat[cond.name, ]
 
   #filter out genes directly dependent on the condition

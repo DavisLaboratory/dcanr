@@ -19,7 +19,9 @@ NULL
 #'   condition), a factor with 2 levels or a character representing 2 conditions
 #' @param dc.method a character, representing the method to use. Use
 #'   \code{dcMethods()} to get a list of methods
-#' @param ... see details
+#' @param ... possible arguments are \code{cor.method}, \code{diffcoex.beta},
+#'   \code{ebcoexpress.useBWMC}, \code{ebcoexpress.plot}, \code{ldgm.lambda},
+#'   \code{ldgm.ntarget} and \code{ldgm.iter}. See details
 #'
 #' @details When using data from sequencing experiments, make sure appropriate
 #'   filtering for low counts and data transformation has been performed. Not
@@ -40,6 +42,15 @@ NULL
 #'   (defaults to \code{TRUE}) representing whether to use the bi-weight
 #'   mid-correlation coefficient or not, and \code{ebcoexpress.plot} which plots
 #'   the diagnostic plots if set to \code{TRUE} (defaults to \code{FALSE}).
+#'
+#'   LDGM specific parameters include \code{ldgm.lambda}, \code{ldgm.ntarget}
+#'   and \code{ldgm.iter}. \code{ldgm.lambda} specifies the L1 regularisation
+#'   parameter to use when fitting the model. This can be tuned and specified by
+#'   the user. Alternatively, this can be tuned such that the resulting network
+#'   has a specified number of edges. In this case, \code{ldgm.ntarget} should
+#'   be specified instead. \code{ldgm.iter} is the maximum number of iterations
+#'   to perform when tuning \code{ldgm.lambda} using \code{ldgm.ntarget}
+#'   (defaults to 50).
 #'
 #'   EBcoexpress, GGM-based and ECF are implemented by providing interfaces to,
 #'   or using functions from the \code{EBcoexpress}, \code{GeneNet}, and

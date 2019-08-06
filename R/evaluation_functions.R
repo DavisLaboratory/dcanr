@@ -17,6 +17,8 @@ NULL
 #'   conditions should be used (default FALSE). No methods implemented currently
 #'   use continuous conditions. This is to allow custom methods that require
 #'   continuous conditions
+#' @param cond.args a list, containing condition-specific arguments for the DC
+#'   inference pipeline. See details
 #' @param ... additional parameters to \code{dc.func}
 #'
 #' @details If \code{dc.func} is a character, the existing methods in the
@@ -40,6 +42,14 @@ NULL
 #'   expression matrix 'emat'. See examples for how the in-built functions are
 #'   combined into a pipeline.
 #'
+#'   If the pipeline (in-built or custom) requires condition-specific parameters
+#'   to run, cond.args can be used to pass these. For instance, LDGM requires
+#'   lambda OR the number of edges in the target network to be specified for
+#'   each inference/condition. For the latter case and with 3 different
+#'   conditions, this can be done by setting \code{cond.args =
+#'   list('ldgm.ntarget' = c(100, 140, 200))}. Non-specific arguments should be
+#'   passed directly to the \code{dcPipeline} function call.
+#'
 #' @return a list of igraphs, representing the differential network for each
 #'   independent condition (knock-out).
 #'
@@ -55,6 +65,14 @@ NULL
 #'
 #' #run a standard pipeline and specify params
 #' resParam <- dcPipeline(sim102, dc.func = 'zscore', cor.method = 'pearson')
+#'
+#' #run a standard pipeline and specify condition-specific params
+#' resParam <- dcPipeline(
+#'   sim102,
+#'   dc.func = 'diffcoex',
+#'   #arguments for the conditions ADR1 knockdown and UME6 knockdown resp.
+#'   cond.args = list(diffcoex.beta = c(6, 20))
+#' )
 #'
 #' #retrieve pre-computed results
 #' resPrecomputed <- dcPipeline(sim102, dc.func = 'zscore', precomputed = TRUE)
@@ -77,7 +95,7 @@ NULL
 #' plot(resCustom[[1]])
 #'
 #' @export
-dcPipeline <- function(simulation, dc.func = 'zscore', precomputed = FALSE, continuous = FALSE, ...) {
+dcPipeline <- function(simulation, dc.func = 'zscore', precomputed = FALSE, continuous = FALSE, cond.args = list(), ...) {
   if (is.character(dc.func)) {
     stopifnot(dc.func %in% dcMethods())
     dc.method = match.arg(dc.func, dcMethods())
@@ -92,8 +110,17 @@ dcPipeline <- function(simulation, dc.func = 'zscore', precomputed = FALSE, cont
   }
   stopifnot(is.function(dc.func))
 
-  #perform inference for each condition
-  infnets = lapply(getConditionNames(simulation), function (cond) {
+  #check cond.args: condition specific arguments to DC method
+  if (!all(sapply(cond.args, length) == length(getConditionNames(simulation)))) {
+    stop('cond.args should have values for all conditions')
+  }
+
+  if (length(cond.args) > 0 && is.null(names(cond.args))) {
+    stop('cond.args should be a named with argument names')
+  }
+
+  #function to perform inference for each condition and return an igraph
+  inf_func <- function (cond, ...) {
     #get data from simulation
     simdata = getSimData(simulation, cond.name = cond, full = FALSE)
     emat = simdata$emat
@@ -104,13 +131,22 @@ dcPipeline <- function(simulation, dc.func = 'zscore', precomputed = FALSE, cont
     }
 
     #evaluate function
-    dcnet = suppressWarnings(dc.func(emat = emat, condition = condition, ...))
+    dc_args = list(emat, condition, ...)
+    dcnet = suppressWarnings(do.call(dc.func, args = list(emat, condition, ...)))
     #validate result and convert to matrix
     dcnet = validateResult(emat, dcnet)
     dcnet = annotateig(simulation, dcnet)
 
     return(dcnet)
-  })
+  }
+
+  # infnets = mapply(inf_func, getConditionNames(simulation), MoreArgs = common_args, SIMPLIFY = FALSE)
+  infnets = do.call(mapply, args = c(list(
+    'FUN' = inf_func,
+    'cond' = getConditionNames(simulation),
+    'MoreArgs' = list(...), #common arguments i.e. not condition specific
+    'SIMPLIFY' = FALSE
+  ), cond.args))
   names(infnets) = getConditionNames(simulation)
 
   return(infnets)
@@ -201,23 +237,20 @@ validateResult <- function(emat, res) {
     stop('result of the function must be either a matrix or igraph object')
   }
 
+  #extract attributes
+  proc_annot = attributes(res)
+  #remove matrix and Matrix attributes
+  proc_annot = proc_annot[!grepl('dim', names(proc_annot))]
+  rm_names = c(names(attributes(Matrix::Matrix())), 'class')
+  proc_annot = proc_annot[!names(proc_annot) %in% rm_names]
+
   #if matrix, check that it is binary
-  if (class(res) %in% 'matrix') {
-    if (!all(res %in% 0:1)) {
+  if (!class(res) %in% 'igraph') {
+    if (!all(res == 0 | res == 1)) {
       stop('result of the function must be a binary matrix')
     }
 
-    #helps with reordering vertices and clearing all attributes
-    res = igraph::graph_from_adjacency_matrix(res)
-  }
-
-  #if Matrix, check that it is binary
-  if (class(res) %in% 'Matrix') {
-    if (!all(Matrix::as.array(res) %in% 0:1)) {
-      stop('result of the function must be a binary matrix')
-    }
-
-    #helps with reordering vertices and clearing all attributes
+    #create igraph
     res = igraph::graph_from_adjacency_matrix(res)
   }
 
@@ -230,12 +263,18 @@ validateResult <- function(emat, res) {
   adjmat = igraph::as_adjacency_matrix(res, sparse = FALSE)
   adjmat = adjmat[rownames(emat), rownames(emat)]
   ig = igraph::graph_from_adjacency_matrix(adjmat, mode = 'undirected')
+  attributes(ig) = c(attributes(ig), proc_annot)
 
   return(ig)
 }
 
 #add attributes to the graph to enable plotting
 annotateig <- function(simulation, ig) {
+  #extract attributes
+  proc_annot = attributes(ig)
+  #remove matrix and Matrix attributes
+  proc_annot = proc_annot[!names(proc_annot) %in% 'class']
+
   #merge inferred graph and true graph
   truenet = igraph::as.undirected(simulation$infnet, mode = 'collapse', edge.attr.comb = 'first')
   infnet = igraph::intersection(truenet, ig, byname = TRUE)
@@ -250,6 +289,8 @@ annotateig <- function(simulation, ig) {
   #add layout as attributes
   V(infnet)$x = simulation$netlayout[, 1]
   V(infnet)$y = simulation$netlayout[, 2]
+
+  attributes(infnet) = c(attributes(infnet), proc_annot)
 
   return(infnet)
 }

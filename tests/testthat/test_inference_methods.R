@@ -32,7 +32,7 @@ test_that('Inference method calls work', {
   expect_is(dcScore(x, cond), 'matrix')
   expect_is(dcScore(x, cond, dc.method = 'zscore'), 'matrix')
   for (m in getInfMethods()) {
-    expect_is(dcScore(x, cond, !!m, lambda = 0.5), 'matrix')
+    expect_is(dcScore(x, cond, !!m, ldgm.lambda = 0.5), 'matrix')
   }
 
   expect_error(dcScore(x, cond, 'ldgm'), 'Need to specify either lambda')
@@ -55,25 +55,25 @@ test_that('Inference method calls work', {
 
 test_that('Correct dimensions of results', {
   for (m in getInfMethods()) {
-    expect_equal(dim(dcScore(x, cond, !!m, lambda = 0.5)), c(4, 4))
+    expect_equal(dim(dcScore(x, cond, !!m, ldgm.lambda = 0.5)), c(4, 4))
   }
 })
 
 test_that('Attributes attached to results', {
   for (m in getInfMethods()) {
-    expect_equal(attr(dcScore(x, cond, !!m, lambda = 0.5), 'dc.method'), m)
+    expect_equal(attr(dcScore(x, cond, !!m, ldgm.lambda = 0.5), 'dc.method'), m)
   }
 })
 
 test_that('Diagonals are NAs', {
   for (m in getInfMethods()) {
-    expect_equal(sum(is.na(diag(dcScore(x, cond, !!m, lambda = 0.5)))), nrow(x))
+    expect_equal(sum(is.na(diag(dcScore(x, cond, !!m, ldgm.lambda = 0.5)))), nrow(x))
   }
 })
 
 test_that('Row and column names are the same', {
   for (m in getInfMethods()) {
-    expect_equal(rownames(dcScore(x, cond, !!m, lambda = 0.5)), colnames(dcScore(x, cond, !!m, lambda = 0.5)))
+    expect_equal(rownames(dcScore(x, cond, !!m, ldgm.lambda = 0.5)), colnames(dcScore(x, cond, !!m, ldgm.lambda = 0.5)))
   }
 })
 
