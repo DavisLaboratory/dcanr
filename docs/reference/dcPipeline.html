@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dcanr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.4</span>
       </span>
     </div>
 
@@ -136,7 +136,7 @@
     </div>
 
     <pre class="usage"><span class='fu'>dcPipeline</span>(<span class='no'>simulation</span>, <span class='kw'>dc.func</span> <span class='kw'>=</span> <span class='st'>"zscore"</span>, <span class='kw'>precomputed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>continuous</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>continuous</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>cond.args</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,6 +162,11 @@ should be used or a new one computed (default FALSE)</p></td>
 conditions should be used (default FALSE). No methods implemented currently
 use continuous conditions. This is to allow custom methods that require
 continuous conditions</p></td>
+    </tr>
+    <tr>
+      <th>cond.args</th>
+      <td><p>a list, containing condition-specific arguments for the DC
+inference pipeline. See details</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -192,6 +197,13 @@ continuous conditions</p></td>
   base R 'matrix' or the S4 'Matrix' class, containing all genes in the
   expression matrix 'emat'. See examples for how the in-built functions are
   combined into a pipeline.</p>
+<p>If the pipeline (in-built or custom) requires condition-specific parameters
+  to run, cond.args can be used to pass these. For instance, LDGM requires
+  lambda OR the number of edges in the target network to be specified for
+  each inference/condition. For the latter case and with 3 different
+  conditions, this can be done by setting <code>cond.args =
+  list('ldgm.ntarget' = c(100, 140, 200))</code>. Non-specific arguments should be
+  passed directly to the <code>dcPipeline</code> function call.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -208,6 +220,14 @@ continuous conditions</p></td>
 
 <span class='co'>#run a standard pipeline and specify params</span>
 <span class='no'>resParam</span> <span class='kw'>&lt;-</span> <span class='fu'>dcPipeline</span>(<span class='no'>sim102</span>, <span class='kw'>dc.func</span> <span class='kw'>=</span> <span class='st'>'zscore'</span>, <span class='kw'>cor.method</span> <span class='kw'>=</span> <span class='st'>'pearson'</span>)
+
+<span class='co'>#run a standard pipeline and specify condition-specific params</span>
+<span class='no'>resParam</span> <span class='kw'>&lt;-</span> <span class='fu'>dcPipeline</span>(
+  <span class='no'>sim102</span>,
+  <span class='kw'>dc.func</span> <span class='kw'>=</span> <span class='st'>'diffcoex'</span>,
+  <span class='co'>#arguments for the conditions ADR1 knockdown and UME6 knockdown resp.</span>
+  <span class='kw'>cond.args</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>diffcoex.beta</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>6</span>, <span class='fl'>20</span>))
+)
 
 <span class='co'>#retrieve pre-computed results</span>
 <span class='no'>resPrecomputed</span> <span class='kw'>&lt;-</span> <span class='fu'>dcPipeline</span>(<span class='no'>sim102</span>, <span class='kw'>dc.func</span> <span class='kw'>=</span> <span class='st'>'zscore'</span>, <span class='kw'>precomputed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)

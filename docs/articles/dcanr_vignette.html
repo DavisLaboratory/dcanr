@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dcanr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.4</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@
       <h1>Performing differential co-expression analysis using dcanr</h1>
                         <h4 class="author">Dharmesh D Bhuva</h4>
             <address class="author_afil">
-      Bioinformatics Division, Walter and Eliza Hall Institute of Medical Research, Parkville, VIC 3052, Australia<br><h4 class="date">2019-05-03</h4>
+      Bioinformatics Division, Walter and Eliza Hall Institute of Medical Research, Parkville, VIC 3052, Australia<br><h4 class="date">2019-08-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/DavisLaboratory/dcanr/blob/master/vignettes/dcanr_vignette.Rmd"><code>vignettes/dcanr_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>dcanr_vignette.Rmd</code></div>
@@ -109,22 +109,23 @@
 <h1 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h1>
 <p>Download the package from Bioconductor</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"BiocManager"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>))
-  <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"BiocManager"</span>)
-BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"dcanr"</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"BiocManager"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"BiocManager"</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"dcanr"</span>)</a></code></pre></div>
 <p>Or install the development version of the package from Github.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"DavisLaboratory/dcanr"</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"DavisLaboratory/dcanr"</span>)</a></code></pre></div>
 <p>Load the installed package into an R session.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dcanr)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dcanr)</a></code></pre></div>
 </div>
 <div id="available-inference-methods" class="section level1">
 <h1 class="hasAnchor">
 <a href="#available-inference-methods" class="anchor"></a>Available inference methods</h1>
 <p>The package implements 10 methods to infer differential co-expression networks across binary conditions. The list of available methods can be accessed by the <code><a href="../reference/dcMethods.html">dcMethods()</a></code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dcanr)
-<span class="kw"><a href="../reference/dcMethods.html">dcMethods</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dcanr)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="../reference/dcMethods.html">dcMethods</a></span>()</a></code></pre></div>
 <pre><code>##  [1] "dicer"       "diffcoex"    "ebcoexpress" "ecf"         "entropy"    
-##  [6] "ftgi"        "ggm-based"   "magic"       "mindy"       "zscore"</code></pre>
+##  [6] "ftgi"        "ggm-based"   "ldgm"        "magic"       "mindy"      
+## [11] "zscore"</code></pre>
 </div>
 <div id="a-generic-differential-co-expression-analysis-pipeline" class="section level1">
 <h1 class="hasAnchor">
@@ -142,23 +143,23 @@ BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocu
 <h1 class="hasAnchor">
 <a href="#load-an-example-dataset-simulated" class="anchor"></a>Load an example dataset (simulated)</h1>
 <p>We first load an example simulated dataset (included in the package) to extract the expression matrix and condition vector. Please note that multiple knock-down experiments are performed per simulation and we use one such knock-down as a condition here. The list of all knock-downs can be retrieved using <code><a href="../reference/getSimData.html">getConditionNames()</a></code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#load data</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(sim102)
-<span class="co">#get available conditions</span>
-<span class="kw"><a href="../reference/getSimData.html">getConditionNames</a></span>(sim102)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co">#load data</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(sim102)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#get available conditions</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw"><a href="../reference/getSimData.html">getConditionNames</a></span>(sim102)</a></code></pre></div>
 <pre><code>## [1] "ADR1" "UME6"</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#get expression data and conditions for 'UME6' knock-down</span>
-simdata &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getSimData.html">getSimData</a></span>(sim102, <span class="dt">cond.name =</span> <span class="st">'UME6'</span>, <span class="dt">full =</span> <span class="ot">FALSE</span>)
-emat &lt;-<span class="st"> </span>simdata<span class="op">$</span>emat
-ume6_kd &lt;-<span class="st"> </span>simdata<span class="op">$</span>condition
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(emat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]) <span class="co">#149 genes and 406 samples</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co">#get expression data and conditions for 'UME6' knock-down</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">simdata &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getSimData.html">getSimData</a></span>(sim102, <span class="dt">cond.name =</span> <span class="st">'UME6'</span>, <span class="dt">full =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">emat &lt;-<span class="st"> </span>simdata<span class="op">$</span>emat</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">ume6_kd &lt;-<span class="st"> </span>simdata<span class="op">$</span>condition</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(emat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]) <span class="co">#149 genes and 406 samples</span></a></code></pre></div>
 <pre><code>##       sample_1  sample_2  sample_3  sample_4   sample_5
 ## ADR1 0.4997864 0.4692072 0.3937255 0.1390989 0.05291159
 ## FLO8 0.3340156 0.2845828 0.3682575 0.2263656 0.19292056
 ## GIS1 0.3955383 0.4922471 0.5006614 0.2672858 0.48041978
 ## IME4 0.4658504 0.3529325 0.4188025 0.3824827 0.33371681
 ## KAR4 0.3705384 0.5812146 0.5282095 0.4945329 0.46677489</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(ume6_kd) <span class="co">#NOTE: binary conditions encoded with 1's and 2's</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(ume6_kd) <span class="co">#NOTE: binary conditions encoded with 1's and 2's</span></a></code></pre></div>
 <pre><code>## sample_1 sample_2 sample_3 sample_4 sample_5 sample_6 
 ##        2        2        1        1        1        1</code></pre>
 </div>
@@ -166,9 +167,9 @@ ume6_kd &lt;-<span class="st"> </span>simdata<span class="op">$</span>condition
 <h1 class="hasAnchor">
 <a href="#step-1-compute-scores" class="anchor"></a>Step 1: Compute scores</h1>
 <p>All inference methods can be accessed using the same call therefore making it easier to change between methods. Method specific parameters can be passed to this function and will be managed accordingly. The default inference method is z-score therefore it does not need to be specified via <code>dc.method</code>. We recommend using the Spearman correlation as a measure of correlation as it is robust to outliers which may be present in RNA-seq data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#apply the z-score method with Spearman correlations</span>
-z_scores &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcScore.html">dcScore</a></span>(emat, ume6_kd, <span class="dt">dc.method =</span> <span class="st">'zscore'</span>, <span class="dt">cor.method =</span> <span class="st">'spearman'</span>)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(z_scores[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co">#apply the z-score method with Spearman correlations</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">z_scores &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcScore.html">dcScore</a></span>(emat, ume6_kd, <span class="dt">dc.method =</span> <span class="st">'zscore'</span>, <span class="dt">cor.method =</span> <span class="st">'spearman'</span>)</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(z_scores[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</a></code></pre></div>
 <pre><code>##             ADR1        FLO8       GIS1       IME4       KAR4
 ## ADR1          NA -0.05890109  1.0645602 -0.6869672 -0.2843683
 ## FLO8 -0.05890109          NA  0.1855110  0.9256449  0.6803593
@@ -181,9 +182,9 @@ z_scores &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dc
 <a href="#step-2-perform-a-statistical-test" class="anchor"></a>Step 2: Perform a statistical test</h1>
 <p>Appropriate statistical tests are automatically selected for the method applied. Tests are applied on the result of the <code><a href="../reference/dcScore.html">dcScore()</a></code> function (z-test for the z-score method and permutation tests for other methods). The testing function returns the score matrix (unmodified) if the method is either EBcoexpress, FTGI or DiffCoEx.</p>
 <p><em>NOTE: Do NOT modify the result of the scoring method as this will result in failure of the testing function. This is intended as tests should be performed for all computed scores to prevent bias in the subsequent correction for multiple hypothesis testing. The same applies for the next step.</em></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#perform a statistical test: the z-test is selected automatically</span>
-raw_p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcTest.html">dcTest</a></span>(z_scores, emat, ume6_kd)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(raw_p[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co">#perform a statistical test: the z-test is selected automatically</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">raw_p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcTest.html">dcTest</a></span>(z_scores, emat, ume6_kd)</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(raw_p[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</a></code></pre></div>
 <pre><code>##           ADR1      FLO8      GIS1      IME4      KAR4
 ## ADR1        NA 0.9530309 0.2870750 0.4921034 0.7761282
 ## FLO8 0.9530309        NA 0.8528283 0.3546306 0.4962770
@@ -196,9 +197,9 @@ raw_p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcTes
 <h1 class="hasAnchor">
 <a href="#step-3-correcting-for-multiple-hypothesis-testing" class="anchor"></a>Step 3: Correcting for multiple hypothesis testing</h1>
 <p>Since all pairwise combinations of genes are tested, <span class="math inline">\(p\)</span>-values need to be adjusted. Given <span class="math inline">\(n\)</span> genes, the total number of hypothesis is <span class="math inline">\(\frac{n(n-1)}{2}\)</span> as the score matrices are symmetric. Adjustment is performed accordingly. The default adjustment function is <code><a href="https://www.rdocumentation.org/packages/stats/topics/p.adjust">stats::p.adjust</a></code> with the ‘fdr’ method used, however, custom functions and their parameters can be specified instead. <code>dcAdjust</code> provides a wrapper to apply an adjustment method to the raw <span class="math inline">\(p\)</span>-value matrix. Results from EBcoexpress and DiffCoEx remain unmodified.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#adjust p-values (raw p-values from dcTest should NOT be modified)</span>
-adj_p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcAdjust.html">dcAdjust</a></span>(raw_p, <span class="dt">f =</span> p.adjust, <span class="dt">method =</span> <span class="st">'fdr'</span>)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(adj_p[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co">#adjust p-values (raw p-values from dcTest should NOT be modified)</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">adj_p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcAdjust.html">dcAdjust</a></span>(raw_p, <span class="dt">f =</span> p.adjust, <span class="dt">method =</span> <span class="st">'fdr'</span>)</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(adj_p[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</a></code></pre></div>
 <pre><code>##           ADR1      FLO8      GIS1      IME4      KAR4
 ## ADR1        NA 0.9933963 0.8879726 0.9289498 0.9655700
 ## FLO8 0.9933963        NA 0.9748335 0.9116214 0.9289498
@@ -210,24 +211,24 @@ adj_p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcAdj
 <h1 class="hasAnchor">
 <a href="#step-4-generating-the-differential-co-expression-network" class="anchor"></a>Step 4: Generating the differential co-expression network</h1>
 <p>The last step is thresholding the score/adjusted <span class="math inline">\(p\)</span>-value matrix to select differential associations. Default adjusted <span class="math inline">\(p\)</span>-value thresholds of 0.1 are applied where statistical tests are performed (to control for FDR at 0.1). Results are presented as an <code>igraph</code> object shown below where edges are coloured based on the score (negative to positive scores are represented using the purple to green gradient of colours).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(igraph)
-
-<span class="co">#get the differential network</span>
-dcnet &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcNetwork.html">dcNetwork</a></span>(z_scores, adj_p)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(dcnet, <span class="dt">vertex.label =</span> <span class="st">''</span>)</code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(igraph)</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="co">#get the differential network</span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">dcnet &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dcNetwork.html">dcNetwork</a></span>(z_scores, adj_p)</a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(dcnet, <span class="dt">vertex.label =</span> <span class="st">''</span>)</a></code></pre></div>
 <p><img src="dcanr_vignette_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#convert to an adjacency matrix</span>
-adjmat &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/igraph/topics/as_adjacency_matrix">as_adj</a></span>(dcnet, <span class="dt">sparse =</span> <span class="ot">FALSE</span>)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(adjmat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co">#convert to an adjacency matrix</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">adjmat &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/igraph/topics/as_adjacency_matrix">as_adj</a></span>(dcnet, <span class="dt">sparse =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(adjmat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</a></code></pre></div>
 <pre><code>##      ADR1 FLO8 GIS1 IME4 KAR4
 ## ADR1    0    0    0    0    0
 ## FLO8    0    0    0    0    0
 ## GIS1    0    0    0    0    0
 ## IME4    0    0    0    0    0
 ## KAR4    0    0    0    0    0</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#convert to a data.frame</span>
-edgedf &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/igraph/topics/graph_from_data_frame">as_data_frame</a></span>(dcnet, <span class="dt">what =</span> <span class="st">'edges'</span>)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(edgedf))</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co">#convert to a data.frame</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">edgedf &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/igraph/topics/graph_from_data_frame">as_data_frame</a></span>(dcnet, <span class="dt">what =</span> <span class="st">'edges'</span>)</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(edgedf))</a></code></pre></div>
 <pre><code>##    from   to     score     color
 ## 1  ADR1 ACS1 -3.648617 #671F73B3
 ## 2  ADR1 CTA1 -4.399843 #40004BB3
@@ -239,13 +240,13 @@ edgedf &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocu
 <div id="session-info" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h1>
-<pre><code>## R version 3.5.1 (2018-07-02)
+<pre><code>## R version 3.6.1 (2019-07-05)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: CentOS release 6.4 (Final)
+## Running under: CentOS Linux 7 (Core)
 ## 
 ## Matrix products: default
-## BLAS: /stornext/System/data/bioinf-centos6/bioinf-software/bioinfsoftware/R/R-3.5.1/lib64/R/lib/libRblas.so
-## LAPACK: /stornext/System/data/bioinf-centos6/bioinf-software/bioinfsoftware/R/R-3.5.1/lib64/R/lib/libRlapack.so
+## BLAS:   /stornext/System/data/apps/R/R-3.6.1/lib64/R/lib/libRblas.so
+## LAPACK: /stornext/System/data/apps/R/R-3.6.1/lib64/R/lib/libRlapack.so
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -259,25 +260,25 @@ edgedf &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocu
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] igraph_1.2.4    dcanr_0.99.15   BiocStyle_2.8.2
+## [1] igraph_1.2.4.1   dcanr_1.1.4      BiocStyle_2.12.0
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.0          RColorBrewer_1.1-2  compiler_3.5.1     
-##  [4] iterators_1.0.11    tools_3.5.1         rngtools_1.3.1     
-##  [7] digest_0.6.18       evaluate_0.11       memoise_1.1.0      
-## [10] pkgconfig_2.0.2     rlang_0.3.1         doRNG_1.7.1        
-## [13] foreach_1.5.0       bibtex_0.4.2        registry_0.5       
-## [16] rstudioapi_0.9.0    commonmark_1.5      yaml_2.2.0         
-## [19] parallel_3.5.1      pkgdown_1.3.0       xfun_0.3           
-## [22] withr_2.1.2         stringr_1.3.1       pkgmaker_0.27      
-## [25] roxygen2_6.1.1      xml2_1.2.0          knitr_1.20         
-## [28] GlobalOptions_0.1.0 desc_1.2.0          fs_1.2.6           
-## [31] grid_3.5.1          rprojroot_1.3-2     R6_2.4.0           
-## [34] rmarkdown_1.11      bookdown_0.7        magrittr_1.5       
-## [37] backports_1.1.2     codetools_0.2-15    htmltools_0.3.6    
-## [40] MASS_7.3-50         assertthat_0.2.0    shape_1.4.4        
-## [43] colorspace_1.4-0    circlize_0.4.4      xtable_1.8-3       
-## [46] stringi_1.3.1       crayon_1.3.4</code></pre>
+##  [1] Rcpp_1.0.1          RColorBrewer_1.1-2  compiler_3.6.1     
+##  [4] BiocManager_1.30.4  iterators_1.0.10    tools_3.6.1        
+##  [7] rngtools_1.4        digest_0.6.20       evaluate_0.14      
+## [10] memoise_1.1.0       pkgconfig_2.0.2     rlang_0.4.0        
+## [13] doRNG_1.7.1         foreach_1.4.4       bibtex_0.4.2       
+## [16] registry_0.5-1      rstudioapi_0.10     commonmark_1.7     
+## [19] yaml_2.2.0          parallel_3.6.1      pkgdown_1.3.0      
+## [22] xfun_0.8            withr_2.1.2         stringr_1.4.0      
+## [25] pkgmaker_0.27       roxygen2_6.1.1      xml2_1.2.0         
+## [28] knitr_1.23          GlobalOptions_0.1.0 desc_1.2.0         
+## [31] fs_1.3.1            grid_3.6.1          rprojroot_1.3-2    
+## [34] R6_2.4.0            rmarkdown_1.13      bookdown_0.11      
+## [37] magrittr_1.5        backports_1.1.4     codetools_0.2-16   
+## [40] htmltools_0.3.6     MASS_7.3-51.4       assertthat_0.2.1   
+## [43] shape_1.4.4         colorspace_1.4-1    circlize_0.4.6     
+## [46] xtable_1.8-4        stringi_1.4.3       crayon_1.3.4</code></pre>
 </div>
   </div>
 

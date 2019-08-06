@@ -1,3 +1,10 @@
+CHANGES IN VERSION 1.1.4 (2019-08-06)
+--------------------------------------
+
+  o Added an implementation for a new DC inference method: LDGM
+  o Added functionality to allow condition-specific parameters when performing evaluations
+  o Allow partial matching of DC method names to dcPipeline and dcScore functions
+
 CHANGES IN VERSION 0.99.0 (2019-03-25)
 --------------------------------------
 

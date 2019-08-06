@@ -68,7 +68,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dcanr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.4</span>
       </span>
     </div>
 
@@ -184,7 +184,9 @@ condition), a factor with 2 levels or a character representing 2 conditions</p><
     </tr>
     <tr>
       <th>...</th>
-      <td><p>see details</p></td>
+      <td><p>possible arguments are <code>cor.method</code>, <code>diffcoex.beta</code>,
+<code>ebcoexpress.useBWMC</code>, <code>ebcoexpress.plot</code>, <code>ldgm.lambda</code>,
+<code>ldgm.ntarget</code> and <code>ldgm.iter</code>. See details</p></td>
     </tr>
     </table>
     
@@ -212,6 +214,14 @@ condition), a factor with 2 levels or a character representing 2 conditions</p><
   (defaults to <code>TRUE</code>) representing whether to use the bi-weight
   mid-correlation coefficient or not, and <code>ebcoexpress.plot</code> which plots
   the diagnostic plots if set to <code>TRUE</code> (defaults to <code>FALSE</code>).</p>
+<p>LDGM specific parameters include <code>ldgm.lambda</code>, <code>ldgm.ntarget</code>
+  and <code>ldgm.iter</code>. <code>ldgm.lambda</code> specifies the L1 regularisation
+  parameter to use when fitting the model. This can be tuned and specified by
+  the user. Alternatively, this can be tuned such that the resulting network
+  has a specified number of edges. In this case, <code>ldgm.ntarget</code> should
+  be specified instead. <code>ldgm.iter</code> is the maximum number of iterations
+  to perform when tuning <code>ldgm.lambda</code> using <code>ldgm.ntarget</code>
+  (defaults to 50).</p>
 <p>EBcoexpress, GGM-based and ECF are implemented by providing interfaces to,
   or using functions from the <code>EBcoexpress</code>, <code>GeneNet</code>, and
   <code>COSINE</code> packages respectively. If using any of these methods, please

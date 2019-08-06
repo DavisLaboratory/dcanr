@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">dcanr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.4</span>
       </span>
     </div>
 
@@ -98,39 +98,39 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Download the package from Bioconductor</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"BiocManager"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>))
-  <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"BiocManager"</span>)
-BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"dcanr"</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"BiocManager"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"BiocManager"</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"dcanr"</span>)</a></code></pre></div>
 <p>Or install the development version of the package from Github.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"DavisLaboratory/dcanr"</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"DavisLaboratory/dcanr"</span>)</a></code></pre></div>
 <p>Load the installed package into an R session.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dcanr)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dcanr)</a></code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
 <p>This example shows how a differential network can be derived. Simulated data within the package is used.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#load simulated data</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(sim102)
-
-<span class="co">#get expression data and conditions for 'UME6' knock-down</span>
-simdata &lt;-<span class="st"> </span><span class="kw"><a href="reference/getSimData.html">getSimData</a></span>(sim102, <span class="dt">cond.name =</span> <span class="st">'UME6'</span>, <span class="dt">full =</span> <span class="ot">FALSE</span>)
-emat &lt;-<span class="st"> </span>simdata<span class="op">$</span>emat
-ume6_kd &lt;-<span class="st"> </span>simdata<span class="op">$</span>condition
-
-<span class="co">#apply the z-score method with Spearman correlations</span>
-z_scores &lt;-<span class="st"> </span><span class="kw"><a href="reference/dcScore.html">dcScore</a></span>(emat, ume6_kd, <span class="dt">dc.method =</span> <span class="st">'zscore'</span>, <span class="dt">cor.method =</span> <span class="st">'spearman'</span>)
-
-<span class="co">#perform a statistical test: the z-test is selected automatically</span>
-raw_p &lt;-<span class="st"> </span><span class="kw"><a href="reference/dcTest.html">dcTest</a></span>(z_scores, emat, ume6_kd)
-
-<span class="co">#adjust p-values (raw p-values from dcTest should NOT be modified)</span>
-adj_p &lt;-<span class="st"> </span><span class="kw"><a href="reference/dcAdjust.html">dcAdjust</a></span>(raw_p, <span class="dt">f =</span> p.adjust, <span class="dt">method =</span> <span class="st">'fdr'</span>)
-
-<span class="co">#get the differential network</span>
-dcnet &lt;-<span class="st"> </span><span class="kw"><a href="reference/dcNetwork.html">dcNetwork</a></span>(z_scores, adj_p)
-<span class="co">#&gt; Warning in dcNetwork(z_scores, adj_p): default thresholds being selected</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(dcnet, <span class="dt">vertex.label =</span> <span class="st">''</span>, <span class="dt">main =</span> <span class="st">'Differential co-expression network'</span>)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">#load simulated data</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(sim102)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#get expression data and conditions for 'UME6' knock-down</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">simdata &lt;-<span class="st"> </span><span class="kw"><a href="reference/getSimData.html">getSimData</a></span>(sim102, <span class="dt">cond.name =</span> <span class="st">'UME6'</span>, <span class="dt">full =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">emat &lt;-<span class="st"> </span>simdata<span class="op">$</span>emat</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">ume6_kd &lt;-<span class="st"> </span>simdata<span class="op">$</span>condition</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#apply the z-score method with Spearman correlations</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">z_scores &lt;-<span class="st"> </span><span class="kw"><a href="reference/dcScore.html">dcScore</a></span>(emat, ume6_kd, <span class="dt">dc.method =</span> <span class="st">'zscore'</span>, <span class="dt">cor.method =</span> <span class="st">'spearman'</span>)</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#perform a statistical test: the z-test is selected automatically</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">raw_p &lt;-<span class="st"> </span><span class="kw"><a href="reference/dcTest.html">dcTest</a></span>(z_scores, emat, ume6_kd)</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#adjust p-values (raw p-values from dcTest should NOT be modified)</span></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16">adj_p &lt;-<span class="st"> </span><span class="kw"><a href="reference/dcAdjust.html">dcAdjust</a></span>(raw_p, <span class="dt">f =</span> p.adjust, <span class="dt">method =</span> <span class="st">'fdr'</span>)</a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#get the differential network</span></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19">dcnet &lt;-<span class="st"> </span><span class="kw"><a href="reference/dcNetwork.html">dcNetwork</a></span>(z_scores, adj_p)</a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">#&gt; Warning in dcNetwork(z_scores, adj_p): default thresholds being selected</span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(dcnet, <span class="dt">vertex.label =</span> <span class="st">''</span>, <span class="dt">main =</span> <span class="st">'Differential co-expression network'</span>)</a></code></pre></div>
 <p><img src="README-example-1.png" width="700"></p>
 <p>Edges in the differential network are coloured based on the score (negative to positive represented from purple to green respectively).</p>
 </div>
