@@ -486,8 +486,8 @@ ldgm.score <- function(emat, condition, ldgm.lambda = NA, ldgm.ntarget = NA, ldg
   expr2 = emat[, condition == 2, drop = FALSE]
 
   #compute latent correlation matrices in each condition
-  kendall1 = cor(t(expr1), method = 'kendall')
-  kendall2 = cor(t(expr2), method = 'kendall')
+  kendall1 = stats::cor(t(expr1), method = 'kendall')
+  kendall2 = stats::cor(t(expr2), method = 'kendall')
   lcor1 = sin(pi/2 * kendall1) #latent correlation estimate
   lcor2 = sin(pi/2 * kendall2) #latent correlation estimate
   diag(lcor1) = diag(lcor2) = 1
