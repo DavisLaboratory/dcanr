@@ -4,8 +4,14 @@
 \alias{dcPipeline}
 \title{Run a DC pipeline on a simulation}
 \usage{
-dcPipeline(simulation, dc.func = "zscore", precomputed = FALSE,
-  continuous = FALSE, cond.args = list(), ...)
+dcPipeline(
+  simulation,
+  dc.func = "zscore",
+  precomputed = FALSE,
+  continuous = FALSE,
+  cond.args = list(),
+  ...
+)
 }
 \arguments{
 \item{simulation}{a list, storing data and results generated from simulations}

@@ -4,7 +4,8 @@
 \name{sim102}
 \alias{sim102}
 \title{Simulated expression data with knock-outs}
-\format{A named list with 14 elements:
+\format{
+A named list with 14 elements:
 \describe{
   \item{simitr}{a numeric, indicating the iteration of the simulation (a
   total of 1000 were performed and 812 converged)}
@@ -39,7 +40,8 @@
   annotated for being in either the direct, influence and association networks}
   \item{sensmat}{an S4 Matrix, sensitivities of genes to TFs based on
   perturbation analysis of the simulation model}
-}}
+}
+}
 \source{
 LINK TO PAPERRRR
 }

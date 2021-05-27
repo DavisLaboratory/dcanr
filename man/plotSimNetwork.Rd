@@ -4,8 +4,11 @@
 \alias{plotSimNetwork}
 \title{Plot source and true differential networks from simulations}
 \usage{
-plotSimNetwork(simulation, what = c("source", "direct", "influence",
-  "association"), ...)
+plotSimNetwork(
+  simulation,
+  what = c("source", "direct", "influence", "association"),
+  ...
+)
 }
 \arguments{
 \item{simulation}{a list, storing data and results generated from simulations}
