@@ -60,8 +60,8 @@ dcZscore <-
   }
 
   #compute z-scores
-  r1 = cor(t(expr1[from, , drop = FALSE]), t(expr1[to, , drop = FALSE]), method = cor.method)
-  r2 = cor(t(expr2[from, , drop = FALSE]), t(expr2[to, , drop = FALSE]), method = cor.method)
+  r1 = stats::cor(t(expr1[from, , drop = FALSE]), t(expr1[to, , drop = FALSE]), method = cor.method)
+  r2 = stats::cor(t(expr2[from, , drop = FALSE]), t(expr2[to, , drop = FALSE]), method = cor.method)
   z1 = atanh(r1)
   z2 = atanh(r2)
   z = (z1 - z2)/sqrt(const/(sum(as.numeric(condition) == 1) - 3) + const/(sum(as.numeric(condition) == 2) - 3))

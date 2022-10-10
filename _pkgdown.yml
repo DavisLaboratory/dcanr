@@ -20,6 +20,7 @@ reference:
   - dcTest
   - dcAdjust
   - dcNetwork
+  - dcZscore
 - title: Functions to evaluate DC methods
   desc: >
     These functions are used to evaluate methods implemented in the package and
