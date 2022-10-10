@@ -81,7 +81,7 @@ When using data from sequencing experiments, make sure appropriate
   to perform when tuning \code{ldgm.lambda} using \code{ldgm.ntarget}
   (defaults to 50).
 
-  EBcoexpress, GGM-based and ECF are implemented by providing interfaces to,
+  EBcoexpress and GGM-based are implemented by providing interfaces to,
   or using functions from the \code{EBcoexpress}, \code{GeneNet}, and
   \code{COSINE} packages respectively. If using any of these methods, please
   \strong{cite} the appropriate packages and the appropriate methodology

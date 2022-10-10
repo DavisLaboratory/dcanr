@@ -7,15 +7,14 @@ methodmap = data.frame(
     'diffcoex.score',
     'ebcoexpress.score',
     'dicer.score',
-    'ecf.score',
     'ent.score',
     'mindy.score',
     'ldgm.score'
   ),
-  'testf' = c('z.test', c('perm.test', 'no.test')[c(1, 1, 2, 2, 2, 1, 1, 1, 1, 2)]),
-  'adjust' = c(rep(TRUE, 4), rep(FALSE, 2), rep(TRUE, 4), FALSE),
-  'default_thresh' = c(rep(0.1, 5), 0.9, rep(0.1, 4), 0),
-  'continuous' = rep(FALSE, 11),
+  'testf' = c('z.test', c('perm.test', 'no.test')[c(1, 1, 2, 2, 2, 1, 1, 1, 2)]),
+  'adjust' = c(rep(TRUE, 4), rep(FALSE, 2), rep(TRUE, 3), FALSE),
+  'default_thresh' = c(rep(0.1, 5), 0.9, rep(0.1, 3), 0),
+  'continuous' = rep(FALSE, 10),
   row.names = c(
     'zscore',
     'ggm-based',
@@ -24,7 +23,6 @@ methodmap = data.frame(
     'diffcoex',
     'ebcoexpress',
     'dicer',
-    'ecf',
     'entropy',
     'mindy',
     'ldgm'
@@ -323,25 +321,6 @@ dicer.score <- function(emat, condition, cor.method = c('pearson', 'spearman'), 
                          'call' = match.call())
 
   return(tscore)
-}
-
-ecf.score <- function(emat, condition, ...) {
-  if (!requireNamespace("COSINE", quietly = TRUE)){
-    stop('\'COSINE\' needed for this function to work. Please install it.', call. = FALSE)
-  }
-
-  expr1 = emat[, condition == 1, drop = FALSE]
-  expr2 = emat[, condition == 2, drop = FALSE]
-
-  # apply the Fisher transformation
-  ecfscore = COSINE::diff_gen(t(expr1), t(expr2))[[2]]
-  colnames(ecfscore) = rownames(ecfscore) = rownames(emat)
-
-  #add run parameters as attributes
-  attributes(ecfscore) = c(attributes(ecfscore),
-                           'call' = match.call())
-
-  return(ecfscore)
 }
 
 ent.score <- function(emat, condition, cor.method = c('pearson', 'spearman'), ...) {

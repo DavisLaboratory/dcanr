@@ -18,9 +18,6 @@ getInfMethods <- function() {
   if (!require('EBcoexpress')) {
     infmethods = setdiff(infmethods, 'ebcoexpress')
   }
-  if (!require('COSINE')) {
-    infmethods = setdiff(infmethods, 'ecf')
-  }
   if (!require('GeneNet')) {
     infmethods = setdiff(infmethods, 'ggm-based')
   }
@@ -39,9 +36,6 @@ test_that('Inference method calls work', {
 
   if (!'ebcoexpress' %in% getInfMethods()) {
     expect_error(dcScore(x, cond, 'ebcoexpress'), 'needed for this function to work')
-  }
-  if (!'ecf' %in% getInfMethods()) {
-    expect_error(dcScore(x, cond, 'ecf'), 'needed for this function to work')
   }
   if (!'ggm-based' %in% getInfMethods()) {
     expect_error(dcScore(x, cond, 'ggm-based'), 'needed for this function to work')

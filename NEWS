@@ -1,3 +1,8 @@
+CHANGES IN VERSION 1.14.0 (2019-08-06)
+--------------------------------------
+
+  o Removed implementation for the ECF method as the package for computing the statistic, COSINE, is now deprecated
+
 CHANGES IN VERSION 1.1.4 (2019-08-06)
 --------------------------------------
 
