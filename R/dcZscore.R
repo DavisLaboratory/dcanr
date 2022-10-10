@@ -121,3 +121,19 @@ annotateZdf <- function(df, mat, value.name) {
 
   return(df)
 }
+
+# if (cor.method %in% 'spearman') {
+#   eranks = t(apply(emat, 1, rank))
+# } else {
+#   eranks = emat
+# }
+#
+# # .Call(stats:::C_cov, x, NULL, 1, FALSE)
+# # cov.wt is faster for pairwise cors than cov
+#
+# #compute pairwise weighted correlation
+# r1 = cov.wt(t(emat), wt = wt1, cor = TRUE)$cor
+# r2 = cov.wt(t(emat), wt = wt2, cor = TRUE)$cor
+# #subset edges
+# r1 = r1[from, to, drop = FALSE]
+# r2 = r2[from, to, drop = FALSE]
