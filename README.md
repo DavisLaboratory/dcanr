@@ -2,9 +2,9 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 # dcanr: Differential co-expression/association network analysis
 
-[![R-CMD-check](https://github.com/DavisLaboratory/singscore/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/DavisLaboratory/singscore/actions)
-[![codecov](https://codecov.io/gh/DavisLaboratory/singscore/branch/master/graph/badge.svg?token=OWOL51QJD1)](https://codecov.io/gh/DavisLaboratory/singscore)
-[![BioC status](https://bioconductor.org/shields/years-in-bioc/singscore.svg)](https://bioconductor.org/packages/singscore/)
+[![R-CMD-check](https://github.com/DavisLaboratory/dcanr/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/DavisLaboratory/dcanr/actions)
+[![codecov](https://codecov.io/gh/DavisLaboratory/dcanr/branch/master/graph/badge.svg?token=93RXZRHIBJ)](https://codecov.io/gh/DavisLaboratory/dcanr)
+[![BioC status](https://bioconductor.org/shields/years-in-bioc/dcanr.svg)](https://bioconductor.org/packages/dcanr/)
 
 Methods and an evaluation framework for the inference of differential co-expression/association networks.
 
