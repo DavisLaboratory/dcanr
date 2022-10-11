@@ -1,72 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/404.html</loc>
   </url>
   <url>
-    <loc>/articles/dcanr_evaluation_vignette.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/articles/dcanr_evaluation_vignette.html</loc>
   </url>
   <url>
-    <loc>/articles/dcanr_vignette.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/articles/dcanr_vignette.html</loc>
   </url>
   <url>
-    <loc>/articles/index.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/articles/index.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/authors.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/index.html</loc>
   </url>
   <url>
-    <loc>/reference/cor.pairs.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/dcAdjust.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/cor.pairs.html</loc>
   </url>
   <url>
-    <loc>/reference/dcEvaluate.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/dcAdjust.html</loc>
   </url>
   <url>
-    <loc>/reference/dcMethods.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/dcEvaluate.html</loc>
   </url>
   <url>
-    <loc>/reference/dcNetwork.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/dcMethods.html</loc>
   </url>
   <url>
-    <loc>/reference/dcPipeline.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/dcNetwork.html</loc>
   </url>
   <url>
-    <loc>/reference/dcScore.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/dcPipeline.html</loc>
   </url>
   <url>
-    <loc>/reference/dcTest.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/dcScore.html</loc>
   </url>
   <url>
-    <loc>/reference/dcZscore.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/dcTest.html</loc>
   </url>
   <url>
-    <loc>/reference/dcanr-package.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/dcZscore.html</loc>
   </url>
   <url>
-    <loc>/reference/getSimData.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/dcanr-package.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/getSimData.html</loc>
   </url>
   <url>
-    <loc>/reference/mi.ap.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/perfMethods.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/mi.ap.html</loc>
   </url>
   <url>
-    <loc>/reference/performanceMeasure.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/perfMethods.html</loc>
   </url>
   <url>
-    <loc>/reference/plotSimNetwork.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/performanceMeasure.html</loc>
   </url>
   <url>
-    <loc>/reference/sim102.html</loc>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/plotSimNetwork.html</loc>
+  </url>
+  <url>
+    <loc>https://DavisLaboratory.github.io/dcanr/reference/sim102.html</loc>
   </url>
 </urlset>
