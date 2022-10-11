@@ -1,11 +1,17 @@
 citHeader("Please cite the paper below for the dcanr software itself.  Please also try to cite the appropriate methodology articles that describe the statistical methods implemented in dcanr, depending on which dcanr functions you are using.")
 
-citEntry(entry = "Manual",
-  title = "dcanr: Differential co-expression/association network analysis",
-  author = c(person(c("Dharmesh", "D"), "Bhuva"),
-             person("Joseph", "Cursons"),
-             person(c("Melissa", "J"), "Davis")),
-  year = 2018,
-
-  textVersion = "Bhuva, D.D., Cursons, J., Davis, M.J. (2018). dcanr: Differential co-expression/association network analysis."
+c(
+  bibentry(bibtype = "article",
+  		 title = "Differential co-expression-based detection of conditional relationships in transcriptional data: comparative analysis and application to breast cancer",
+  		 author = c(person("Dharmesh D.", "Bhuva"),
+  		 		   person("Joseph", "Cursons"),
+  		 		   person("Gordon K", "Smyth"),
+  		 		   person("Melissa J.", "Davis")),
+  		 journal = "Genome biology",
+  		 volume = 20,
+  		 number = 1,
+  		 pages = 1-20,
+  		 year = 2019,
+  		 publisher = "BioMed Central",
+  		 DOI = "http://doi.org/10.1186/s13059-019-1851-8")
 )
