@@ -1,0 +1,8 @@
+pandoc: 2.19.2
+pkgdown: 2.0.6.9000
+pkgdown_sha: 7fe9e802df2964d483d0267f1d5a59aa7b3c685d
+articles:
+  dcanr_evaluation_vignette: dcanr_evaluation_vignette.html
+  dcanr_vignette: dcanr_vignette.html
+last_built: 2022-10-11T00:02Z
+
