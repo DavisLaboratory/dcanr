@@ -1,12 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-dcanr: Differential co-expression/association network analysis
-==============================================================
+# dcanr: Differential co-expression/association network analysis
+
+[![R-CMD-check](https://github.com/DavisLaboratory/singscore/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/DavisLaboratory/singscore/actions)
+[![codecov](https://codecov.io/gh/DavisLaboratory/singscore/branch/master/graph/badge.svg?token=OWOL51QJD1)](https://codecov.io/gh/DavisLaboratory/singscore)
+[![BioC status](https://bioconductor.org/shields/years-in-bioc/singscore.svg)](https://bioconductor.org/packages/singscore/)
 
 Methods and an evaluation framework for the inference of differential co-expression/association networks.
 
-Installation
-------------
+## Installation
 
 Download the package from Bioconductor
 
@@ -28,8 +30,7 @@ Load the installed package into an R session.
 library(dcanr)
 ```
 
-Example
--------
+## Example
 
 This example shows how a differential network can be derived. Simulated data within the package is used.
 
@@ -57,6 +58,7 @@ dcnet <- dcNetwork(z_scores, adj_p)
 plot(dcnet, vertex.label = '', main = 'Differential co-expression network')
 ```
 
-![](README-example-1.png)
+<img src="https://github.com/DavisLaboratory/dcanr/blob/master/README-example-1.png?raw=true" alt="DC Network"/>
+
 
 Edges in the differential network are coloured based on the score (negative to positive represented from purple to green respectively).
