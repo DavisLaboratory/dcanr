@@ -79,7 +79,7 @@ dcZscore <-
   fdr = fdr[, -(1:2)]
   fdr = unique(fdr)
   fdr$fdr = stats::p.adjust(fdr$value, method = 'fdr')
-  fdr = fdr[fdr$fdr < fdrthresh, -1]
+  fdr = fdr[fdr$fdr <= fdrthresh, -1]
   colnames(fdr) = c('from', 'to', 'fdr')
 
   #annotate df
